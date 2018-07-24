@@ -6,6 +6,10 @@ app.get('/api/*', (req,res) => {
 	res.json({ok: true})
 })
 
+app.get('/jazzCharts', (req,res) => {
+	res.json({wilbe: "JazzCharts soon!"})
+})
+
 app.listen(PORT, () => {
 	console.log(`server running on ${PORT}`)
 })

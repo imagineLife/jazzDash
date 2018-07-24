@@ -3,7 +3,7 @@ node_js: node
 deploy:
   provider: heroku
   api_key:
-    secure: pKd3HVkcLbpc9NNtZ4OioYuCbZhoAbJD23AQeiWjUWjprM0OX1YVVh7AYxYvSva4XpHgca+SgM1JdtcPUBuiniV6pZFyR6IvEt/RlPWubnKmolmzPcBDJsPnIpfKFBI3T79rYHUCGTl28A9f19mQ+rxTaHOqBzFFmSZ+he5/hYagmSaXpDegGAV3t/4AZQfIxCUv5vMCrTeqJygZXLNUU/mVXnyYDlOSBImjCTjLal4hZ4k5U3Lj/tsaDkciJinH33IvhCQOtyL4PX8c9TWqk2ytijNedqgn48kgLyf4yWFCbo/Zgu1j0OTErWLOkbLdatx1WFogq9WBPSqXayljWUpROTQOrYQ0YrSChcbqXCTx6857kY2MXGFd6dxlwg7QhKMsgabRkCM7cCI7U4JMnKNwZX0jsRzChLh23KB/r4LZ7BXlNibEkMMeurqn9cXhbt791ML83SzZcwm5k28wmmhLlhfNNoFf3Dg/2sPdWSAX8Gz//DbG+lWe5sjL4jUgoYlULCRJ5OGWNBCPLJtHuhZx0MH7WFne+KshD4678bf9/tZOvhp7cpbiagBptwi6kJf/PMe3/eLZFNBxPtD9vlsw9xRwobsEK2rRDLy2PY+potEGR9jRcgtXtQDqhJPsFIaodQ4o8ODztDm2x7LrIrevZ4Y5aJBq+gphOljwOWU=
+    secure: 6ce5afb6-da75-4295-83b9-52d5c53771d3
   app: blooming-tor-17450
   on:
     repo: imagineLife/jazzDash

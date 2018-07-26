@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const {PORT, DATABASE_URL} = require('./config');
 const musiciansRouter = require('./routes/musicians/router');
+const songsRouter = require('./routes/songs/router');
 
 mongoose.Promise = global.Promise;
 
@@ -13,6 +14,7 @@ app.use(express.static(__dirname +'/public'));
 
 //ROUTES
 app.use('/api/musicians', musiciansRouter);
+app.use('/api/songs', songsRouter);
 
 //dummy endpoint
 app.get('/api/*', (req,res) => {

@@ -3,12 +3,13 @@ const router = express.Router();
 const { Musician } = require('./models');
 // const passport = require('passport');
 
-const musiciansRouter = require('./routes/musicians/router');
-
-router.get('/musicians', (req, res) => {
+router.get('/', (req, res) => {
 	Musician.find()
 	.exec()
-	.then(res => res.status(201).json(res))
+	.then(musicians => {
+		console.log(res)
+		return res.status(201).json(musicians)
+	})
 	.catch(err => {
       console.error(err);
       res.status(500).json({error: 'Musician Get went wrong'});

@@ -6,6 +6,7 @@ mongoose.Promise = global.Promise;
 const SongSchema = mongoose.Schema({
 	title: String,
 	musicians : [ {type: Schema.Types.ObjectId, ref: 'Musician' }],
+	album: String,
 	dateRecorded : Date
 })
 

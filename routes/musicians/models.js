@@ -10,6 +10,10 @@ const MusicianSchema = mongoose.Schema({
 	dob: String
 })
 
+MusicianSchema.virtual('fullName').get(function() {
+  return `${this.first} ${this.last}`.trim();
+});
+
 const Musician = mongoose.model('Musician', MusicianSchema);
 
 module.exports = { Musician };

@@ -7,7 +7,6 @@ router.get('/', (req, res) => {
 	Musician.find()
 	.exec()
 	.then(musicians => {
-		console.log(res)
 		return res.status(201).json(musicians)
 	})
 	.catch(err => {

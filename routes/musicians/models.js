@@ -10,10 +10,7 @@ const MusicianSchema = mongoose.Schema({
 	dob: String
 })
 
-MusicianSchema.virtual('fullName').get(function() {
-  return `${this.first} ${this.last}`.trim();
-});
-
-const Musician = mongoose.model('Musician', MusicianSchema);
+//model is singular, 'collections' is plural HMM!!
+const Musician = mongoose.model('musician', MusicianSchema);
 
 module.exports = { Musician };

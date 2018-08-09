@@ -6,6 +6,7 @@ const { RawData } = require('./models');
 router.get('/', (req, res) => {
 	RawData.find()
 	.populate('noteLengths', 'length count')
+	.populate('chordStats', 'chordName chordTones diatonictNCTs nonDiatonictNCTs totalNotes')
 	.exec()
 	.then(rawData => {
 		return res.status(201).json(rawData)

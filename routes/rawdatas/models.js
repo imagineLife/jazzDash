@@ -31,7 +31,8 @@ const RawDataScheme = mongoose.Schema({
 		G: Number,
 		Ab: Number
 	},
-	noteLengths: [ {type: Schema.Types.ObjectId, ref: 'NoteLength' } ]
+	noteLengths: [ {type: Schema.Types.ObjectId, ref: 'NoteLength' } ],
+	chordStats: [ {type: Schema.Types.ObjectId, ref: 'ChordStat' } ]
 })
 
 const RawData = mongoose.model('rawdata', RawDataScheme);

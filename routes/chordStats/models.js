@@ -14,6 +14,6 @@ const ChordStatSchema = mongoose.Schema({
 })
 
 //model is singular, 'collections' is plural HMM!!
-const ChordStat = mongoose.model('chordstats', ChordStatSchema);
+const chordStat = mongoose.model('ChordStat', ChordStatSchema);
 
-module.exports = { ChordStat };
+module.exports = { chordStat };

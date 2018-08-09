@@ -1,16 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { ChordStat } = require('./models');
+const { chordStat } = require('./models');
 
 router.get('/', (req, res) => {
-	ChordStat.findOne()
+	chordStat.find()
 	.exec()
-	.then(stat => {
-		console.log('chordStat res')
-		console.log(stat)
-		console.log('- - - -')
-		return res.status(201).json(stat)
-	})
+	.then(stat => res.status(201).json(stat) )
 	.catch(err => {
       console.error(err);
       res.status(500).json({error: 'ChordStat went Wrong... '});

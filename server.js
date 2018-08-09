@@ -7,6 +7,7 @@ const {PORT, DATABASE_URL} = require('./config');
 const musiciansRouter = require('./routes/musicians/router');
 const songsRouter = require('./routes/songs/router');
 const chordStatRouter = require('./routes/chordStats/router');
+const rawDataRouter = require('./routes/rawdatas/router');
 
 mongoose.Promise = global.Promise;
 
@@ -17,7 +18,7 @@ app.use(express.static(__dirname +'/public'));
 app.use('/api/musicians', musiciansRouter);
 app.use('/api/songs', songsRouter);
 app.use('/api/chordStats', chordStatRouter);
-// app.use('/api/charts/', chartData);
+app.use('/api/rawData/', rawDataRouter);
 
 //dummy endpoint
 app.get('/api/*', (req,res) => {

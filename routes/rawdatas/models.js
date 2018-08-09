@@ -30,9 +30,8 @@ const RawDataScheme = mongoose.Schema({
 		Gb: Number,
 		G: Number,
 		Ab: Number
-	}
-	// totalsByNoteLength:[		
-	// ]
+	},
+	noteLengths: [ {type: Schema.Types.ObjectId, ref: 'NoteLength' } ]
 })
 
 const RawData = mongoose.model('rawdata', RawDataScheme);

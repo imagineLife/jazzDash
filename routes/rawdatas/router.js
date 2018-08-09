@@ -5,6 +5,7 @@ const { RawData } = require('./models');
 
 router.get('/', (req, res) => {
 	RawData.find()
+	.populate('noteLengths', 'length count')
 	.exec()
 	.then(rawData => {
 		return res.status(201).json(rawData)

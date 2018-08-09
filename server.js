@@ -8,6 +8,7 @@ const musiciansRouter = require('./routes/musicians/router');
 const songsRouter = require('./routes/songs/router');
 const chordStatRouter = require('./routes/chordStats/router');
 const rawDataRouter = require('./routes/rawdatas/router');
+const noteLengthRouter = require('./routes/notelengths/router');
 
 mongoose.Promise = global.Promise;
 
@@ -19,6 +20,7 @@ app.use('/api/musicians', musiciansRouter);
 app.use('/api/songs', songsRouter);
 app.use('/api/chordStats', chordStatRouter);
 app.use('/api/rawData/', rawDataRouter);
+app.use('/api/noteLengths/', noteLengthRouter);
 
 //dummy endpoint
 app.get('/api/*', (req,res) => {

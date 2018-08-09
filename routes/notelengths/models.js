@@ -10,6 +10,6 @@ const NoteLengthSchema = mongoose.Schema({
 	count: Number
 })
 
-const NoteLength = mongoose.model('notelength', NoteLengthSchema);
+const noteLength = mongoose.model('NoteLength', NoteLengthSchema);
 
-module.exports = { NoteLength };
+module.exports = { noteLength };

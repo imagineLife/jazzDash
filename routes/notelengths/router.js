@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { NoteLength } = require('./models');
+const { noteLength } = require('./models');
 const { Musician } = require('../musicians/models');
 
 //Get SOng with populated musicians ID array
 router.get('/', (req, res) => {
-    NoteLength
-    .findOne()
+    noteLength
+    .find()
 
     // .populate (THIS schema (song) key 'lowercase musicians')
     //similar to musicians.first

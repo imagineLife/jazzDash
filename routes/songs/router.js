@@ -6,7 +6,7 @@ const { Musician } = require('../musicians/models');
 //Get SOng with populated musicians ID array
 router.get('/', (req, res) => {
     Song
-    .findOne()
+    .find()
 
     //.populate (THIS schema (song) key 'lowercase musicians')
     //similar to musicians.first

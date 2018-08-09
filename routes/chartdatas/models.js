@@ -31,67 +31,7 @@ const SongChartSchema = mongoose.Schema({
 		G: Number,
 		Ab: Number
 	],
-	totalsByNoteLength:[
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},
-		{
-			length: Number,
-			count: Number
-		},			
-		{
-			length: Number,
-			count: Number
-		},		
-		{
-			length: Number,
-			count: Number
-		},		
+	totalsByNoteLength:[		
 	]
 })
 

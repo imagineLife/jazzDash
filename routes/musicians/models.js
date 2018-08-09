@@ -11,6 +11,6 @@ const MusicianSchema = mongoose.Schema({
 })
 
 //model is singular, 'collections' is plural HMM!!
-const Musician = mongoose.model('musician', MusicianSchema);
+const Musician = mongoose.model('Musicians', MusicianSchema);
 
 module.exports = { Musician };

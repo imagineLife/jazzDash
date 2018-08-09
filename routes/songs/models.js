@@ -5,11 +5,10 @@ mongoose.Promise = global.Promise;
 
 const SongSchema = mongoose.Schema({
 	title: String,
-	musicians : [ {type: Schema.Types.ObjectId, ref: 'Musician' }],
-	album: String,
-	dateRecorded : Date
+	musicians : [ {type: Schema.Types.ObjectId, ref: 'Musicians' }],
+	album: String
 })
 
-const Song = mongoose.model('Song', SongSchema);
+const Song = mongoose.model('Songs', SongSchema);
 
 module.exports = { Song };

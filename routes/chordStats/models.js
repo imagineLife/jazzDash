@@ -9,8 +9,8 @@ const ChordStatSchema = mongoose.Schema({
 	chordName: String,
 	totalNotes: Number,
 	chordTones: Number,
-	diatonictNCTs: Number,
-	nonDiatonictNCTs: Number
+	diatonicNCTs: Number,
+	nonDiatonicNCTs: Number
 })
 
 //model is singular, 'collections' is plural HMM!!

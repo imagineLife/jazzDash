@@ -5,7 +5,7 @@ const { Musician } = require('./models');
 //Get Musician with populated musicians ID array
 router.get('/', (req, res) => {
     Musician
-    .findOne()
+    .find()
     .exec()
     .then(MusicianRes => res.status(201).json(MusicianRes))
     .catch(err => {

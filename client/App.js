@@ -16,14 +16,14 @@ class App extends React.Component {
 	render(){
 		return (
 			<React.Fragment>
-					<Router>
-						<div className="routerWrapper">						
+				<Router>
+					<div className="routerWrapper">						
 						<Nav />
 						<Switch>
 					        <Route exact path="/" component={JazzDash} />
 					    </Switch>
-					    </div>
-					</Router>
+				    </div>
+				</Router>
 			</React.Fragment>
 		);
 	}

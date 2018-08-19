@@ -12,7 +12,7 @@ export default function Nav(){
 		{
 			linkTo : "/",
 			imgSrc : DashIcon,
-			alt : "Dashboard Homepage"
+			alt : "Dashboard"
 		},
 		{
 			linkTo : "/about",
@@ -32,7 +32,7 @@ export default function Nav(){
 	})
 	
     return (
-		<nav>
+		<nav className="nav">
 			<ul>
 				{linkObjsToComponents}
 			</ul>

@@ -4,9 +4,9 @@ class JazzDash extends Component {
 
 	render(){
 		return (
-		    <React.Fragment>
+		    <div className="dashWrapper">
 		      <p> JazzDash Container Here :) </p>
-		    </React.Fragment>
+			</div>
 		);
 	}
 

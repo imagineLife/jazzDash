@@ -6,14 +6,17 @@ import {
     Redirect,
     Switch
 } from 'react-router-dom';
+import JazzDash from './containers/JazzDash';
 
 class App extends Component {
 
 	render(){
 		return (
-		    <React.Fragment>
-		      <p>Dummy React Component here!</p>
-		    </React.Fragment>
+			<Router>
+				<React.Fragment>
+			        <Route exact path="/" component={JazzDash} />
+				</React.Fragment>
+			</Router>
 		);
 	}
 

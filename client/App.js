@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom';
 import Nav from './components/Nav';
 import JazzDash from './containers/JazzDash';
+import './resetNormalize.css';
+import './float-grid.css';
 
 class App extends React.Component {
 

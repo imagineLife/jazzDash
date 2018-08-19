@@ -4,14 +4,15 @@ import {connect} from 'react-redux';
 class JazzDash extends Component {
 	constructor(props){
 		super(props)
-		this.state = {
-			dashData : []
-		}
+		this.state = {}
 	}
 
 	componentWillMount(){
-		console.log('CWM jazzDash props')
+		console.log('CWM this.props')
 		console.log(this.props)
+		if(!this.state.dashData){
+			this.props.dispatch({type: "fetch_dashboard_data"})
+		}
 		console.log('CWM - - - -')
 	}
 

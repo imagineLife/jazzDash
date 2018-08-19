@@ -12,10 +12,11 @@ const loggerMW = createLogger()
 //3. dummy reducer to start
 const dashDataReducer = (state=initialState.dashData, action) => {
 	console.log('inside dashDataReducer')
-	// switch(action.type){
-	// 	case ("CHANGE_NAME"):
-	// 		state = Object.assign({}, state, {age: action.payload});
-	// }
+	switch(action.type){
+		case ("fetch_dashboard_data"):
+			console.log('fetching data on CWM')		
+			// state = Object.assign({}, state, {age: action.payload});
+	}
 	return state;
 }
 

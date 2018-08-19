@@ -1,19 +1,18 @@
-.li {
-  text-align: left;
-  margin: 0 auto;
+.icon{
+  width:40px;
+  height:auto;
+  margin-top: 15px;
 }
 
-section .li{
-	float:none;
-	display:block;
+.reactLink > *:hover { /* Firefox */
+    color: green;
 }
 
-.boldWord{
-	font-weight: bold;
-	font-size: 1.2em;
+
+.reactLink:visited { /* Firefox */
+    color: white;
 }
 
-nav li{
-	margin-left: 10px;
-	margin-right: 10px;
+.reactLink:visited {
+    color: white; 
 }

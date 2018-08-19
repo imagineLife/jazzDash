@@ -12,7 +12,7 @@ export default function NavLink(props) {
 					className="icon" 
 					alt= {props.linkTitle} 
 				/>
-				<span className="menuLabel"> {props.linkTitle} </span>
+				<span className="navSpan"> {props.linkTitle} </span>
 			</li>
 		</Link>		
 	);

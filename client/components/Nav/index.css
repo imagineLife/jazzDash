@@ -1,24 +1,44 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import {
-    BrowserRouter as Router,
-    Route,
-    Redirect,
-    Switch
-} from 'react-router-dom';
-import JazzDash from './containers/JazzDash';
+nav, footer {
+  padding-top:1%;
+  background-color: rgba(0,0,0,.8);
+}
 
-class App extends Component {
+nav {
+  padding: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  line-height: 45px;
+  z-index: 10;
+}
 
-	render(){
-		return (
-			<Router>
-				<React.Fragment>
-			        <Route exact path="/" component={JazzDash} />
-				</React.Fragment>
-			</Router>
-		);
-	}
+nav ul{
+  list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display:block;
+}
 
-};
-export default App;
+ul li.liWithIcon{
+  margin: 0 auto;
+  list-style-type: none;
+  display:inline-block;
+  width:50%;
+  text-align: center;
+  line-height: 45px;
+}
+
+.liWithIcon a {
+  height:55px; 
+}
+
+.icon{
+  width:40px;
+  height:auto;
+  margin-top: 15px;
+}
+
+a{
+  text-decoration: none;
+}

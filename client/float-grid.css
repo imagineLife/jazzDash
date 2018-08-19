@@ -51,7 +51,13 @@
 }
 
 
-.menuLabel{
+
+
+
+/*
+  nav text, hide on mobile
+*/
+.navSpan{
   display:none;
 }
 
@@ -62,6 +68,33 @@
 
 /* Non-mobile, grid */
 @media only screen and (min-width: 640px) {
+  
+  /* 
+    Move nav to left-side-bar style  
+    Set Icon hidden, text visible
+  */
+  .nav{
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+  }
+
+  /* Show nav li text  */
+  .navSpan, .liWithIcon, .reactLink{
+    display: inline-block;
+  }
+
+  .navSpan{
+    width: 100px;
+  }
+
+
+
+  .icon{
+    display: none;
+  }
+
   /* 3 columns, 3/12 in % */
   .col-3 {
     width: 25%;

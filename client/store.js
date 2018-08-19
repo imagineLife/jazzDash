@@ -3,7 +3,7 @@ import {createLogger} from 'redux-logger';
 
 //1. initialState
 const initialState = {
-	dashData : {}
+	dashData : []
 }
 
 //2. logger middle-ware
@@ -14,7 +14,25 @@ const dashDataReducer = (state=initialState.dashData, action) => {
 	console.log('inside dashDataReducer')
 	switch(action.type){
 		case ("fetch_dashboard_data"):
-			console.log('fetching data on CWM')		
+			console.log('fetching data on CWM')
+		    fetch(`http://localhost:8080/api/rawData/default`, {
+		        method: 'GET',
+		        headers: {
+		            'Content-Type': 'application/json',
+		        }
+		    })
+		    .then(res => res.json())
+		    .then(res => {
+		    	console.log('fetch res')
+		    	console.log(res)
+		    	console.log('fetch -----')
+		    })
+		    .catch(err => {
+		        const {code} = err;
+		        if (code === 401) {
+		          console.log(code);
+		        }
+		    })
 			// state = Object.assign({}, state, {age: action.payload});
 	}
 	return state;

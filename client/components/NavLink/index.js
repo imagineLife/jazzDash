@@ -5,15 +5,15 @@ import './navLink.css';
 export default function NavLink(props) {
 
 	return(
-		<li className='liWithIcon'>
-			<Link to= {props.linkTo}>
+		<Link to= {props.linkTo} className="reactLink">
+			<li className='liWithIcon'>
 				<img 
 					src= {props.imgSrc} 
 					className="icon" 
 					alt= {props.linkTitle} 
 				/>
 				<span className="menuLabel"> {props.linkTitle} </span>
-			</Link>
-		</li>
+			</li>
+		</Link>		
 	);
 }

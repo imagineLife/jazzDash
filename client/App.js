@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from 'react';
 import ReactDOM from "react-dom";
 import {
     BrowserRouter as Router,
@@ -6,17 +6,23 @@ import {
     Redirect,
     Switch
 } from 'react-router-dom';
+import Nav from './components/Nav';
 import JazzDash from './containers/JazzDash';
 
-class App extends Component {
+class App extends React.Component {
 
 	render(){
 		return (
-			<Router>
-				<React.Fragment>
-			        <Route exact path="/" component={JazzDash} />
-				</React.Fragment>
-			</Router>
+			<React.Fragment>
+					<Router>
+						<div className="routerWrapper">						
+						<Nav />
+						<Switch>
+					        <Route exact path="/" component={JazzDash} />
+					    </Switch>
+					    </div>
+					</Router>
+			</React.Fragment>
 		);
 	}
 

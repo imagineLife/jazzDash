@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 
 class JazzDash extends Component {
+	constructor(props){
+		super(props)
+		this.state = {
+			dashData : []
+		}
+	}
 
 	render(){
 		return (

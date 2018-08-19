@@ -14,10 +14,6 @@ const dashDataReducer = (state=initialState.dashData, action) => {
 	console.log('inside dashDataReducer')
 	// switch(action.type){
 	// 	case ("CHANGE_NAME"):
-	// 		state = Object.assign({}, state, {name: action.payload});
-	// 		break;
-
-	// 	case ("CHANGE_AGE"):
 	// 		state = Object.assign({}, state, {age: action.payload});
 	// }
 	return state;
@@ -28,36 +24,17 @@ const reducedReducers = combineReducers({
 	dashData: dashDataReducer,
 })
 
+//5. applying middleware
 const appliedLoggerMW = applyMiddleware(loggerMW);
 
-const devstore = createStore(reducedReducers, appliedLoggerMW)
+//6. CREATE the store
+const store = createStore(reducedReducers, appliedLoggerMW)
 
-devstore.subscribe(() => {
-	console.log('store changed ->', devstore.getState())
+//SUBSCRIBE to the store
+//may not need this with the redux logger & the redux dev tools
+
+store.subscribe(() => {
+	console.log('store changed ->', store.getState())
 }) 
 
-module.exports = { devstore };
-/*
-NOTES
-Handling async actions w middleware
-
-OVERVIEW: React is only a view rep of the state of the store
-	view never changes unless store changes
-	react is a view-layer-ONLY
-	move ALL rep OUT of components,
-		ONLY in store
-
-1. install redux-logger
-2. import redux-logger
-3. update applyMiddleware parameter
-
-HERE:
-	many changes from video.
-	redux-logger v3 is different syntax than previous
-
-
-
-
-*/
-
-
+module.exports = { store };

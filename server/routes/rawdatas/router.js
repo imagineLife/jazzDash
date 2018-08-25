@@ -33,6 +33,8 @@ router.get('/song/:id', (req, res) => {
 router.get('/default', (req, res) => {
 	RawData.find({_song: "5b59a3a4e8aaa194e036155a"})
 	.populate('noteLengths', 'length count')
+	.populate('_musician', 'first last')
+	// .populate('_song', 'title')
 	.populate('chordStats', 'chordName chordTones diatonicNCTs nonDiatonicNCTs totalNotes')
 	.exec()
 	.then(rawData => res.status(200).json(rawData))

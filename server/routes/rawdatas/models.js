@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 
 const RawDataScheme = mongoose.Schema({
-	_musician: String,
+	_musician: {type: Schema.Types.ObjectId, ref: 'Musicians' },
+	// _song: {type: Schema.Types.ObjectId, ref: 'Songs' },
 	_song: String,
 	totalDiatonicNCTs: Number,
 	totalNondiatonicNCT: Number,

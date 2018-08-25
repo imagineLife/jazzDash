@@ -7,7 +7,7 @@ import {
     Switch
 } from 'react-router-dom';
 import Nav from './components/Nav';
-import JazzDash from './containers/JazzDash';
+import JazzDash from './containers/jazzDash/JazzDash';
 import './resetNormalize.css';
 import './float-grid.css';
 

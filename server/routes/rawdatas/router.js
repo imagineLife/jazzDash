@@ -9,7 +9,7 @@ router.get('/mus/:id', (req, res) => {
 	.populate('noteLengths', 'length count')
 	.populate('chordStats', 'chordName chordTones diatonicNCTs nonDiatonicNCTs totalNotes')
 	.exec()
-	.then(rawData => res.status(201).json(rawData))
+	.then(rawData => res.status(200).json(rawData))
 	.catch(err => {
       console.error(err);
       res.status(500).json({error: 'RawData Get went wrong'});
@@ -22,7 +22,7 @@ router.get('/song/:id', (req, res) => {
 	.populate('noteLengths', 'length count')
 	.populate('chordStats', 'chordName chordTones diatonicNCTs nonDiatonicNCTs totalNotes')
 	.exec()
-	.then(rawData => res.status(201).json(rawData))
+	.then(rawData => res.status(200).json(rawData))
 	.catch(err => {
       console.error(err);
       res.status(500).json({error: 'RawData Get went wrong'});
@@ -35,7 +35,7 @@ router.get('/default', (req, res) => {
 	.populate('noteLengths', 'length count')
 	.populate('chordStats', 'chordName chordTones diatonicNCTs nonDiatonicNCTs totalNotes')
 	.exec()
-	.then(rawData => res.status(201).json(rawData))
+	.then(rawData => res.status(200).json(rawData))
 	.catch(err => {
       console.error(err);
       res.status(500).json({error: 'RawData Get went wrong'});

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
+import { fetchStats } from './state/actions';
 
 class JazzDash extends Component {
 	constructor(props){
@@ -8,15 +9,29 @@ class JazzDash extends Component {
 	}
 
 	componentWillMount(){
-		console.log('CWM this.props')
-		console.log(this.props)
+		console.log('CWM jazzDash this.props')
+		
+		//use the action!
 		if(!this.state.dashData){
-			this.props.dispatch({type: "fetch_dashboard_data"})
+			//fetch stats on dispatch fn as a 'pointer'
+			//dispatch gets passed around till its needed
+			fetchStats(this.props.dispatch)
+
 		}
-		console.log('CWM - - - -')
+
+		console.log('CWM DONE - - - -')
+	}
+
+	componentDidMount(){
+		console.log('CDM jazzDash CDM this.props')	
+		console.log(this.props)
+		console.log('CDM - - - - -')
 	}
 
 	render(){
+		console.log('RENDERING!! JazzDash this.props.storeDashData')
+		console.log(this.props.storeDashData)
+		console.log('- - - - -')
 		return (
 		    <div className="dashWrapper">
 		      <p> JazzDash Container Here :) </p>
@@ -26,6 +41,6 @@ class JazzDash extends Component {
 
 };
 
-const mapStateToProps = state => ({ storeDashData: state.dashData })
+const mapStateToProps = state => ({ storeDashData: state._root.entries[0][1].jazzData })
 
 export default connect(mapStateToProps)(JazzDash);

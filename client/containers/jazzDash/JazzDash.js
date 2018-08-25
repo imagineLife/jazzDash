@@ -10,33 +10,37 @@ class JazzDash extends Component {
 
 	componentWillMount(){
 		console.log('CWM jazzDash this.props')
-		
-		//use the action!
+
 		if(!this.state.dashData){
-			//fetch stats on dispatch fn as a 'pointer'
-			//dispatch gets passed around till its needed
 			fetchStats(this.props.dispatch)
-
 		}
-
+		
 		console.log('CWM DONE - - - -')
 	}
 
 	componentDidMount(){
-		console.log('CDM jazzDash CDM this.props')	
-		console.log(this.props)
-		console.log('CDM - - - - -')
+		console.log('CDM jazzDash CDM this.props.storeDashData')	
+		console.log(this.props.storeDashData)
+		console.log('CDM DONE - - - - -')
 	}
 
 	render(){
 		console.log('RENDERING!! JazzDash this.props.storeDashData')
 		console.log(this.props.storeDashData)
 		console.log('- - - - -')
-		return (
-		    <div className="dashWrapper">
-		      <p> JazzDash Container Here :) </p>
-			</div>
-		);
+		if(this.props.storeDashData){
+			return (
+			    <div className="dashWrapper">
+			      <p> JazzDash Container Here :) </p>
+				</div>
+			);
+		}else{
+			return (
+			    <div className="dashWrapper">
+			      <p>loading stats...</p>
+				</div>
+			);
+		}
 	}
 
 };

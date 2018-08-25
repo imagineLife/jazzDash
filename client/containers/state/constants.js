@@ -1,0 +1,1 @@
+export const FETCH_DATA = 'jazzdash.jazzDash.FETCH_DATA'

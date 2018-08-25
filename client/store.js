@@ -2,7 +2,6 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { fromJS } from 'immutable';
 import { createLogger } from 'redux-logger';
 import createReducer from './reducers';
-import thunk from 'redux-thunk';
 
 //1. initialState
 const initialState = { dashData : [] }

@@ -13,12 +13,12 @@ fat-arrow makes 'this' reference the place the fn was called from
 
 const parseData = function(data){
 	let readyData = data.map((d, i) => {
-		console.log('parseData MAPPING data i')
-		console.log(i)
-		console.log('d')
-		console.log(d)
-		console.log('- - - -')
-		return { 
+		// console.log('parseData MAPPING data i')
+		// console.log(i)
+		// console.log('d')
+		// console.log(d)
+		// console.log('- - - -')
+		return {
 			musician: d._musician,
 			song: d._song,
 			noteTypesByPercentage: {
@@ -26,14 +26,27 @@ const parseData = function(data){
 				NCTs: d.NCTs,
 				DNCTs: d.totalDiatonicNCTs,
 				NDNCTs: d.totalNonDiatonicNCTs
-			}
+			},
+			perMeasure: {
+				npm: ( d.noteCount / d.totalMeasuresPlayed),
+				measures: d.totalMeasuresPlayed,
+				nonEmptyMeasures: d.nonEmptyMeasures,
+				CTpm: ( d.CTs / d.totalMeasuresPlayed),
+				NCTpm: ( d.NCTs / d.totalMeasuresPlayed)
+			},
+			totalDirections:{
+				ups: d.upsMoved,
+				downs: d.downsTraveled,
+				unis: d.unisonsTraveled
+			},
+			chordStats: d.chordStats,
+			noteLengthCounts: d.noteLengths,
+			totalsByNoteName: d.totalsByNoteName
 		};
 	})
 
-	console.log('readyData')
+	console.log('REDUCER readyData is')
 	console.log(readyData)
-	console.log('- - - -')
-
 	return readyData;
 
 }

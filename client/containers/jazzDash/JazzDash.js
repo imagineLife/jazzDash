@@ -19,9 +19,9 @@ class JazzDash extends Component {
 	}
 
 	componentDidMount(){
-		console.log('CDM jazzDash CDM this.props.storeDashData')	
-		console.log(this.props.storeDashData)
-		console.log('CDM DONE - - - - -')
+		// console.log('CDM jazzDash CDM this.props.storeDashData')	
+		// console.log(this.props.storeDashData)
+		// console.log('CDM DONE - - - - -')
 	}
 
 	render(){
@@ -29,9 +29,23 @@ class JazzDash extends Component {
 		console.log(this.props.storeDashData)
 		console.log('- - - - -')
 		if(this.props.storeDashData){
+			let objKeys = Object.keys(this.props.storeDashData[0]);
+			let keysMessages = objKeys.map((k,ind) => {
+				if(ind > 1){
+					return (
+						<React.Fragment>
+							<p key={k}><b>{k}</b></p>
+							<p>will be a chart!</p>
+						</React.Fragment>
+					 )
+				}
+			})
+
+
 			return (
 			    <div className="dashWrapper">
 			      <p> JazzDash Container Here :) </p>
+					{keysMessages}
 				</div>
 			);
 		}else{

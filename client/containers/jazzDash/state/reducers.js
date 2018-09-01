@@ -4,51 +4,90 @@ import * as jazzDashConst from './constants';
 	Writing in this manner allows reacts 'this'
 writing function(data) would make 'this' reference this function
 fat-arrow makes 'this' reference the place the fn was called from
-	
-	object for more random data-using, as oppoesd to array for linear  looping 
-
-	key  = chart1
+object for more random data-using, as opposed to array for linear  looping 
 
 */
 
 const parseData = function(data){
 	let readyData = data.map((d, i) => {
-		// console.log('parseData MAPPING data i')
-		// console.log(i)
-		// console.log('d')
-		// console.log(d)
-		// console.log('- - - -')
 		return {
-			musician: d._musician,
+			musician: `${d._musician.first} ${d._musician.last}`,
 			song: d._song,
 			noteTypesByPercentage: {
+				musician: `${d._musician.first} ${d._musician.last}`,
+				song: d._song,
 				CTs: d.CTs,
 				NCTs: d.NCTs,
 				DNCTs: d.totalDiatonicNCTs,
-				NDNCTs: d.totalNonDiatonicNCTs
+				NDNCTs: d.totalNonDiatonicNCTs,
+				type: 'pie'
 			},
 			perMeasure: {
+				musician: `${d._musician.first} ${d._musician.last}`,
+				song: d._song,
 				npm: ( d.noteCount / d.totalMeasuresPlayed),
 				measures: d.totalMeasuresPlayed,
 				nonEmptyMeasures: d.nonEmptyMeasures,
 				CTpm: ( d.CTs / d.totalMeasuresPlayed),
-				NCTpm: ( d.NCTs / d.totalMeasuresPlayed)
+				NCTpm: ( d.NCTs / d.totalMeasuresPlayed),
+				type: 'line'
 			},
 			totalDirections:{
+				musician: `${d._musician.first} ${d._musician.last}`,
+				song: d._song,
 				ups: d.upsMoved,
 				downs: d.downsTraveled,
-				unis: d.unisonsTraveled
+				unis: d.unisonsTraveled,
+				type: 'line'
 			},
-			chordStats: d.chordStats,
-			noteLengthCounts: d.noteLengths,
-			totalsByNoteName: d.totalsByNoteName
+			chordStats: {
+				musician: `${d._musician.first} ${d._musician.last}`,
+				song: d._song,
+				...d.chordStats
+			},
+			noteLengthCounts: {
+				musician: `${d._musician.first} ${d._musician.last}`,
+				song: d._song,
+				...d.noteLengths
+			},
+			totalsByNoteName: {
+				musician: `${d._musician.first} ${d._musician.last}`,
+				song: d._song,
+				...d.totalsByNoteName
+			}
 		};
 	})
 
-	console.log('REDUCER readyData is')
-	console.log(readyData)
-	return readyData;
+	let reVampedArr = [];
 
+	readyData.forEach((musicianData, ind) => {
+
+		//get chart-name keys from previous object
+		let charKeys = Object.keys(musicianData)
+
+		//iterate through each chart by chart-name
+		charKeys.map(chKey => {
+			if(chKey !== 'musician' && chKey !== 'song'){
+		
+		//get chart-data by chart name
+				let thisObj = {...musicianData[chKey] }
+				
+		//if this chart name/data is NOT present in reVamped Arr, add it
+				if(!reVampedArr[chKey]){
+					reVampedArr[chKey]= []
+					reVampedArr[chKey].push(thisObj)
+		//else add it to the already-present element,
+		// as a 2nd object under the same chart-name keyy
+				}else{
+					reVampedArr[chKey].push(thisObj)
+				}
+			}
+		})
+		return reVampedArr;
+	})
+
+	// return readyData;
+	return reVampedArr;
 }
 
 const dashDataReducer = (state={}, action) => {
@@ -58,7 +97,7 @@ const dashDataReducer = (state={}, action) => {
 		case jazzDashConst.FETCH_DATA :
 			// console.log('fetching dashboard data by reducer...')
 			
-			//call the fn
+			//covert the data in chartable-objects
 			const parsedData = parseData(action.payload)
 
 

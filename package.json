@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive 'server/test/test.*.js' --exit",
-    "start:client": "webpack-dev-server --mode development ./client/index.js --open --config client/webpack.config.js",
+    "start:client": "webpack-dev-server --mode development ./client/index.js --open --config client/webpack.config.js --port 8081",
     "start:server": "nodemon server/server.js",
-    "start": "npm run start:client & npm run start:server"
+    "start": "npm run start:server & npm run start:client"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
 import { fetchStats } from './state/actions';
+import CountByNoteName from '../../components/CountByNoteName';
+import './index.css';
 
 class JazzDash extends Component {
 	constructor(props){
@@ -18,43 +20,25 @@ class JazzDash extends Component {
 		console.log('CWM DONE - - - -')
 	}
 
-	componentDidMount(){
-		// console.log('CDM jazzDash CDM this.props.storeDashData')	
-		// console.log(this.props.storeDashData)
-		// console.log('CDM DONE - - - - -')
-	}
-
 	render(){
-		console.log('RENDERING!! JazzDash this.props.storeDashData')
-		console.log(this.props.storeDashData)
-		console.log('- - - - -')
-		if(this.props.storeDashData){
-			let objKeys = Object.keys(this.props.storeDashData[0]);
-			let keysMessages = objKeys.map((k,ind) => {
-				if(ind > 1){
-					return (
-						<React.Fragment>
-							<p key={k}><b>{k}</b></p>
-							<p>will be a chart!</p>
-						</React.Fragment>
-					 )
-				}
-			})
+		// console.log('RENDERING!! JazzDash this.props.storeDashData')
+		// console.log(this.props.storeDashData)
 
-
-			return (
-			    <div className="dashWrapper">
-			      <p> JazzDash Container Here :) </p>
-					{keysMessages}
-				</div>
-			);
-		}else{
+		//<ChordStats data={this.props.store.data.chordStats} />
+		//<NotesByType data={this.props.store.data.notesByType} />
+		if(!this.props.storeDashData){
+			//try img as class bg image for dummy loading image!!
 			return (
 			    <div className="dashWrapper">
 			      <p>loading stats...</p>
 				</div>
 			);
+		}else{
+			return(
+				<CountByNoteName data={this.props.storeDashData.totalsByNoteName}/>
+			)
 		}
+		// }
 	}
 
 };

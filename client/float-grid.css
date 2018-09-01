@@ -84,9 +84,11 @@
   */
   .nav{
     left: 0;
+    right: 0;
     top: 0;
-    bottom: 0;
-    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
   }
 
   /* Show nav li text  */
@@ -106,8 +108,7 @@
 
 
   .dashWrapper{
-    margin-left: 100px;
-    padding: 5px;
+    padding: 10px;
   }
 
 

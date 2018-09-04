@@ -2,38 +2,45 @@
   box-sizing: border-box;
 }
 
+body{
+  margin-top: 100px;
+}
+
+.row {
+  margin-top: 100px;
+  display: grid;
+  margin: 0;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1000px;
+  grid-template-columns: 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33%;
+}
+
+
 /* Grid measurements:
  *
- *   960px wide including 12 gutters (half gutters on both edges)
+    TOTAL WIDTH
+ *   960px wide 
+      including 12 gutters (half gutters on both edges)
  *
+    GUTTERS
+    *   20px gutters (two half-gutters + 11 full gutters, so 12 total)
+
+    COLUMNS
  *   60px columns (12)
- *   20px gutters (two half-gutters + 11 full gutters, so 12 total)
- *
+ 
  *
  *   For smaller screens, we always want 20px of padding on either side,
  *   so 960 + 20 + 20 => 1000px
  *
  **/
-.row {
-  max-width: 1000px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin: 0 auto;
-}
 
-/* Clearfix */
-.row::before,
-.row::after {
-  display: table;
-  content: '';
-}
 
-.row::after {
-  clear: both;
-}
+/*
+  gr-specific padding
+*/
 
-.col-3, .col-4, .col-6, .col-12 {
-  float: left;
+.gr-2-3, .gr-3, .gr-4, .gr-6, .gr-12 {
 
   /* Gutters:
    * Each column is padded by half-a-gutter on each side,
@@ -45,29 +52,33 @@
   padding-right: 1.04166666%;
 }
 
-/* Mobile defaults */
-.col-3, .col-4, .col-6, .col-12 {
-  width: 100%;
+
+/*
+MOBILE-FIRST
+Grid Layout
+*/
+.gr-2, .gr-2-2, .gr-2-3, .gr-3, .gr-4, .gr-6, .gr-12 {
+  grid-column-end: span 12;
 }
-
-
-
-
-
 
 
 
 
 
 /*
-  nav text, hide on mobile
+mid-screens-size resizing
 */
-.navSpan{
-  display:none;
+@media only screen and (min-width: 450px){
+  .gr-2-2{
+    grid-column-end: span 4;
+  }
+
+  .gr-2-3{
+    grid-column-end: span 6;
+  }
+
+
 }
-
-
-
 
 
 
@@ -78,59 +89,24 @@
 /* Non-mobile, grid */
 @media only screen and (min-width: 640px) {
   
-  /* 
-    Move nav to left-side-bar style  
-    Set Icon hidden, text visible
-  */
-  .nav{
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 40px;
-    line-height: 40px;
-    position: relative;
+  /* 2 columns, 2/12 in % */  
+  .gr-2, .gr-2-2{
+    grid-column-end: span 2;
   }
-
-  /* Show nav li text  */
-  .navSpan, .liWithIcon, .reactLink{
-    display: inline-block;
-  }
-
-  .navSpan{
-    width: 100px;
-  }
-
-  .icon{
-    display: none;
-  }
-
-
-
-
-  .dashWrapper{
-    padding: 10px;
-  }
-
-
-
 
   /* 3 columns, 3/12 in % */
-  .col-3 {
-    width: 25%;
+  .gr-3, .gr-2-3 {
+    grid-column-end: span 3;
   }
 
   /* 4 columns, 4/12 in % */
-  .col-4 {
-    width: 33.333333%;
+  .gr-4 {
+    grid-column-end: span 4;
   }
 
   /* 6 columns, 6/12 in % */
-  .col-6 {
-    width: 50%;
+  .gr-6 {
+    grid-column-end: span 6;
   }
 
-  /* 12 columns, 12/12 in % */
-  .col-12 {
-    width: 100%;
-  }
 }

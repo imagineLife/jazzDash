@@ -26,13 +26,23 @@ ul li.liWithIcon{
   display:inline-block;
   width:50%;
   text-align: center;
-  line-height: 30px;
+  line-height: 45px;
 }
 
 .liWithIcon a {
   height:55px; 
 }
 
+.icon{
+  width:40px;
+  height:auto;
+  margin-top: 15px;
+}
+
 a{
   text-decoration: none;
+}
+
+.navSpan{
+  display:none;
 }

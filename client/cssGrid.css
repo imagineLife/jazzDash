@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-body{
-  margin-top: 100px;
-}
-
 .row {
   margin-top: 100px;
   display: grid;
@@ -89,6 +85,10 @@ mid-screens-size resizing
 /* Non-mobile, grid */
 @media only screen and (min-width: 640px) {
   
+  /*
+  GRID SETTINGS
+  */
+
   /* 2 columns, 2/12 in % */  
   .gr-2, .gr-2-2{
     grid-column-end: span 2;
@@ -107,6 +107,21 @@ mid-screens-size resizing
   /* 6 columns, 6/12 in % */
   .gr-6 {
     grid-column-end: span 6;
+  }
+
+  /*
+  NAV
+  */
+  .navSpan{
+    display: inline;
+  }
+
+  .icon{
+    display: none;
+  }
+
+  nav{
+    bottom: auto;
   }
 
 }

@@ -9,7 +9,7 @@ import {
 import Nav from './components/Nav';
 import JazzDash from './containers/jazzDash/JazzDash';
 import './resetNormalize.css';
-import './float-grid.css';
+import './cssGrid.css';
 
 class App extends React.Component {
 

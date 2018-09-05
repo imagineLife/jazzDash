@@ -2,6 +2,7 @@ import React from 'react';
 import { scaleBand, scaleLinear } from 'd3-scale'
 import * as d3 from 'd3-selection'
 import Toggle from '../Toggle'
+import AxesAndMath from '../Axes'
 
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import './index.css';
@@ -9,7 +10,7 @@ import './index.css';
 class CountByNoteName extends React.Component {
 	constructor(props){
 		super(props)
-		this.xScale = scaleBand().padding(0.2)
+		this.xScale = scaleBand()
 		this.yScale = scaleLinear()
 		this.calcXPos = this.calcXPos.bind(this)
 		this.calcYPos = this.calcYPos.bind(this)
@@ -18,14 +19,14 @@ class CountByNoteName extends React.Component {
 			labels: [
 				{ 
 				type:'x',
-				text : 'Truck ID',
+				text : 'Note Name',
 				textClass : 'xAxisLabelText',
 				gWrapperClass : 'xAxisLabelG',
 				transformation: ''
 				}, 
 				{
 				type: 'y',
-				text : 'Minutes In Facility',
+				text : 'Number Of Plays',
 				textClass : 'yAxisLabelText',
 				gWrapperClass : 'yAxisLabelG',
 				transformation: 'rotate(-90)'
@@ -38,14 +39,15 @@ class CountByNoteName extends React.Component {
 			//   transformation: ''
 			// },
 			],
-			margins : { top: 75, right: 20, bottom: 100, left: 60 },
+			margins : { top: 45, right: 20, bottom: 100, left: 80 },
 			curShowing: 0
 		}
 	}
 
 	toggle(){
 	    console.log('made it!')
-	    this.setState({curShowing: !this.state.curShowing})
+	    let newVal = (this.state.curShowing === 0) ? 1 : 0;
+	    this.setState({curShowing: newVal})
 	}
 
 	calcXPos(string, dims){
@@ -68,21 +70,75 @@ class CountByNoteName extends React.Component {
 		}
 	}
 
+	getNamesFromData(data){
+		return {
+			first : data[0].musician, 
+			second : data[1].musician
+		}
+	}
+
+	convertToArray(obj, usableKeysArr){
+		let completedArr = [];
+		usableKeysArr.forEach(key => {
+			let thisObj = {}
+			thisObj['noteName'] = key
+			thisObj['count'] = obj[key]
+			completedArr.push(thisObj)
+
+		})
+		return completedArr
+	}
 
 
 	render(){
 		console.log('RENDERING!! CountByNoteName props')
 		console.log(this.props)
-		console.log('parent state')
-		console.log(this.state.curShowing)
-		console.log('- - - - -')
+
+		//set svg dimensions
+	    const svgDimensions = {
+	      width: Math.max(this.props.respWrapWidth, 300),
+	      height: 450
+	    }
+
+	    /*
+			Make data workable for d3 scales
+	    */
+		let curMusicianStats = this.props.data[this.state.curShowing]
+		let dataKeys = Object.keys(curMusicianStats)
+		let filteredKeys = dataKeys.filter(key => {
+			if(key !== 'musician' && key !== 'song' && key !== 'grWidth')
+			return key
+		})
+		let curUsableData = this.convertToArray(curMusicianStats, filteredKeys);
+
+		//make class string for svg element
 		let thisClass = `CountByNoteName gr-${this.props.data[0].grWidth}`
+
+		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
+	
+		//update scales
+	    const xScale = this.xScale
+	      .domain(filteredKeys)
+	      .range([this.state.margins.left, svgDimensions.width - this.state.margins.right])
+	    
+	     //yScale max hard-coded
+	     //yScale max hard-coded
+	    const yScale = this.yScale
+	      .domain([0, 103])
+	      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
+
 		return (
 		    <React.Fragment>
 			    <svg className={thisClass}>
-			      <text y='50'>CountByNoteName Here!</text>
+			        
+			        <AxesAndMath
+			          scales={{ xScale, yScale }}
+			          margins={this.state.margins}
+			          svgDimensions={svgDimensions}
+			        />
+
 				</svg>
-				<Toggle onToggle={this.toggle}/>
+				<Toggle opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
 			</React.Fragment>
 		);
 	}

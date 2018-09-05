@@ -55,7 +55,7 @@ input:checked + .slider:before {
 }
   
 .on, .off {
-  color: white;
+  color: black;
   position: absolute;
   transform: translate(-50%,-50%);
   top: 50%;

@@ -1,3 +1,4 @@
 .Responsive-wrapper{
-	/*outline: 1px solid royalblue;*/
+	border: 1px solid royalblue;
+	text-align: center;
 }

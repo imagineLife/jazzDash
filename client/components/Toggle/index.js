@@ -5,9 +5,10 @@ import './index.css';
 export default class Toggle extends React.Component {
 
 	render() {
-		console.log('toggle props')
-		console.log(this.props)
-		const { onToggle } = this.props
+		const { onToggle, opts } = this.props
+		const firstFirst = opts.first.replace(/ .*/,'');
+		const firstSecond = opts.second.replace(/ .*/,'');
+
 		return (
 			<label className="switch" htmlFor="toggleMusician">
 				<input 
@@ -17,8 +18,8 @@ export default class Toggle extends React.Component {
 					onClick={ onToggle }
 				/>
 				<div className="slider">
-					<span className="off rightSpan">Woody</span>
-					<span className="off leftSpan">Joe</span>
+					<span className="off rightSpan">{firstFirst}</span>
+					<span className="off leftSpan">{firstSecond}</span>
 				</div>
 			</label>
 		)

@@ -21,9 +21,25 @@ class JazzDash extends Component {
 	}
 
 	render(){
-		// console.log('RENDERING!! JazzDash this.props.storeDashData')
-		// console.log(this.props.storeDashData)
+		
+		/*
+		COULD I...?
+			const responsiveSection = this.props.storeDashData.forEach((chartObj, ind) => {
+				return <LayoutWrapper key={ind} {...chartObj}/>
+			})
 
+			here, the '<LayoutWrapper />' would return 
+			ResonsiveWrapper(<ChartComponent />)
+			Will this separate layout concern from chart-content-concern a little?
+
+
+			OR could/should I this.props.storeDashdata.forEach((chartObj, ind) => {
+				return REsponsiveWrapper(<ChartComponent />)
+
+				
+			})
+		*/
+		
 		//<ChordStats data={this.props.store.data.chordStats} />
 		//<NotesByType data={this.props.store.data.notesByType} />
 		if(!this.props.storeDashData){
@@ -35,7 +51,9 @@ class JazzDash extends Component {
 			);
 		}else{
 			return(
-				<CountByNoteName data={this.props.storeDashData.totalsByNoteName}/>
+				<main className="dashWrapper">
+					<CountByNoteName data={this.props.storeDashData.totalsByNoteName} />
+				</main>
 			)
 		}
 		// }

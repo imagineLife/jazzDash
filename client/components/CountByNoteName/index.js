@@ -10,9 +10,9 @@ class CountByNoteName extends React.Component {
 		console.log(this.props.data)
 		let thisClass = `CountByNoteName gr-${this.props.data[0].grWidth}`
 		return (
-		    <div className={thisClass}>
+		    <svg className={thisClass}>
 		      <p>CountByNoteName Here!</p>
-			</div>
+			</svg>
 		);
 	}
 }

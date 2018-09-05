@@ -1,0 +1,83 @@
+.switch {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  position: relative;
+  display: inline-block;
+  width: 98%;
+  height: 34px;
+}
+
+.switch input {
+  display:none;
+}
+
+.switch input text{
+  display: all;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  -webkit-transition: .1s;
+  transition: .1s;
+  border: 1px solid lightslategrey;
+  background-color: lightslategrey ;
+  border-radius: 60px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 90%;
+  width: 50%;
+  left: 4px;
+  bottom: 5%;
+  background-color: rgba(255,255,255,.7);
+  -webkit-transition: .2s;
+  transition: .2s;
+  border-radius: 50px;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(97%);
+  -ms-transform: translateX(97%);
+  transform: translateX(97%);
+}
+
+.on {
+  display: none;
+}
+  
+.on, .off {
+  color: white;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 95%;
+  font-size: 14px;
+  font-family: Verdana, sans-serif;
+}
+
+input:checked + .slider .on {
+  display: block;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+input:checked + .slider .off {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+
+.rightSpan{
+  left: 75%;
+}
+
+.leftSpan{
+  left: 25%;
+}

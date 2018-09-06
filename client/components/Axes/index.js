@@ -3,8 +3,6 @@ import Axis from '../Axis'
 
 export default ({ scales, margins, svgDimensions }) => {
   const { height, width } = svgDimensions
-  console.log('svgDims')
-  console.log(height, width)
 
   const xProps = {
     orient: 'Bottom',

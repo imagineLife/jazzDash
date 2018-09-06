@@ -6,8 +6,8 @@ export default class Toggle extends React.Component {
 
 	render() {
 		const { onToggle, opts } = this.props
-		const firstFirst = opts.first.replace(/ .*/,'');
-		const firstSecond = opts.second.replace(/ .*/,'');
+		const firstSecond = opts.first.replace(/ .*/,'');
+		const firstFirst = opts.second.replace(/ .*/,'');
 
 		return (
 			<label className="switch" htmlFor="toggleMusician">

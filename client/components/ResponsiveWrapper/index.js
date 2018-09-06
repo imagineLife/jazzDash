@@ -48,8 +48,6 @@ export default RespWrapper => (
       const { containerWidth } = this.state
       const shouldRenderChart = containerWidth !== null
 
-      console.log('responsive wrapper PROPS')
-      console.log(this.props)
       return (
         <div
           ref={(el) => { this.chartContainerViaRef = el }}

@@ -4,6 +4,7 @@ import * as d3 from 'd3-selection'
 import Toggle from '../Toggle'
 import AxesAndMath from '../Axes'
 import AxisLabel from '../AxisLabel'
+import Bars from '../Bars'
 
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import './index.css';
@@ -40,7 +41,7 @@ class CountByNoteName extends React.Component {
 			//   transformation: ''
 			// },
 			],
-			margins : { top: 45, right: 20, bottom: 100, left: 80 },
+			margins : { top: 45, right: 20, bottom: 100, left: 60 },
 			curShowing: 0
 		}
 	}
@@ -148,6 +149,17 @@ class CountByNoteName extends React.Component {
 			          scales={{ xScale, yScale }}
 			          margins={this.state.margins}
 			          svgDimensions={svgDimensions}
+			        />
+
+			        <Bars
+			          scales={{ xScale, yScale }}
+			          margins={this.state.margins}
+			          data={curUsableData}
+			          maxValue={maxDataValue}
+			          svgDimensions={svgDimensions}
+			          mousedOver={this.mousedOver}
+			          alertLevel={this.state.alertLevel}
+			          showBarDetails={this.showingBarDetails}
 			        />
 
 			        {axisLabels}

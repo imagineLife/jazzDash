@@ -102,9 +102,11 @@ class NoteLengthCounts extends React.Component {
 	    }
 
 	    /*
-			Make data workable for d3 scales
+			Make data workable with d3 scales
 	    */
 		let curMusicianStats = this.props.data[this.state.curShowing]
+		console.log('curMusicianStats')
+		console.log(curMusicianStats)
 		let dataKeys = Object.keys(curMusicianStats)
 		let filteredKeys = dataKeys.filter(key => {
 			if(key !== 'musician' && key !== 'song' && key !== 'grWidth')
@@ -142,30 +144,10 @@ class NoteLengthCounts extends React.Component {
 	    })
 
 		return (
-		    <React.Fragment>
-			    <svg className={thisClass}>
-			        
-			        <AxesAndMath
-			          scales={{ xScale, yScale }}
-			          margins={this.state.margins}
-			          svgDimensions={svgDimensions}
-			        />
-
-			        <Bars
-			          scales={{ xScale, yScale }}
-			          margins={this.state.margins}
-			          data={curUsableData}
-			          maxValue={maxDataValue}
-			          svgDimensions={svgDimensions}
-			          mousedOver={this.mousedOver}
-			          alertLevel={this.state.alertLevel}
-			          showBarDetails={this.showingBarDetails}
-			        />
-
-			        {axisLabels}
-
+			<React.Fragment>
+				<svg className={thisClass}>
+					<text x="125" y="250">Mic Check what is this</text>
 				</svg>
-				<Toggle opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
 			</React.Fragment>
 		);
 	}

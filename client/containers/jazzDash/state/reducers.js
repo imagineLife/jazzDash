@@ -30,7 +30,7 @@ const parseData = function(data){
 				nonEmptyMeasures: d.nonEmptyMeasures,
 				CTpm: ( d.CTs / d.totalMeasuresPlayed),
 				NCTpm: ( d.NCTs / d.totalMeasuresPlayed),
-				type: 'line'
+				type: 'line',
 			},
 			totalDirections:{
 				musician: `${d._musician.first} ${d._musician.last}`,
@@ -48,13 +48,16 @@ const parseData = function(data){
 			noteLengthCounts: {
 				musician: `${d._musician.first} ${d._musician.last}`,
 				song: d._song,
+				grWidth:'6',
 				...d.noteLengths
 			},
 			totalsByNoteName: {
 				musician: `${d._musician.first} ${d._musician.last}`,
 				song: d._song,
-				...d.totalsByNoteName
-			}
+				grWidth:'12',
+				...d.totalsByNoteName,
+
+			}	
 		};
 	})
 

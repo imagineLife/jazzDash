@@ -46,6 +46,11 @@ class JazzDash extends Component {
 				</div>
 			);
 		}else{
+
+			console.log('dash wrapper props')
+			console.log(this.props.storeDashData)
+			console.log('- - - - -')
+
 			return(
 				<main className="dashWrapper">
 					<CountByNoteName data={this.props.storeDashData.totalsByNoteName} />

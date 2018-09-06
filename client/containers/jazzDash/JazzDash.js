@@ -11,13 +11,9 @@ class JazzDash extends Component {
 	}
 
 	componentWillMount(){
-		console.log('CWM jazzDash this.props')
-
 		if(!this.state.dashData){
 			fetchStats(this.props.dispatch)
 		}
-		
-		console.log('CWM DONE - - - -')
 	}
 
 	render(){

@@ -3,6 +3,7 @@ import { scaleBand, scaleLinear } from 'd3-scale'
 import * as d3 from 'd3-selection'
 import Toggle from '../Toggle'
 import AxesAndMath from '../Axes'
+import AxisLabel from '../AxisLabel'
 
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import './index.css';
@@ -45,7 +46,6 @@ class CountByNoteName extends React.Component {
 	}
 
 	toggle(){
-	    console.log('made it!')
 	    let newVal = (this.state.curShowing === 0) ? 1 : 0;
 	    this.setState({curShowing: newVal})
 	}
@@ -91,8 +91,8 @@ class CountByNoteName extends React.Component {
 
 
 	render(){
-		console.log('RENDERING!! CountByNoteName props')
-		console.log(this.props)
+		// console.log('RENDERING!! CountByNoteName props')
+		// console.log(this.props)
 
 		//set svg dimensions
 	    const svgDimensions = {
@@ -127,6 +127,19 @@ class CountByNoteName extends React.Component {
 	      .domain([0, 103])
 	      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
 
+	    //Make data-driven axis labels
+	    const axisLabels = this.state.labels.map((each) => {
+	      return <AxisLabel
+	        key={each.text}
+	        xPos={this.calcXPos(each.type, svgDimensions)}
+	        yPos={this.calcYPos(each.type, svgDimensions)}
+	        labelClass={each.textClass}
+	        groupClass={each.gWrapperClass}
+	        textVal={each.text}
+	        transformation={each.transformation}
+	      />
+	    })
+
 		return (
 		    <React.Fragment>
 			    <svg className={thisClass}>
@@ -136,6 +149,8 @@ class CountByNoteName extends React.Component {
 			          margins={this.state.margins}
 			          svgDimensions={svgDimensions}
 			        />
+
+			        {axisLabels}
 
 				</svg>
 				<Toggle opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>

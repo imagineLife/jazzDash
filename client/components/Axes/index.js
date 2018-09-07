@@ -7,7 +7,7 @@ export default ({ scales, margins, svgDimensions }) => {
   const xProps = {
     orient: 'Bottom',
     scale: scales.xScale,
-    translate: `translate(${margins.left}, ${height - margins.bottom})`,
+    translate: `translate(0, ${height - margins.bottom})`,
     tickSize: height - margins.top - margins.bottom,
   }
 

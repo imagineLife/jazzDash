@@ -12,8 +12,10 @@ import './index.css';
 class NoteLengthCounts extends React.Component {
 	constructor(props){
 		super(props)
-		this.xScale = scaleBand()
-		this.yScale = scaleLinear()
+		this.xScale = scaleLinear()
+		this.yScale = scaleBand()
+			.paddingInner(0.3)
+        	.paddingOuter(0.2)
 		this.calcXPos = this.calcXPos.bind(this)
 		this.calcYPos = this.calcYPos.bind(this)
 		this.toggle = this.toggle.bind(this)
@@ -41,7 +43,7 @@ class NoteLengthCounts extends React.Component {
 			//   transformation: ''
 			// },
 			],
-			margins : { top: 45, right: 20, bottom: 100, left: 60 },
+			margins : { top: 45, right: 20, bottom: 100, left: 70 },
 			curShowing: 0
 		}
 	}
@@ -79,17 +81,19 @@ class NoteLengthCounts extends React.Component {
 	}
 
 	convertToArray(obj, usableKeysArr){
-		let completedArr = [];
+		let cleanedData = [];
 		usableKeysArr.forEach(key => {
-			let thisObj = {}
-			thisObj['noteName'] = key
-			thisObj['count'] = obj[key]
-			completedArr.push(thisObj)
-
+			let thisObj = {};
+			if(['0','1','2','3','4','5','6','7','8'].includes(key)){
+				let length = obj[key].length
+				let count = obj[key].count
+				thisObj['duration'] = length;
+				thisObj['count'] = count;
+				cleanedData.push(thisObj)
+			}
 		})
-		return completedArr
+		return cleanedData;
 	}
-
 
 	render(){
 		// console.log('RENDERING!! NoteLengthCounts props')
@@ -104,30 +108,25 @@ class NoteLengthCounts extends React.Component {
 	    /*
 			Make data workable with d3 scales
 	    */
-		let curMusicianStats = this.props.data[this.state.curShowing]
-		console.log('curMusicianStats')
-		console.log(curMusicianStats)
-		let dataKeys = Object.keys(curMusicianStats)
-		let filteredKeys = dataKeys.filter(key => {
-			if(key !== 'musician' && key !== 'song' && key !== 'grWidth')
-			return key
-		})
-		let curUsableData = this.convertToArray(curMusicianStats, filteredKeys);
+		let curMusicianStats = this.props.data[this.state.curShowing];
+		let dataKeys = Object.keys(curMusicianStats);
+		let curUsableData = this.convertToArray(curMusicianStats, dataKeys);
 
 		//make class string for svg element
 		let thisClass = `noteLengthCounts gr-${this.props.data[0].grWidth}`
 
-		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
-	
+		const maxDataValue = Math.max(...curUsableData.map(d => +d.count))
+		const durArr = curUsableData.map(d => +d.duration);
+		durArr.sort((a,b) => a - b)
+
 		//update scales
 	    const xScale = this.xScale
-	      .domain(filteredKeys)
+	      .domain([0, maxDataValue])
 	      .range([this.state.margins.left, svgDimensions.width - this.state.margins.right])
 	    
 	     //yScale max hard-coded
-	     //yScale max hard-coded
 	    const yScale = this.yScale
-	      .domain([0, 103])
+	      .domain(durArr)
 	      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
 
 	    //Make data-driven axis labels
@@ -146,7 +145,14 @@ class NoteLengthCounts extends React.Component {
 		return (
 			<React.Fragment>
 				<svg className={thisClass}>
-					<text x="125" y="250">Mic Check what is this</text>
+
+				<AxesAndMath
+		          scales={{ xScale, yScale }}
+		          margins={this.state.margins}
+		          svgDimensions={svgDimensions}
+		        />
+
+					{axisLabels}
 				</svg>
 			</React.Fragment>
 		);

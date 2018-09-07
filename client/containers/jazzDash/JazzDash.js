@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {connect} from 'react-redux';
 import { fetchStats } from './state/actions';
 import CountByNoteName from '../../components/CountByNoteName';
+import NoteLengthCounts from '../../components/noteLengthCounts';
 import './index.css';
 
 class JazzDash extends Component {
@@ -54,6 +55,7 @@ class JazzDash extends Component {
 			return(
 				<main className="dashWrapper">
 					<CountByNoteName data={this.props.storeDashData.totalsByNoteName} />
+					<NoteLengthCounts data={this.props.storeDashData.noteLengthCounts} />
 				</main>
 			)
 		}

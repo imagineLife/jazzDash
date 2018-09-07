@@ -4,7 +4,7 @@ import * as d3 from 'd3-selection'
 import Toggle from '../Toggle'
 import AxesAndMath from '../Axes'
 import AxisLabel from '../AxisLabel'
-import Bars from '../Bars'
+import HorizontalBars from '../HorizontalBars'
 
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import './index.css';
@@ -43,7 +43,7 @@ class NoteLengthCounts extends React.Component {
 			//   transformation: ''
 			// },
 			],
-			margins : { top: 45, right: 20, bottom: 100, left: 70 },
+			margins : { top: 45, right: 50, bottom: 100, left: 70 },
 			curShowing: 0
 		}
 	}
@@ -122,7 +122,8 @@ class NoteLengthCounts extends React.Component {
 		//update scales
 	    const xScale = this.xScale
 	      .domain([0, maxDataValue])
-	      .range([this.state.margins.left, svgDimensions.width - this.state.margins.right])
+	      .range([0, (svgDimensions.width - this.state.margins.right - this.state.margins.left)])
+	      .nice()
 	    
 	     //yScale max hard-coded
 	    const yScale = this.yScale
@@ -152,7 +153,18 @@ class NoteLengthCounts extends React.Component {
 		          svgDimensions={svgDimensions}
 		        />
 
-					{axisLabels}
+				<HorizontalBars
+		          scales={{ xScale, yScale }}
+		          margins={this.state.margins}
+		          data={curUsableData}
+		          maxValue={maxDataValue}
+		          svgDimensions={svgDimensions}
+		          mousedOver={this.mousedOver}
+		          alertLevel={this.state.alertLevel}
+		          showBarDetails={this.showingBarDetails}
+		        />
+
+				{axisLabels}
 				</svg>
 			</React.Fragment>
 		);

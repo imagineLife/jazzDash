@@ -1,0 +1,7 @@
+.singleBar{
+  cursor: pointer;
+}
+
+.singleBar:hover{
+  opacity: .4;
+}

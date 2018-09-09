@@ -43,7 +43,7 @@ router.get('/default', (req, res) => {
 	.populate('noteLengths', 'length count')
 	.populate('_musician', 'first last')
 	.populate('chordStats', 'chordName chordTones diatonicNCTs nonDiatonicNCTs totalNotes')
-	.populate('_song', 'title')
+	.populate('_song', 'title album')
 	.exec()
 	.then(rawData => res.status(200).json(rawData))
 	.catch(err => {

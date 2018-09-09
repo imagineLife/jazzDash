@@ -37,8 +37,6 @@ class JazzDash extends Component {
 			})
 		*/
 		
-		//<ChordStats data={this.props.store.data.chordStats} />
-		//<NotesByType data={this.props.store.data.notesByType} />
 		if(!this.props.storeDashData){
 			//try img as class bg image for dummy loading image!!
 			return (
@@ -48,14 +46,18 @@ class JazzDash extends Component {
 			);
 		}else{
 
-			console.log('dash wrapper props')
-			console.log(this.props.storeDashData)
-			console.log('- - - - -')
+			// console.log('dash wrapper props')
+			// console.log(this.props.storeDashData)
+			// console.log('- - - - -')
 
 			return(
 				<main className="dashWrapper">
-					<CountByNoteName data={this.props.storeDashData.totalsByNoteName} />
-					<NoteLengthCounts data={this.props.storeDashData.noteLengthCounts} />
+					<div className="row">
+						<CountByNoteName data={this.props.storeDashData.totalsByNoteName} parentCol={'12'}/>
+					</div>
+					<div className="row">
+						<NoteLengthCounts data={this.props.storeDashData.noteLengthCounts} parentCol={'6'}/>
+					</div>
 				</main>
 			)
 		}

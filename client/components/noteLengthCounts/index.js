@@ -18,7 +18,7 @@ class NoteLengthCounts extends React.Component {
         	.paddingOuter(0.2)
 		this.calcXPos = this.calcXPos.bind(this)
 		this.calcYPos = this.calcYPos.bind(this)
-		this.toggle = this.toggle.bind(this)
+		this.toggleThis = this.toggleThis.bind(this)
 		this.state = {
 			labels: [
 				{ 
@@ -43,12 +43,12 @@ class NoteLengthCounts extends React.Component {
 			//   transformation: ''
 			// },
 			],
-			margins : { top: 45, right: 50, bottom: 100, left: 70 },
+			margins : { top: 45, right: 40, bottom: 100, left: 70 },
 			curShowing: 0
 		}
 	}
 
-	toggle(){
+	toggleThis(){
 	    let newVal = (this.state.curShowing === 0) ? 1 : 0;
 	    this.setState({curShowing: newVal})
 	}
@@ -121,9 +121,9 @@ class NoteLengthCounts extends React.Component {
 
 		//update scales
 	    const xScale = this.xScale
-	      .domain([0, maxDataValue])
-	      .range([0, (svgDimensions.width - this.state.margins.right - this.state.margins.left)])
-	      .nice()
+	      .domain([0, 275])
+	      .range([this.state.margins.left, (svgDimensions.width - this.state.margins.right)])
+	      // .nice()
 	    
 	     //yScale max hard-coded
 	    const yScale = this.yScale
@@ -166,6 +166,7 @@ class NoteLengthCounts extends React.Component {
 
 				{axisLabels}
 				</svg>
+				<Toggle cl={'NoteLengthCounts'} opts={this.getNamesFromData(this.props.data)} onToggle={this.toggleThis}/>
 			</React.Fragment>
 		);
 	}

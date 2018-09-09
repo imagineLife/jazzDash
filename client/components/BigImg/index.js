@@ -12,7 +12,7 @@ function BigImg(props) {
 	console.log('- - - - -')
 	return(
 		<section className='bigImgWrapper'>
-		<img className='bigImg' src={`client/imgs/musicians/${props.str}.jpg`}/>
+		<img className='bigImg' src={`client/imgs/${props.type}s/${props.str}.jpg`}/>
 		<h3 className='bigImgName'>{props.fullName}</h3>
 		</section>
 	);

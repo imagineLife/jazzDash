@@ -90,7 +90,6 @@ class CountByNoteName extends React.Component {
 		return completedArr
 	}
 
-
 	render(){
 		// console.log('RENDERING!! CountByNoteName props')
 		// console.log(this.props)
@@ -165,7 +164,7 @@ class CountByNoteName extends React.Component {
 			        {axisLabels}
 
 				</svg>
-				<Toggle opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
+				<Toggle cl='CountsByNoteName' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
 			</React.Fragment>
 		);
 	}

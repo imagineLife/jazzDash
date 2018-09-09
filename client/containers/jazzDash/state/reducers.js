@@ -61,7 +61,7 @@ const parseData = function(data){
 		};
 	})
 
-	let reVampedArr = [];
+	let reVampedObj = {};
 
 	readyData.forEach((musicianData, ind) => {
 
@@ -76,33 +76,33 @@ const parseData = function(data){
 				let thisObj = {...musicianData[chKey] }
 				
 		//if this chart name/data is NOT present in reVamped Arr, add it
-				if(!reVampedArr[chKey]){
-					reVampedArr[chKey]= []
-					reVampedArr[chKey].push(thisObj)
+				if(!reVampedObj[chKey]){
+					reVampedObj[chKey]= []
+					reVampedObj[chKey].push(thisObj)
 		//else add it to the already-present element,
 		// as a 2nd object under the same chart-name keyy
 				}else{
-					reVampedArr[chKey].push(thisObj)
+					reVampedObj[chKey].push(thisObj)
 				}
 			}
 		})
-		return reVampedArr;
+		return reVampedObj;
 	})
 
+	let musicianOne = `${data[0]._musician.first} ${data[0]._musician.last}`
+	let musicianTwo = `${data[1]._musician.first} ${data[1]._musician.last}`
+	
+	reVampedObj['musicians'] = [musicianOne, musicianTwo];
 	// return readyData;
-	return reVampedArr;
+	return reVampedObj;
 }
 
 const dashDataReducer = (state={}, action) => {
-	console.log('inside dashDataReducer')
 	
 	switch(action.type){
 		case jazzDashConst.FETCH_DATA :
-			// console.log('fetching dashboard data by reducer...')
-			
 			//covert the data in chartable-objects
 			const parsedData = parseData(action.payload)
-
 
 /*
 	static data in one-object

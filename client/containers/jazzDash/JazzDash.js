@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {connect} from 'react-redux';
 import { fetchStats } from './state/actions';
 import CountByNoteName from '../../components/CountByNoteName';
+import UpsAndDowns from '../../components/UpsAndDowns';
 import NoteLengthCounts from '../../components/noteLengthCounts';
 import BigImg from '../../components/BigImg';
 import './index.css';
@@ -71,6 +72,7 @@ class JazzDash extends Component {
 					</div>
 					<div className="row">
 						<NoteLengthCounts data={this.props.storeDashData.noteLengthCounts} parentCol={'6'}/>
+						<UpsAndDowns data={this.props.storeDashData.totalDirections} parentCol={'6'}/>
 					</div>
 				</main>
 			)

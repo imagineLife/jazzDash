@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './wrapper.css'
+import '../../cssGrid.css'
 
 export default RespWrapper => (
   class ResponsiveChart extends Component {
@@ -45,13 +46,16 @@ export default RespWrapper => (
     }
 
     render() {
+      // console.log('resp wrapper props')
+      // console.log(this.props)
       const { containerWidth } = this.state
       const shouldRenderChart = containerWidth !== null
+      const thisClass = `Responsive-wrapper gr-${this.props.parentCol}`
 
       return (
         <div
           ref={(el) => { this.chartContainerViaRef = el }}
-          className="Responsive-wrapper"
+          className={thisClass}
         >
           {shouldRenderChart && this.renderRespWrapper()}
         </div>

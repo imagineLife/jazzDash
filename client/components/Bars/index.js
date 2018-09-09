@@ -14,6 +14,8 @@ export default function Bars(props) {
 
     let colorScale = scaleOrdinal()
       .range(colorArr);
+
+    let thisWidth = ( props.barWidth || xScale.bandwidth())
     
     //calculate bar border based on data above/below threshold
     const bars = (
@@ -24,7 +26,7 @@ export default function Bars(props) {
             x={xScale(barData.noteName)}
             y={yScale(barData.count)}
             height={height - margins.bottom - scales.yScale(barData.count)}
-            width={xScale.bandwidth()}
+            width={thisWidth}
             fill={colorScale(barData.commodity)}
             stroke={'green'}
             strokeWidth={'2px'}

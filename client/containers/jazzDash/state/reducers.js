@@ -91,8 +91,10 @@ const parseData = function(data){
 
 	let musicianOne = `${data[0]._musician.first} ${data[0]._musician.last}`
 	let musicianTwo = `${data[1]._musician.first} ${data[1]._musician.last}`
+	let thisAlbum = `${data[1]._song.album}`
 	
 	reVampedObj['musicians'] = [musicianOne, musicianTwo];
+	reVampedObj['album'] = thisAlbum;
 	// return readyData;
 	return reVampedObj;
 }

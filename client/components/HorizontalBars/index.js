@@ -8,7 +8,7 @@ export default function HorizontalBars(props) {
 
     const { scales, margins, data, svgDimensions } = props
     const { xScale, yScale } = scales
-    const { height } = svgDimensions
+    const { height, width } = svgDimensions
 
     colorArr = ['cadetblue', 'green']
 
@@ -24,9 +24,10 @@ export default function HorizontalBars(props) {
           <rect
             key={+barData.duration}
             y={yScale(barData.duration)}
-            width={xScale(barData.count)}
+
+            width={xScale(+barData.count) - margins.left}
             height={yScale.bandwidth()}
-            fill={colorScale(barData.duration)}
+            fill={colorScale(barData.count)}
             stroke={'green'}
             strokeWidth={'2px'}
             transform={trans}

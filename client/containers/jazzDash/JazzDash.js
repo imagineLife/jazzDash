@@ -54,12 +54,16 @@ class JazzDash extends Component {
 			let musicians = this.props.storeDashData.musicians.map(m => {
 				console.log('this musician thism')
 				let imgStr = m.replace(/\s/g, '');
-				return <BigImg key={imgStr} str={imgStr} fullName={m} parentCol={'4'}/>
+				return <BigImg key={imgStr} str={imgStr} fullName={m} type={'musician'} parentCol={'4'}/>
 			})
+
+			let albumName = this.props.storeDashData.album;
+			let album = <BigImg key={albumName} str={albumName} fullName={albumName} type={'album'} parentCol={'4'}/>
 
 			return(
 				<main className="dashWrapper">
 					<div className="row">
+						{album}
 						{musicians}
 					</div>
 					<div className="row">

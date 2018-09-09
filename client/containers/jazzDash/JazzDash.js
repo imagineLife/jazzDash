@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { fetchStats } from './state/actions';
 import CountByNoteName from '../../components/CountByNoteName';
 import NoteLengthCounts from '../../components/noteLengthCounts';
+import BigImg from '../../components/BigImg';
 import './index.css';
 
 class JazzDash extends Component {
@@ -50,13 +51,17 @@ class JazzDash extends Component {
 			console.log(this.props.storeDashData)
 			console.log('- - - - -')
 
-			let musicians = this.props.storeDashData.musicians.forEach(m => {
+			let musicians = this.props.storeDashData.musicians.map(m => {
 				console.log('this musician thism')
 				let imgStr = m.replace(/\s/g, '');
+				return <BigImg key={imgStr} str={imgStr} fullName={m} parentCol={'4'}/>
 			})
 
 			return(
 				<main className="dashWrapper">
+					<div className="row">
+						{musicians}
+					</div>
 					<div className="row">
 						<CountByNoteName data={this.props.storeDashData.totalsByNoteName} parentCol={'12'}/>
 					</div>

@@ -46,9 +46,14 @@ class JazzDash extends Component {
 			);
 		}else{
 
-			// console.log('dash wrapper props')
-			// console.log(this.props.storeDashData)
-			// console.log('- - - - -')
+			console.log('dash wrapper props')
+			console.log(this.props.storeDashData)
+			console.log('- - - - -')
+
+			let musicians = this.props.storeDashData.musicians.forEach(m => {
+				console.log('this musician thism')
+				let imgStr = m.replace(/\s/g, '');
+			})
 
 			return(
 				<main className="dashWrapper">

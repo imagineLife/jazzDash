@@ -1,7 +1,8 @@
 .bigImgWrapper{
     height: 100%;
     position: relative;
-    padding: 0 5px;
+    margin: 0 15px;
+    background-color: black;
 }
 
 .bigImg{

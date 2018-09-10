@@ -22,11 +22,6 @@ export default function Bars(props) {
     if ('key' in firstDataObj){
         bars = (
           data.map(d => {
-            console.log('mapping d here, d')
-            console.log(d)
-            console.log('scales.yScale(d.val)')
-            console.log(height - margins.bottom - scales.yScale(d.val))
-            console.log('- - - - ')
             return ( 
               <rect
                 key={d.key}

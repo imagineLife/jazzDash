@@ -25,11 +25,11 @@ const parseData = function(data){
 			perMeasure: {
 				musician: `${d._musician.first} ${d._musician.last}`,
 				song: d._song,
-				npm: ( d.noteCount / d.totalMeasuresPlayed),
+				notes: d.noteCount,
 				measures: d.totalMeasuresPlayed,
 				nonEmptyMeasures: d.nonEmptyMeasures,
-				CTpm: ( d.CTs / d.totalMeasuresPlayed),
-				NCTpm: ( d.NCTs / d.totalMeasuresPlayed),
+				CTs: d.CTs,
+				NCTs: d.NCTs,
 				type: 'line',
 			},
 			totalDirections:{
@@ -38,7 +38,8 @@ const parseData = function(data){
 				ups: d.upsMoved,
 				downs: d.downsTraveled,
 				unis: d.unisonsTraveled,
-				type: 'line'
+				type: 'line',
+				grWidth: '6'
 			},
 			chordStats: {
 				musician: `${d._musician.first} ${d._musician.last}`,

@@ -3,7 +3,7 @@ import { scaleOrdinal } from 'd3-scale'
 import './bars.css'
 
 export default function Bars(props) {
-
+    let bars;
     let colorArr = [];
 
     const { scales, margins, data, svgDimensions } = props
@@ -18,27 +18,59 @@ export default function Bars(props) {
     let thisWidth = ( props.barWidth || xScale.bandwidth())
     
     //calculate bar border based on data above/below threshold
-    const bars = (
-      data.map(barData => {
-        return ( 
-          <rect
-            key={barData.noteName}
-            x={xScale(barData.noteName)}
-            y={yScale(barData.count)}
-            height={height - margins.bottom - scales.yScale(barData.count)}
-            width={thisWidth}
-            fill={colorScale(barData.commodity)}
-            stroke={'green'}
-            strokeWidth={'2px'}
-            // onClick={() => props.showBarDetails(barData)}
-            // onMouseOver={() => props.mousedOver(barData)}
-            className="singleBar"
-          />
+    let firstDataObj = data[0];
+    if ('key' in firstDataObj){
+        bars = (
+          data.map(d => {
+            console.log('mapping d here, d')
+            console.log(d)
+            console.log('scales.yScale(d.val)')
+            console.log(height - margins.bottom - scales.yScale(d.val))
+            console.log('- - - - ')
+            return ( 
+              <rect
+                key={d.key}
+                x={xScale(d.key) + (xScale.bandwidth() / 2)}
+                y={yScale(d.val)}
+                height={height - margins.bottom - scales.yScale(d.val)}
+                width={thisWidth}
+                fill={'green'}
+                stroke={'green'}
+                strokeWidth={'2px'}
+                className="singleBar"
+              />
+            )
+          })
         )
-      })
-    )
+    }else{
+        bars = (
+          data.map(d => {
+
+            //CountPerNoteName
+            if(d.noteName){
+                return ( 
+                  <rect
+                    key={d.noteName}
+                    x={xScale(d.noteName)}
+                    y={yScale(d.count)}
+                    height={height - margins.bottom - scales.yScale(d.count)}
+                    width={thisWidth}
+                    fill={colorScale(d.commodity)}
+                    stroke={'green'}
+                    strokeWidth={'2px'}
+                    // onClick={() => props.showBarDetails(d)}
+                    // onMouseOver={() => props.mousedOver(d)}
+                    className="singleBar"
+                  />
+                )
+            }
+          })
+        )
+    }
 
     return (
-      <g>{bars}</g>
+        <React.Fragment>
+            {bars}
+        </React.Fragment>
     )
 }

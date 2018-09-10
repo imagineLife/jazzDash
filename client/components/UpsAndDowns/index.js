@@ -20,6 +20,12 @@ class UpsAndDowns extends React.Component {
 
 		this.convertToArray = this.convertToArray.bind(this)
 		this.getMaxVal = this.getMaxVal.bind(this)
+		this.toggleThis = this.toggleThis.bind(this)
+	}
+
+	toggleThis(){
+	    let newVal = (this.state.curShowing === 0) ? 1 : 0;
+	    this.setState({curShowing: newVal})
 	}
 
 	getNamesFromData(data){
@@ -88,9 +94,6 @@ class UpsAndDowns extends React.Component {
 	      height: 450
 	    }
 
-	    console.log('svgDimensions')
-	    console.log(svgDimensions)
-
 		/*
 			Make data workable with d3 scales
 	    */
@@ -98,8 +101,6 @@ class UpsAndDowns extends React.Component {
 		let dataKeys = ['downs','ups','unis'];
 		let curUsableData = this.convertToArray(curMusicianStats, dataKeys);
 		let maxDataValue = this.getMaxVal(curUsableData)
-		console.log('maxDataValue')
-		console.log(maxDataValue)
 
 		//make class string for svg element
 		let thisClass = `upsAndDowns gr-${this.props.data[0].grWidth}`
@@ -112,9 +113,6 @@ class UpsAndDowns extends React.Component {
 	    const yScale = this.yScale
 	      .domain([0, maxDataValue])
 	      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
-
-	      console.log('this yScale.range')
-	      console.log(yScale.range)
 
 		return(
 			<React.Fragment>
@@ -129,7 +127,7 @@ class UpsAndDowns extends React.Component {
 			          barWidth={'10'}
 			        />
 		        </svg>
-				<Toggle cl='UpsAndDowns' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>	
+				<Toggle cl='UpsAndDowns' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggleThis}/>	
 			</React.Fragment>
 	);
 	}

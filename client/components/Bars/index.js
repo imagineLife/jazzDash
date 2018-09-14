@@ -1,5 +1,6 @@
 import React from 'react'
 import { scaleOrdinal } from 'd3-scale'
+import { Rect } from '../Rect'
 import './bars.css'
 
 export default function Bars(props) {
@@ -23,12 +24,13 @@ export default function Bars(props) {
         bars = (
           data.map(d => {
             return ( 
-              <rect
+              <Rect
                 key={d.key}
                 x={xScale(d.key) + (xScale.bandwidth() / 2)}
                 y={yScale(d.val)}
                 height={height - margins.bottom - scales.yScale(d.val)}
                 width={thisWidth}
+                barZeroHeight={height - margins.bottom}
                 fill={'green'}
                 stroke={'green'}
                 strokeWidth={'2px'}
@@ -44,7 +46,7 @@ export default function Bars(props) {
             //CountPerNoteName
             if(d.noteName){
                 return ( 
-                  <rect
+                  <Rect
                     key={d.noteName}
                     x={xScale(d.noteName)}
                     y={yScale(d.count)}

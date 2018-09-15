@@ -18,7 +18,6 @@ export class Rect extends React.Component {
 	componentDidUpdate(prevProps,prevState) {
 		if(prevProps.height !== this.props.height){
 			let el = d3.select(this.rectRef.current);
-		    // el.attr('y', this.props.barZeroHeight)
 		    el.attr('height', prevProps.height)
 		    el.attr('y', prevProps.y)
 

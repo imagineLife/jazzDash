@@ -17,6 +17,7 @@ class CountByNoteName extends React.Component {
 		this.calcXPos = this.calcXPos.bind(this)
 		this.calcYPos = this.calcYPos.bind(this)
 		this.toggle = this.toggle.bind(this)
+		this.getFilteredKeys = this.getFilteredKeys.bind(this)
 		this.state = {
 			labels: [
 				{ 
@@ -90,6 +91,13 @@ class CountByNoteName extends React.Component {
 		return completedArr
 	}
 
+	getFilteredKeys(obj){
+		return Object.keys(obj).filter(key => {
+			if(key !== 'musician' && key !== 'song' && key !== 'grWidth')
+			return key
+		})
+	}
+
 	render(){
 		// console.log('RENDERING!! CountByNoteName props')
 		// console.log(this.props)
@@ -103,13 +111,10 @@ class CountByNoteName extends React.Component {
 	    /*
 			Make data workable for d3 scales
 	    */
-		let curMusicianStats = this.props.data[this.state.curShowing]
-		let dataKeys = Object.keys(curMusicianStats)
-		let filteredKeys = dataKeys.filter(key => {
-			if(key !== 'musician' && key !== 'song' && key !== 'grWidth')
-			return key
-		})
+		let curMusicianStats = this.props.data[this.state.curShowing];
+		let filteredKeys = this.getFilteredKeys(curMusicianStats);
 		let curUsableData = this.convertToArray(curMusicianStats, filteredKeys);
+
 
 		//make class string for svg element
 		let thisClass = `CountByNoteName gr-${this.props.data[0].grWidth}`

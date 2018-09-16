@@ -37,13 +37,13 @@ class NoteLengthCounts extends React.Component {
 				gWrapperClass : 'yAxisLabelG',
 				transformation: 'rotate(-90)'
 				},
-			// {
-			//   type: 'chartTitle',
-			//   text : 'Minutes In the Facility Per Truck',
-			//   textClass : 'chartTitle',
-			//   gWrapperClass : 'chartTitleG',
-			//   transformation: ''
-			// },
+			{
+			  type: 'chartTitle',
+			  text : 'Times-Played Per Note-Duration',
+			  textClass : 'chartTitle',
+			  gWrapperClass : 'chartTitleG',
+			  transformation: ''
+			},
 			],
 			margins : { top: 45, right: 40, bottom: 100, left: 70 },
 			curShowing: 0
@@ -69,7 +69,7 @@ class NoteLengthCounts extends React.Component {
 		if(string.indexOf('y') > -1){
 			return 20
 		}else if(string.indexOf('c') > -1){
-			return (dims.height * .05)
+			return (dims.height * .075)
 		}else{
 			return dims.height - 25
 		}
@@ -175,6 +175,7 @@ class NoteLengthCounts extends React.Component {
 	        labelClass={each.textClass}
 	        groupClass={each.gWrapperClass}
 	        textVal={each.text}
+	        fontSize={'1.5em'}
 	        transformation={each.transformation}
 	      />
 	    })
@@ -189,20 +190,22 @@ class NoteLengthCounts extends React.Component {
         //Preps Data-Driven Horizontal Rect Components
 	    const bars = (
 	      newUsableData.map((barData, ind) => {
-	        return ( 
-	          <HorizontalRect
-	            key={ind}
-	            thisKey={ind}
-	            y={yScale(barData.duration)}
-	            width={xScale(+barData.count) - this.state.margins.left}
-	            height={yScale.bandwidth()}
-	            fill={colorScale(barData.count)}
-	            stroke={'green'}
-	            strokeWidth={'2px'}
-	            transform={trans}
-	            className="singleBar"
-	          />
-	        )
+	      	if (+barData.count > 0){
+	      		return ( 
+		          <HorizontalRect
+		            key={ind}
+		            thisKey={ind}
+		            y={yScale(barData.duration)}
+		            width={xScale(+barData.count) - this.state.margins.left}
+		            height={yScale.bandwidth()}
+		            fill={colorScale(barData.count)}
+		            stroke={'green'}
+		            strokeWidth={'2px'}
+		            transform={trans}
+		            className="singleBar"
+		          />
+		        )
+	      	}
 	      })
 	    )
 

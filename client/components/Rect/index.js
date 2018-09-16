@@ -2,12 +2,10 @@ import React from 'react';
 import * as d3 from 'd3';
 import './index.css';
 
-export class Rect extends React.Component {
+export default class Rect extends React.Component {
 	constructor(props){
 		super(props)
 
-		//state keeps what-is-changing
-		//dont need 'this' referencing props in const
 		this.state = {
 			height: props.height
 		}
@@ -40,12 +38,10 @@ export class Rect extends React.Component {
   	}
 
   	render(){
-  		// console.log('rect height on render')
-  		// console.log(this.state.height)
   		return(
 			<rect
 			ref={this.rectRef}
-	        key={this.props.key}
+	        key={this.props.thisKey}
 	        x={this.props.x}
 	        y={this.props.y}
 	        height={this.state.height}
@@ -53,8 +49,6 @@ export class Rect extends React.Component {
 	        fill={this.props.fill}
 	        stroke={this.props.stroke}
 	        strokeWidth={this.props.strokeWidth}
-	        // onClick={() => props.showBarDetails(d)}
-	        // onMouseOver={() => props.mousedOver(d)}
 	        className={this.props.className}
 	      />
 		);

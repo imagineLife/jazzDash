@@ -1,10 +1,10 @@
 import React from 'react';
-import { scaleBand, scaleLinear } from 'd3-scale'
+import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
 import * as d3 from 'd3-selection'
 import Toggle from '../Toggle'
 import AxesAndMath from '../Axes'
 import AxisLabel from '../AxisLabel'
-import HorizontalBars from '../HorizontalBars'
+import HorizontalRect from '../HorizontalRect'
 
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import './index.css';
@@ -131,26 +131,24 @@ class NoteLengthCounts extends React.Component {
 	    /*
 			Make data workable with d3 scales
 	    */
-	    //get ALL durations between musicians & compile,
-	    //	 making 0s where curMusician didn't play them
 
-	    //1. get cur & other values
+	    //1. get cur & other musician ind value from state
 	    let otherMusicianVal = (this.state.curShowing === 1) ? 0 : 1;
 
-	    //2. Get cur & other stats
+	    //2. Get cur & other stats from props
 		let curMusicianStats = this.props.data[this.state.curShowing];
 		let otherMusicianStats = this.props.data[otherMusicianVal];
 
-		//3. get cur & other duration keys
+		//3. combine cur & other duration keys
 		const mergedDurArr = this.makeMergedDurationDataSet(this.props.data, this.state.curShowing, otherMusicianVal, curMusicianStats, otherMusicianStats)
 
 		//4. make usable data filled with 0s
 		//	 where curMusician did not play given duration
+		//	 and sort
 		let dataKeys = Object.keys(curMusicianStats);
 		let curMusicianData = this.convertToArray(curMusicianStats, dataKeys);
 		let newUsableData = this.getUsableData(mergedDurArr, curMusicianData).sort((a,b) => +a.duration - +b.duration);
 		const maxDataValue = Math.max(...newUsableData.map(d => +d.count))
-
 		const durArr = newUsableData.map(d => +d.duration);
 		durArr.sort((a,b) => a - b)
 
@@ -181,6 +179,34 @@ class NoteLengthCounts extends React.Component {
 	      />
 	    })
 
+
+	    
+		//Prep for the bars
+	    let colorArr = ['cadetblue', 'green']
+	    let colorScale = scaleOrdinal().range(colorArr);
+	    let trans = `translate(${this.state.margins.left},0)`
+
+        //Preps Data-Driven Horizontal Rect Components
+	    const bars = (
+	      newUsableData.map((barData, ind) => {
+	        return ( 
+	          <HorizontalRect
+	            key={ind}
+	            y={yScale(barData.duration)}
+	            width={xScale(+barData.count) - this.state.margins.left}
+	            height={yScale.bandwidth()}
+	            fill={colorScale(barData.count)}
+	            stroke={'green'}
+	            strokeWidth={'2px'}
+	            transform={trans}
+	            className="singleBar"
+	          />
+	        )
+	      })
+	    )
+
+	    
+
 		return (
 			<React.Fragment>
 				<svg className={thisClass}>
@@ -191,16 +217,7 @@ class NoteLengthCounts extends React.Component {
 		          svgDimensions={svgDimensions}
 		        />
 
-				<HorizontalBars
-		          scales={{ xScale, yScale }}
-		          margins={this.state.margins}
-		          data={newUsableData}
-		          maxValue={maxDataValue}
-		          svgDimensions={svgDimensions}
-		          mousedOver={this.mousedOver}
-		          alertLevel={this.state.alertLevel}
-		          showBarDetails={this.showingBarDetails}
-		        />
+				{bars}
 
 				{axisLabels}
 				</svg>

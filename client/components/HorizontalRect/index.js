@@ -5,9 +5,8 @@ import './index.css';
 export default class HorizontalRect extends React.Component {
 	constructor(props){
 		super(props)
-
+		
 		//state keeps what-is-changing
-		//dont need 'this' referencing props in const
 		this.state = {
 			width: props.width
 		}

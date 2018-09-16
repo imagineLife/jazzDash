@@ -16,7 +16,6 @@ export default class HorizontalRect extends React.Component {
 	}
 
 	componentDidUpdate(prevProps,prevState) {
-		console.log('cdu!')
 		if(prevProps.width !== this.props.width){
 			let el = d3.select(this.rectRef.current);
 		    el.attr('width', prevProps.width)
@@ -43,7 +42,7 @@ export default class HorizontalRect extends React.Component {
   		return(
 			<rect
 				ref={this.rectRef}
-		        key={this.props.key}
+		        key={this.props.thisKey}
 		        x={this.props.x}
 		        y={this.props.y}
 		        height={this.props.height}

@@ -19,6 +19,8 @@ class NoteLengthCounts extends React.Component {
 		this.calcXPos = this.calcXPos.bind(this)
 		this.calcYPos = this.calcYPos.bind(this)
 		this.toggleThis = this.toggleThis.bind(this)
+		this.getUsableData = this.getUsableData.bind(this)
+		this.makeMergedDurationDataSet = this.makeMergedDurationDataSet.bind(this)
 		this.state = {
 			labels: [
 				{ 
@@ -80,6 +82,19 @@ class NoteLengthCounts extends React.Component {
 		}
 	}
 
+	getUsableData(arr, curMusData){
+		let recompiled = arr.map(durVal => {
+			let thisObj;
+			let indOfThisVal = curMusData.findIndex(data => data['duration'] === durVal)
+			if(indOfThisVal >= 0){
+				return curMusData[indOfThisVal]
+			}else{
+				return {duration: durVal, count: 0}
+			}
+		})
+		return recompiled.filter((it, ind) => recompiled.indexOf(it) >= ind );
+	}
+
 	convertToArray(obj, usableKeysArr){
 		let cleanedData = [];
 		usableKeysArr.forEach(key => {
@@ -95,6 +110,14 @@ class NoteLengthCounts extends React.Component {
 		return cleanedData;
 	}
 
+	makeMergedDurationDataSet(dataSet,curMusicianVal, otherMusicianVal, curMusStats, othersStats){
+		let curMusicianKeys = Object.keys(dataSet[curMusicianVal]).filter(key => !['musician', 'song', 'grWidth'].includes(key))
+		let curMusicianDurations = curMusicianKeys.map(key => curMusStats[key]['length'])
+		let otherMusicianKeys = Object.keys(dataSet[otherMusicianVal]).filter(key => !['musician', 'song', 'grWidth'].includes(key))
+		let otherMusicianDurations = otherMusicianKeys.map(key => othersStats[key]['length'])
+		return [...curMusicianDurations, ...otherMusicianDurations]
+	}	
+
 	render(){
 		// console.log('RENDERING!! NoteLengthCounts props')
 		// console.log(this.props)
@@ -108,16 +131,31 @@ class NoteLengthCounts extends React.Component {
 	    /*
 			Make data workable with d3 scales
 	    */
+	    //get ALL durations between musicians & compile,
+	    //	 making 0s where curMusician didn't play them
+
+	    //1. get cur & other values
+	    let otherMusicianVal = (this.state.curShowing === 1) ? 0 : 1;
+
+	    //2. Get cur & other stats
 		let curMusicianStats = this.props.data[this.state.curShowing];
+		let otherMusicianStats = this.props.data[otherMusicianVal];
+
+		//3. get cur & other duration keys
+		const mergedDurArr = this.makeMergedDurationDataSet(this.props.data, this.state.curShowing, otherMusicianVal, curMusicianStats, otherMusicianStats)
+
+		//4. make usable data filled with 0s
+		//	 where curMusician did not play given duration
 		let dataKeys = Object.keys(curMusicianStats);
-		let curUsableData = this.convertToArray(curMusicianStats, dataKeys);
+		let curMusicianData = this.convertToArray(curMusicianStats, dataKeys);
+		let newUsableData = this.getUsableData(mergedDurArr, curMusicianData).sort((a,b) => +a.duration - +b.duration);
+		const maxDataValue = Math.max(...newUsableData.map(d => +d.count))
+
+		const durArr = newUsableData.map(d => +d.duration);
+		durArr.sort((a,b) => a - b)
 
 		//make class string for svg element
 		let thisClass = `noteLengthCounts gr-${this.props.data[0].grWidth}`
-
-		const maxDataValue = Math.max(...curUsableData.map(d => +d.count))
-		const durArr = curUsableData.map(d => +d.duration);
-		durArr.sort((a,b) => a - b)
 
 		//update scales
 	    const xScale = this.xScale
@@ -156,7 +194,7 @@ class NoteLengthCounts extends React.Component {
 				<HorizontalBars
 		          scales={{ xScale, yScale }}
 		          margins={this.state.margins}
-		          data={curUsableData}
+		          data={newUsableData}
 		          maxValue={maxDataValue}
 		          svgDimensions={svgDimensions}
 		          mousedOver={this.mousedOver}

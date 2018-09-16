@@ -192,6 +192,7 @@ class NoteLengthCounts extends React.Component {
 	        return ( 
 	          <HorizontalRect
 	            key={ind}
+	            thisKey={ind}
 	            y={yScale(barData.duration)}
 	            width={xScale(+barData.count) - this.state.margins.left}
 	            height={yScale.bandwidth()}

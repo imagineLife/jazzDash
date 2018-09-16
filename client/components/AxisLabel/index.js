@@ -11,6 +11,7 @@ export default function AxisLabel(props){
         transform={props.transformation}
         textAnchor='middle'
         fill={'black'}
+        fontSize={props.fontSize}
       >{props.textVal}</text>
     </g>
   )

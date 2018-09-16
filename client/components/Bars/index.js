@@ -1,6 +1,6 @@
 import React from 'react'
 import { scaleOrdinal } from 'd3-scale'
-import { Rect } from '../Rect'
+import Rect from '../Rect'
 import './bars.css'
 
 export default function Bars(props) {

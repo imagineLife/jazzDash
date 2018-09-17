@@ -34,13 +34,14 @@ class CountByNoteName extends React.Component {
 				gWrapperClass : 'yAxisLabelG',
 				transformation: 'rotate(-90)'
 				},
-			// {
-			//   type: 'chartTitle',
-			//   text : 'Minutes In the Facility Per Truck',
-			//   textClass : 'chartTitle',
-			//   gWrapperClass : 'chartTitleG',
-			//   transformation: ''
-			// },
+			{
+			  type: 'chartTitle',
+			  text : 'Times-Played Per Note-Name',
+			  textClass : 'chartTitle',
+			  gWrapperClass : 'chartTitleG',
+			  transformation: '',
+			  fontSize: '1.5em'
+			},
 			],
 			margins : { top: 45, right: 20, bottom: 100, left: 60 },
 			curShowing: 0
@@ -141,6 +142,7 @@ class CountByNoteName extends React.Component {
 	        labelClass={each.textClass}
 	        groupClass={each.gWrapperClass}
 	        textVal={each.text}
+	        fontSize={each.fontSize}
 	        transformation={each.transformation}
 	      />
 	    })

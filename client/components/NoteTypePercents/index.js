@@ -1,6 +1,6 @@
 import React from 'react';
 import { scaleBand, scaleLinear, scaleSqrt } from 'd3-scale'
-import * as d3 from 'd3-selection'
+import * as d3 from 'd3'
 import Toggle from '../Toggle'
 import AxesAndMath from '../Axes'
 import AxisLabel from '../AxisLabel'
@@ -64,6 +64,16 @@ class NoteTypePercents extends React.Component {
 		})
 	}
 
+	makeD3PieFuncs(wedgeVal, w){
+		let d3PieFunc = d3.pie().value(wedgeVal);
+		let d3ArcFn = d3.arc()
+			.innerRadius(0).outerRadius((d) => {
+				return radiusScale(d.data[radiusColumn]);
+			})
+
+		return { d3PieFunc, d3ArcFn };
+	}
+
 	render(){
 		console.log('RENDERING!! NoteTypePercents props')
 		console.log(this.props)
@@ -88,6 +98,9 @@ class NoteTypePercents extends React.Component {
 	
 		console.log('curUsableData')
 		console.log(curUsableData)
+
+		//pie & arc functions
+		const { d3PieFunc, d3ArcFn } = this.makeD3PieFuncs(this.state.radiusColumn, (this.props.respWrapWidth - this.state.margins.l - this.state.margins.r))
 
 
 		//make class string for svg element

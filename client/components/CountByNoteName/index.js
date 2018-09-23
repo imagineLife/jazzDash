@@ -43,7 +43,7 @@ class CountByNoteName extends React.Component {
 			  fontSize: '1.5em'
 			},
 			],
-			margins : { top: 45, right: 20, bottom: 100, left: 60 },
+			margins : { top: 45, right: 20, bottom: 80, left: 60 },
 			curShowing: 0
 		}
 	}

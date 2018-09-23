@@ -1,4 +1,5 @@
 import React from 'react'
+import './index.css'
 
 export default function AxisLabel(props){
   return (
@@ -12,6 +13,7 @@ export default function AxisLabel(props){
         textAnchor='middle'
         fill={'black'}
         fontSize={props.fontSize}
+        className={props.labelClass}
       >{props.textVal}</text>
     </g>
   )

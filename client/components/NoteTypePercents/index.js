@@ -29,7 +29,8 @@ class NoteTypePercents extends React.Component {
 			],
 			margins : { t: 45, r: 20, b: 80, l: 60 },
 			curShowing: 0,
-			radiusColumn: 'count'
+			radiusColumn: 'count',
+			colorValue : d => d.noteType
 		}
 	}
 
@@ -48,11 +49,14 @@ class NoteTypePercents extends React.Component {
 	convertToArray(obj, usableKeysArr){
 		let completedArr = [];
 		usableKeysArr.forEach(key => {
-			let thisObj = {}
-			thisObj['noteType'] = key
-			thisObj['count'] = obj[key]
-			completedArr.push(thisObj)
-
+			console.log('mapping keys...')
+			console.log(key)
+			if(key !== 'type'){
+				let thisObj = {}
+				thisObj['noteType'] = key
+				thisObj['count'] = obj[key]
+				completedArr.push(thisObj)
+			}
 		})
 		return completedArr
 	}
@@ -89,32 +93,33 @@ class NoteTypePercents extends React.Component {
 	      width: Math.max(this.props.respWrapWidth, 300),
 	      height: 450
 	    }
-
 	    const divWidthLessMargins = svgDimensions.width - this.state.margins.l - this.state.margins.r
 	    const divHeightLessMargins = svgDimensions.height - this.state.margins.b - this.state.margins.t
+	    
 	    /*
-			Make data workable for d3 scales
+			Make data workable with d3 & pie 
 	    */
 		let curMusicianStats = this.props.data[this.state.curShowing];
 		let filteredKeys = this.getFilteredKeys(curMusicianStats);
 		let curUsableData = this.convertToArray(curMusicianStats, filteredKeys);
 		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
 		let largestPieSliceRadius = this.getLargestRadius(divWidthLessMargins, divHeightLessMargins, 207);
+		//pie & arc functions
+		const { d3PieFunc, d3ArcFn } = this.makeD3PieFuncs(this.state.radiusColumn, (divWidthLessMargins))		
+		//center-ish spot for PieGWrapper
+		let xCenter = (this.props.respWrapWidth / 2.2);
+		let yCenter = 225;
+
+		const colorScale = d3.scaleOrdinal().range(d3.schemeCategory10).domain(curUsableData.map(this.state.colorValue))
+		console.log('colorScaleRange')
+		console.log(colorScale.range())
 
 		console.log('largestPieSliceRadius')
 		console.log(largestPieSliceRadius)
 		console.log('- - - - - -')
-
-
-		//center-ish spot for PieGWrapper
-		let xCenter = (this.props.respWrapWidth / 2.2);
-		let yCenter = 225;
 	
 		console.log('curUsableData')
 		console.log(curUsableData)
-
-		//pie & arc functions
-		const { d3PieFunc, d3ArcFn } = this.makeD3PieFuncs(this.state.radiusColumn, (this.props.respWrapWidth - this.state.margins.l - this.state.margins.r))
 
 
 		//make class string for svg element

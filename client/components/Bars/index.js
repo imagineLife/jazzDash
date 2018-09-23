@@ -18,7 +18,8 @@ export default function Bars(props) {
 
     let thisWidth = ( props.barWidth || xScale.bandwidth())
     
-    //calculate bar border based on data above/below threshold
+    
+    //ARROWS
     let firstDataObj = data[0];
     if ('key' in firstDataObj){
         bars = (
@@ -43,7 +44,7 @@ export default function Bars(props) {
         bars = (
           data.map(d => {
 
-            //CountPerNoteName
+    //Count-Per-Note-Name
             if(d.noteName){
                 return ( 
                   <Rect

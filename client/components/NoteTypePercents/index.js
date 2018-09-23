@@ -27,7 +27,7 @@ class NoteTypePercents extends React.Component {
 				  fontSize: '1.5em'
 				},
 			],
-			margins : { top: 45, right: 20, bottom: 80, left: 60 },
+			margins : { t: 45, r: 20, b: 80, l: 60 },
 			curShowing: 0,
 			radiusColumn: 'count'
 		}
@@ -74,6 +74,12 @@ class NoteTypePercents extends React.Component {
 		return { d3PieFunc, d3ArcFn };
 	}
 
+	getLargestRadius(w,h, largestVal){
+		const smallerHorW = (w < h) ? w : h;
+		const largestRadiusCalculation = Math.floor( ( smallerHorW / 2) * .8 );
+		return (largestRadiusCalculation < largestVal)? largestRadiusCalculation : largestVal; 
+	}
+
 	render(){
 		console.log('RENDERING!! NoteTypePercents props')
 		console.log(this.props)
@@ -84,6 +90,8 @@ class NoteTypePercents extends React.Component {
 	      height: 450
 	    }
 
+	    const divWidthLessMargins = svgDimensions.width - this.state.margins.l - this.state.margins.r
+	    const divHeightLessMargins = svgDimensions.height - this.state.margins.b - this.state.margins.t
 	    /*
 			Make data workable for d3 scales
 	    */
@@ -91,6 +99,12 @@ class NoteTypePercents extends React.Component {
 		let filteredKeys = this.getFilteredKeys(curMusicianStats);
 		let curUsableData = this.convertToArray(curMusicianStats, filteredKeys);
 		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
+		let largestPieSliceRadius = this.getLargestRadius(divWidthLessMargins, divHeightLessMargins, 207);
+
+		console.log('largestPieSliceRadius')
+		console.log(largestPieSliceRadius)
+		console.log('- - - - - -')
+
 
 		//center-ish spot for PieGWrapper
 		let xCenter = (this.props.respWrapWidth / 2.2);

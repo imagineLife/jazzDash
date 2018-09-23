@@ -6,7 +6,7 @@ export default class HorizontalRect extends React.Component {
 	constructor(props){
 		super(props)
 		
-		//state keeps what-is-changing
+		//state keeps track of animating values
 		this.state = {
 			width: props.width
 		}
@@ -14,28 +14,34 @@ export default class HorizontalRect extends React.Component {
 		this.rectRef = React.createRef();
 	}
 
+	//updates pre-existing bars
 	componentDidUpdate(prevProps,prevState) {
-		if(prevProps.width !== this.props.width){
-			let el = d3.select(this.rectRef.current);
-		    el.attr('width', prevProps.width)
 
-		    //1. D3 transition
+		if(prevProps.width !== this.props.width){
+		
+			let el = d3.select(this.rectRef.current);
+
+			//1. set to 'prevProps' width
+		    el.attr('width', prevProps.width || 0)
+
+		    //2. D3 transition
 		    el.transition()
-		      .duration(800)
+		      .duration(1500)
 		      .ease(d3.easeQuad)
 		      .attr("width", this.props.width)
 		      
-		      //setThis component state after transition
+		    //3. setThis component state after transition
 		      .on("end", () =>
 		        this.setState({
 		          width: this.props.width,
 		        })
 		      );
 		}
-	    
   	}
 
   	render(){
+  		console.log('comp Name')
+  		console.log(this.constructor.name)
   		// console.log('rect width on render')
   		// console.log(this.state.width)
   		return(
@@ -46,9 +52,7 @@ export default class HorizontalRect extends React.Component {
 		        y={this.props.y}
 		        height={this.props.height}
 		        width={this.props.width}
-		        fill={this.props.fill}
-		        stroke={this.props.stroke}
-		        strokeWidth={this.props.strokeWidth}
+		        fill={'steelblue'}
 				transform={this.props.transform}
 		        // onClick={() => props.showBarDetails(d)}
 		        // onMouseOver={() => props.mousedOver(d)}

@@ -57,13 +57,13 @@ class JazzDash extends Component {
 				return <BigImg key={imgStr} str={imgStr} fullName={m} type={'musician'} parentCol={'4'}/>
 			})
 
-			let albumName = this.props.storeDashData.album;
-			let album = <BigImg key={albumName} str={albumName} fullName={albumName} type={'album'} parentCol={'4'}/>
+			let albumNameStr = this.props.storeDashData.album;
+			let albumImg = <BigImg key={albumNameStr} str={albumNameStr} fullName={albumNameStr} type={'album'} parentCol={'4'}/>
 
 			return(
 				<main className="dashWrapper">
 					<div className="row">
-						{album}
+						{albumImg}
 						{musicians}
 					</div>
 					<div className="row">

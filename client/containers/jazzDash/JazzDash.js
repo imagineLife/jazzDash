@@ -4,6 +4,8 @@ import { fetchStats } from './state/actions';
 import CountByNoteName from '../../components/CountByNoteName';
 import UpsAndDowns from '../../components/UpsAndDowns';
 import NoteLengthCounts from '../../components/noteLengthCounts';
+import NoteTypePercents from '../../components/NoteTypePercents';
+
 import BigImg from '../../components/BigImg';
 import './index.css';
 
@@ -72,6 +74,10 @@ class JazzDash extends Component {
 					<div className="row">
 						<NoteLengthCounts data={this.props.storeDashData.noteLengthCounts} parentCol={'6'}/>
 						<UpsAndDowns data={this.props.storeDashData.totalDirections} parentCol={'6'}/>
+					</div>
+					<div className="row">
+						<NoteTypePercents data={this.props.storeDashData.noteTypesByPercentage} parentCol={'6'}/>
+						<div className={'gr-6'}/>
 					</div>
 				</main>
 			)

@@ -45,7 +45,7 @@ class NoteLengthCounts extends React.Component {
 			  transformation: ''
 			},
 			],
-			margins : { top: 45, right: 40, bottom: 100, left: 70 },
+			margins : { top: 45, right: 40, bottom: 80, left: 70 },
 			curShowing: 0
 		}
 	}

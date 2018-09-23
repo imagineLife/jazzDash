@@ -28,7 +28,8 @@ class NoteTypePercents extends React.Component {
 				},
 			],
 			margins : { top: 45, right: 20, bottom: 80, left: 60 },
-			curShowing: 0
+			curShowing: 0,
+			radiusColumn: 'count'
 		}
 	}
 
@@ -48,7 +49,7 @@ class NoteTypePercents extends React.Component {
 		let completedArr = [];
 		usableKeysArr.forEach(key => {
 			let thisObj = {}
-			thisObj['noteName'] = key
+			thisObj['noteType'] = key
 			thisObj['count'] = obj[key]
 			completedArr.push(thisObj)
 
@@ -85,8 +86,8 @@ class NoteTypePercents extends React.Component {
 		let xCenter = (this.props.respWrapWidth / 2.2);
 		let yCenter = 225;
 	
-		console.log('curMusicianStats')
-		console.log(curMusicianStats)
+		console.log('curUsableData')
+		console.log(curUsableData)
 
 
 		//make class string for svg element

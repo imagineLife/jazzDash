@@ -79,7 +79,12 @@ class NoteTypePercents extends React.Component {
 		let curMusicianStats = this.props.data[this.state.curShowing];
 		let filteredKeys = this.getFilteredKeys(curMusicianStats);
 		let curUsableData = this.convertToArray(curMusicianStats, filteredKeys);
+		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
 
+		//center-ish spot for PieGWrapper
+		let xCenter = (this.props.respWrapWidth / 2.2);
+		let yCenter = 225;
+	
 		console.log('curMusicianStats')
 		console.log(curMusicianStats)
 
@@ -87,7 +92,6 @@ class NoteTypePercents extends React.Component {
 		//make class string for svg element
 		let thisClass = `CountByNoteName gr-${this.props.data[0].grWidth}`
 
-		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
 	
 		//update scales
 	    
@@ -100,6 +104,7 @@ class NoteTypePercents extends React.Component {
 		return (
 		    <React.Fragment>
 			    <svg className={thisClass}>
+			    	<g className='pieGWrapper' transform={`translate(${xCenter},${yCenter})`} />
 				</svg>
 				<Toggle cl='CountsByNoteName' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
 			</React.Fragment>

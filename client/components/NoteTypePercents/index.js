@@ -1,5 +1,5 @@
 import React from 'react';
-import { scaleBand, scaleLinear } from 'd3-scale'
+import { scaleBand, scaleLinear, scaleSqrt } from 'd3-scale'
 import * as d3 from 'd3-selection'
 import Toggle from '../Toggle'
 import AxesAndMath from '../Axes'
@@ -12,7 +12,7 @@ import './index.css';
 class NoteTypePercents extends React.Component {
 	constructor(props){
 		super(props)
-		this.xScale = scaleBand()
+		this.radiusScale = scaleSqrt()
 		this.yScale = scaleLinear()
 		this.toggle = this.toggle.bind(this)
 		this.getFilteredKeys = this.getFilteredKeys.bind(this)
@@ -90,9 +90,6 @@ class NoteTypePercents extends React.Component {
 		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
 	
 		//update scales
-	    const xScale = this.xScale
-	      .domain(filteredKeys)
-	      .range([this.state.margins.left, svgDimensions.width - this.state.margins.right])
 	    
 	     //yScale max hard-coded
 	     //yScale max hard-coded

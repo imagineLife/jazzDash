@@ -143,8 +143,7 @@ class NoteLengthCounts extends React.Component {
 		const mergedDurArr = this.makeMergedDurationDataSet(this.props.data, this.state.curShowing, otherMusicianVal, curMusicianStats, otherMusicianStats)
 
 		//4. make usable data filled with 0s
-		//	 where curMusician did not play given duration
-		//	 and sort
+		//	 where curMusician did not play given duration & then sort
 		let dataKeys = Object.keys(curMusicianStats);
 		let curMusicianData = this.convertToArray(curMusicianStats, dataKeys);
 		let newUsableData = this.getUsableData(mergedDurArr, curMusicianData).sort((a,b) => +a.duration - +b.duration);
@@ -190,11 +189,13 @@ class NoteLengthCounts extends React.Component {
         //Preps Data-Driven Horizontal Rect Components
 	    const bars = (
 	      newUsableData.map((barData, ind) => {
+
+	      	//Use mongo ID as the key!
 	      	if (+barData.count > 0){
 	      		return ( 
 		          <HorizontalRect
-		            key={ind}
-		            thisKey={ind}
+		            key={barData.duration}
+		            thisKey={barData.duration}
 		            y={yScale(barData.duration)}
 		            width={xScale(+barData.count) - this.state.margins.left}
 		            height={yScale.bandwidth()}

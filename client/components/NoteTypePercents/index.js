@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.css';
 import { scaleBand, scaleLinear, scaleSqrt } from 'd3-scale'
 import * as d3 from 'd3'
 import AxesAndMath from '../Axes'
@@ -8,6 +7,7 @@ import Path from '../Path'
 
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import Toggle from '../Toggle'
+import './index.css';
 
 class NoteTypePercents extends React.Component {
 	constructor(props){
@@ -50,7 +50,7 @@ class NoteTypePercents extends React.Component {
 	convertToArray(obj, usableKeysArr){
 		let completedArr = [];
 		usableKeysArr.forEach(key => {
-			if(key !== 'type'){
+			if(!['type','NCTs'].includes(key)){
 				let thisObj = {}
 				thisObj['noteType'] = key
 				thisObj['count'] = obj[key]
@@ -79,7 +79,7 @@ class NoteTypePercents extends React.Component {
 
 	getLargestRadius(w,h, largestVal){
 		const smallerHorW = (w < h) ? w : h;
-		const largestRadiusCalculation = Math.floor( ( smallerHorW / 2) * .8 );
+		const largestRadiusCalculation = Math.floor( ( smallerHorW / 2) );
 		return (largestRadiusCalculation < largestVal)? largestRadiusCalculation : largestVal; 
 	}
 
@@ -118,10 +118,6 @@ class NoteTypePercents extends React.Component {
 
 		const colorScale = d3.scaleOrdinal().range(d3.schemeCategory10).domain(curUsableData.map(this.state.colorValue))
 
-	
-		// console.log('d3ArcFn')
-		// console.log(d3ArcFn)
-
 		const theseSlices = arcs.map((arc, ind) => {
 			
 			let thisSliceColor = colorScale(this.state.colorValue(arc.data))
@@ -135,7 +131,7 @@ class NoteTypePercents extends React.Component {
 		})
 
 		//make class string for svg element
-		let thisClass = `NoteTypePercents gr-${this.props.data[0].grWidth}`
+		let thisClass = `noteTypePercents gr-${this.props.data[0].grWidth}`
 
 	
 		//update scales
@@ -146,10 +142,8 @@ class NoteTypePercents extends React.Component {
 	      .domain([0, 103])
 	      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
 
-	   	console.log('theseSlices')
-		console.log(theseSlices)
-
-		console.log('rendering')
+	   	// console.log('theseSlices')
+		// console.log(theseSlices)
 
 		return (
 		    <React.Fragment>
@@ -159,7 +153,7 @@ class NoteTypePercents extends React.Component {
 			    	</g>
 			    	
 				</svg>
-				<Toggle cl='NoteTypePercents' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
+				<Toggle cl={'NoteTypePercents'} opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
 			</React.Fragment>
 		);
 	}

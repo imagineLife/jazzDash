@@ -2,44 +2,40 @@ import React from 'react';
 import * as d3 from 'd3';
 import './index.css';
 
-export default class Patj extends React.Component {
-	// constructor(props){
-	// 	super(props)
+export default class Path extends React.Component {
+	constructor(props){
+		super(props)
 
-	// 	this.state = {
-	// 		height: props.height
-	// 	}
+		this.state = {
+			d: props.d
+		}
 
-	// 	this.rectRef = React.createRef();
-	// }
+		this.pathRef = React.createRef();
+	}
 
-	// componentDidUpdate(prevProps,prevState) {
-	// 	if(prevProps.height !== this.props.height){
-	// 		let el = d3.select(this.rectRef.current);
-	// 	    el.attr('height', prevProps.height)
-	// 	    el.attr('y', prevProps.y)
+	componentDidUpdate(prevProps,prevState) {
+		if(prevProps.d !== this.props.d){
+			let el = d3.select(this.pathRef.current);
+		    el.attr('d', prevProps.d)
 
-	// 	    //1. D3 transition
-	// 	    el.transition()
-	// 	      .duration(400)
-	// 	      .ease(d3.easeQuad)
-	// 	      .attr("height", this.props.height)
-	// 	      .attr("y", this.props.y)
+		    //1. D3 transition
+		    el.transition()
+		      .duration(400)
+		      .ease(d3.easeQuad)
+		      .attr("d", this.props.d)
 		      
-	// 	      //setThis component state after transition
-	// 	      .on("end", () =>
-	// 	        this.setState({
-	// 	          height: this.props.height,
-	// 	          y: this.props.y
-	// 	        })
-	// 	      );
-	// 	}
+		      //setThis component state after transition
+		      .on("end", () =>
+		        this.setState({ d: this.props.d })
+		      );
+		}
 	    
- //  	}
+  	}
 
   	render(){
   		return(
 			<path
+			ref={this.pathRef}
 			d={this.props.d}
 			fill={this.props.fill}
 			cursor={'pointer'}

@@ -215,16 +215,13 @@ class NoteLengthCounts extends React.Component {
 		return (
 			<React.Fragment>
 				<svg className={thisClass}>
-
-				<AxesAndMath
-		          scales={{ xScale, yScale }}
-		          margins={this.state.margins}
-		          svgDimensions={svgDimensions}
-		        />
-
-				{bars}
-
-				{axisLabels}
+					<AxesAndMath
+			          scales={{ xScale, yScale }}
+			          margins={this.state.margins}
+			          svgDimensions={svgDimensions}
+			        />
+					{bars}
+					{axisLabels}
 				</svg>
 				<Toggle cl={'NoteLengthCounts'} opts={this.getNamesFromData(this.props.data)} onToggle={this.toggleThis}/>
 			</React.Fragment>

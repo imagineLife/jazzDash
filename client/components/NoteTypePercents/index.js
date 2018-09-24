@@ -14,6 +14,8 @@ class NoteTypePercents extends React.Component {
 		super(props)
 		this.radiusScale = scaleSqrt()
 		this.yScale = scaleLinear()
+		this.calcXPos = this.calcXPos.bind(this)
+		this.calcYPos = this.calcYPos.bind(this)
 		this.toggle = this.toggle.bind(this)
 		this.getFilteredKeys = this.getFilteredKeys.bind(this)
 		this.state = {
@@ -31,6 +33,26 @@ class NoteTypePercents extends React.Component {
 			curShowing: 0,
 			radiusColumn: 'count',
 			colorValue : d => d.noteType
+		}
+	}
+
+	calcXPos(string, dims){
+		if(string.indexOf('y') > -1){
+			return -(dims.height / 2)
+		}else if(string.indexOf('c') > -1){
+			return (dims.width / 2)
+		}else{
+			return ( dims.width / 2)
+		}
+	}
+
+	calcYPos(string, dims){
+		if(string.indexOf('y') > -1){
+			return 20
+		}else if(string.indexOf('c') > -1){
+			return (dims.height * .075)
+		}else{
+			return dims.height - 25
 		}
 	}
 
@@ -145,13 +167,27 @@ class NoteTypePercents extends React.Component {
 	   	// console.log('theseSlices')
 		// console.log(theseSlices)
 
+		//Make data-driven axis labels
+	    const axisLabels = this.state.labels.map((each) => {
+	      return <AxisLabel
+	        key={each.text}
+	        xPos={this.calcXPos(each.type, svgDimensions)}
+	        yPos={this.calcYPos(each.type, svgDimensions)}
+	        labelClass={each.textClass}
+	        groupClass={each.gWrapperClass}
+	        textVal={each.text}
+	        fontSize={'1.5em'}
+	        transformation={each.transformation}
+	      />
+	    })
+
 		return (
 		    <React.Fragment>
 			    <svg className={thisClass}>
 			    	<g className='pieGWrapper' transform={`translate(${xCenter},${yCenter})`}>
 			    		{theseSlices}
 			    	</g>
-			    	
+			    	{axisLabels}	    	
 				</svg>
 				<Toggle cl={'NoteTypePercents'} opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
 			</React.Fragment>

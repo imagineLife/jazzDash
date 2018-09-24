@@ -22,7 +22,7 @@ class NoteTypePercents extends React.Component {
 			labels: [
 				{
 				  type: 'chartTitle',
-				  text : '(Non)Chord-Tones',
+				  text : 'Chord-Tones By %',
 				  textClass : 'chartTitle',
 				  gWrapperClass : 'chartTitleG',
 				  transformation: '',

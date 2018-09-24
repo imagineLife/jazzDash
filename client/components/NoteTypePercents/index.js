@@ -102,7 +102,7 @@ class NoteTypePercents extends React.Component {
 	getLargestRadius(w,h, largestVal){
 		const smallerHorW = (w < h) ? w : h;
 		const largestRadiusCalculation = Math.floor( ( smallerHorW / 2) );
-		return (largestRadiusCalculation < largestVal)? largestRadiusCalculation : largestVal; 
+		return (largestRadiusCalculation < largestVal)? largestVal : largestRadiusCalculation; 
 	}
 
 	render(){
@@ -124,6 +124,8 @@ class NoteTypePercents extends React.Component {
 		let filteredKeys = this.getFilteredKeys(curMusicianStats);
 		let curUsableData = this.convertToArray(curMusicianStats, filteredKeys);
 		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
+		console.log('maxDataValue')
+		console.log(maxDataValue)
 		let largestPieSliceRadius = this.getLargestRadius(divWidthLessMargins, divHeightLessMargins, maxDataValue);
 		//pie & arc functions
 		const { d3PieFunc, d3ArcFn } = this.makeD3PieFuncs(this.state.radiusColumn, (divWidthLessMargins))		

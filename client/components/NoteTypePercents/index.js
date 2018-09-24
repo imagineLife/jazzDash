@@ -20,14 +20,14 @@ class NoteTypePercents extends React.Component {
 			labels: [
 				{
 				  type: 'chartTitle',
-				  text : 'Times-Played Per Note-Name',
+				  text : '(Non)Chord-Tones',
 				  textClass : 'chartTitle',
 				  gWrapperClass : 'chartTitleG',
 				  transformation: '',
 				  fontSize: '1.5em'
 				},
 			],
-			margins : { t: 45, r: 20, b: 80, l: 60 },
+			margins : { t: 45, r: 20, b: 0, l: 60 },
 			curShowing: 0,
 			radiusColumn: 'count',
 			colorValue : d => d.noteType
@@ -102,7 +102,7 @@ class NoteTypePercents extends React.Component {
 		let filteredKeys = this.getFilteredKeys(curMusicianStats);
 		let curUsableData = this.convertToArray(curMusicianStats, filteredKeys);
 		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
-		let largestPieSliceRadius = this.getLargestRadius(divWidthLessMargins, divHeightLessMargins, 207);
+		let largestPieSliceRadius = this.getLargestRadius(divWidthLessMargins, divHeightLessMargins, maxDataValue);
 		//pie & arc functions
 		const { d3PieFunc, d3ArcFn } = this.makeD3PieFuncs(this.state.radiusColumn, (divWidthLessMargins))		
 		//center-ish spot for PieGWrapper
@@ -113,8 +113,8 @@ class NoteTypePercents extends React.Component {
 		d3PieFunc.value(1);
 		const arcs = d3PieFunc(curUsableData);
 
-		let xCenter = (this.props.respWrapWidth / 2.2);
-		let yCenter = 225;
+		let xCenter = (divWidthLessMargins / 2);
+		let yCenter = (divHeightLessMargins / 1.5);
 
 		const colorScale = d3.scaleOrdinal().range(d3.schemeCategory10).domain(curUsableData.map(this.state.colorValue))
 

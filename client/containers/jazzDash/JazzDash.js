@@ -23,24 +23,6 @@ class JazzDash extends Component {
 
 	render(){
 		
-		/*
-		COULD I...?
-			const responsiveSection = this.props.storeDashData.forEach((chartObj, ind) => {
-				return <LayoutWrapper key={ind} {...chartObj}/>
-			})
-
-			here, the '<LayoutWrapper />' would return 
-			ResonsiveWrapper(<ChartComponent />)
-			Will this separate layout concern from chart-content-concern a little?
-
-
-			OR could/should I this.props.storeDashdata.forEach((chartObj, ind) => {
-				return REsponsiveWrapper(<ChartComponent />)
-
-				
-			})
-		*/
-		
 		if(!this.props.storeDashData){
 			//try img as class bg image for dummy loading image!!
 			return (

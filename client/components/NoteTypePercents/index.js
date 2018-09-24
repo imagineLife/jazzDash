@@ -1,13 +1,13 @@
 import React from 'react';
+import './index.css';
 import { scaleBand, scaleLinear, scaleSqrt } from 'd3-scale'
 import * as d3 from 'd3'
-import Toggle from '../Toggle'
 import AxesAndMath from '../Axes'
 import AxisLabel from '../AxisLabel'
-import Bars from '../Bars'
+import Path from '../Path'
 
 import ResponsiveWrapper from '../ResponsiveWrapper';
-import './index.css';
+import Toggle from '../Toggle'
 
 class NoteTypePercents extends React.Component {
 	constructor(props){
@@ -35,6 +35,7 @@ class NoteTypePercents extends React.Component {
 	}
 
 	toggle(){
+		console.log('toggling')
 	    let newVal = (this.state.curShowing === 0) ? 1 : 0;
 	    this.setState({curShowing: newVal})
 	}
@@ -49,8 +50,6 @@ class NoteTypePercents extends React.Component {
 	convertToArray(obj, usableKeysArr){
 		let completedArr = [];
 		usableKeysArr.forEach(key => {
-			console.log('mapping keys...')
-			console.log(key)
 			if(key !== 'type'){
 				let thisObj = {}
 				thisObj['noteType'] = key
@@ -72,7 +71,7 @@ class NoteTypePercents extends React.Component {
 		let d3PieFunc = d3.pie().value(wedgeVal);
 		let d3ArcFn = d3.arc()
 			.innerRadius(0).outerRadius((d) => {
-				return radiusScale(d.data[radiusColumn]);
+				return this.radiusScale(d.data[this.state.radiusColumn]);
 			})
 
 		return { d3PieFunc, d3ArcFn };
@@ -107,23 +106,36 @@ class NoteTypePercents extends React.Component {
 		//pie & arc functions
 		const { d3PieFunc, d3ArcFn } = this.makeD3PieFuncs(this.state.radiusColumn, (divWidthLessMargins))		
 		//center-ish spot for PieGWrapper
+
+		this.radiusScale.domain([0, d3.max(curUsableData, d => d[this.state.radiusColumn]) ])
+		.range([0,largestPieSliceRadius]);
+
+		d3PieFunc.value(1);
+		const arcs = d3PieFunc(curUsableData);
+
 		let xCenter = (this.props.respWrapWidth / 2.2);
 		let yCenter = 225;
 
 		const colorScale = d3.scaleOrdinal().range(d3.schemeCategory10).domain(curUsableData.map(this.state.colorValue))
-		console.log('colorScaleRange')
-		console.log(colorScale.range())
 
-		console.log('largestPieSliceRadius')
-		console.log(largestPieSliceRadius)
-		console.log('- - - - - -')
 	
-		console.log('curUsableData')
-		console.log(curUsableData)
+		// console.log('d3ArcFn')
+		// console.log(d3ArcFn)
 
+		const theseSlices = arcs.map((arc, ind) => {
+			
+			let thisSliceColor = colorScale(this.state.colorValue(arc.data))
+			let arcVal = d3ArcFn(arc)
+			return <Path 
+				key={ind}
+				d={arcVal}
+				fill={thisSliceColor}
+				cl={'singlePath'}
+			/>
+		})
 
 		//make class string for svg element
-		let thisClass = `CountByNoteName gr-${this.props.data[0].grWidth}`
+		let thisClass = `NoteTypePercents gr-${this.props.data[0].grWidth}`
 
 	
 		//update scales
@@ -134,12 +146,20 @@ class NoteTypePercents extends React.Component {
 	      .domain([0, 103])
 	      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
 
+	   	console.log('theseSlices')
+		console.log(theseSlices)
+
+		console.log('rendering')
+
 		return (
 		    <React.Fragment>
 			    <svg className={thisClass}>
-			    	<g className='pieGWrapper' transform={`translate(${xCenter},${yCenter})`} />
+			    	<g className='pieGWrapper' transform={`translate(${xCenter},${yCenter})`}>
+			    		{theseSlices}
+			    	</g>
+			    	
 				</svg>
-				<Toggle cl='CountsByNoteName' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
+				<Toggle cl='NoteTypePercents' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
 			</React.Fragment>
 		);
 	}

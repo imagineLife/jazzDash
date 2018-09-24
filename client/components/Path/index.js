@@ -20,8 +20,8 @@ export default class Path extends React.Component {
 
 		    //1. D3 transition
 		    el.transition()
-		      .duration(400)
-		      .ease(d3.easeQuad)
+		      .duration(800)
+		      .ease(d3.easeElastic)
 		      .attr("d", this.props.d)
 		      
 		      //setThis component state after transition

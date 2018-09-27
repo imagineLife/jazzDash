@@ -4,6 +4,7 @@ import './index.css';
 import { scaleBand, scaleLinear } from 'd3-scale'
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import Bars from '../Bars'
+import Line from '../Line'
 import Toggle from '../Toggle'
 
 
@@ -14,7 +15,7 @@ class UpsAndDowns extends React.Component {
 		this.xScale = scaleBand();
 		this.yScale = scaleLinear();
 		this.state = {
-			margins : { top: 10, right: 10, bottom: 100, left: 10 },
+			margins : { top: 20, right: 20, bottom: 100, left: 20 },
 			curShowing: 0
 		}
 
@@ -35,16 +36,25 @@ class UpsAndDowns extends React.Component {
 		}
 	}
 
-	convertToArray(obj, usableKeysArr){
-		let cleanedData = [];
-		usableKeysArr.forEach(key => {
-			let thisObj = {};
-			if(key in obj){
-				thisObj['key'] = key;
-				thisObj['val'] = obj[key];
-				cleanedData.push(thisObj)
-			}
-		})
+	//converts object row to array of objects per original-object-key/valu pair
+	convertToArray(musObj){
+		let cleanedData = [
+			{
+				direction: 'ups',
+				count: musObj.ups
+			},
+			{
+				direction: 'downs',
+				count: musObj.downs
+			},
+			{
+				direction: 'unis',
+				count: musObj.unis
+			},
+		]
+		// console.log('cleanedData')
+		// console.log(cleanedData)
+		// console.log('- - - - -')
 		return cleanedData;
 	}
 
@@ -61,32 +71,39 @@ class UpsAndDowns extends React.Component {
 		return curMax;
 	}
 
-	/*
-	To-Do
-	1. make xAxis
-		hide it, just use domain & range, no actual visible axis component
-	
-	2. Make 2 'rects'...?
-		split width by 3
-		put rects @ thirds
+	makeLinearScale(data, str, rangeMin, rangeMax){
+		let thisVal = data[str]
+		let thisScale = scaleLinear().domain([0, 205]).range([rangeMin,rangeMax])
+		return thisScale;
+	}
 
-		Make HEIGHT 'length' resemble number of ups / downs traveled
+	makeLinesFromDataAndScales(data, upX, upY, downX, downY, dims){
+		return data.map(d => {
+			let dirStr = d.direction.toString();
+			let thisXScale = downX;
+			let thisYScale;
+			if(['unis','ups'].includes(dirStr)){
+				thisYScale = upY;
+			}
+			if(dirStr == 'downs'){
+				thisYScale = downY;
+			}
 
-		CURIOUS
-		Make up arrow point stick to Top
-		Make down arrow point stick to Bottom?
-
-		make & append arrowHeads to both,
-			up on top
-			down on bottom
-	
-
-	3.
-
-
-	*/
+			return <Line
+				key={d.direction}
+				x1={downX(0)}
+				y1={(!['unis'].includes(d.direction)) ? thisYScale(0) : (dims.height / 2)}
+				x2={downX(d.count)}
+				y2={(!['unis'].includes(d.direction)) ? thisYScale(d.count): (dims.height / 2)}
+				stroke={(d.direction == 'ups') ? 'green' : (d.direction == 'downs') ? 'darkblue' : 'black'}
+				strokeWidth={'3px'}
+			/>
+		})
+	}
 
 	render(){
+		console.log('RENDERING UPS & DOWNS')
+		console.log('- - - - -')
 
 		//prep svgDimensions var
 		const svgDimensions = {
@@ -97,35 +114,31 @@ class UpsAndDowns extends React.Component {
 		/*
 			Make data workable with d3 scales
 	    */
+
+	    //1. Select JUST the selected musician stats
+	    						//this.props.data[0]
 		let curMusicianStats = this.props.data[this.state.curShowing];
-		let dataKeys = ['downs','ups','unis'];
-		let curUsableData = this.convertToArray(curMusicianStats, dataKeys);
-		let maxDataValue = this.getMaxVal(curUsableData)
+		console.log('curMusicianStats')
+		console.log(curMusicianStats)
+
+		//2. vars for easier reading of range vals below
+		let leftSide = this.state.margins.left;
+		let rightSide = svgDimensions.width - this.state.margins.right;
+
+		//3b. Build the arrow-specific scales scale using curStats, the 'ups' keyword, and the svg extremeties Dimensions Left & Right
+		let upsXScale = this.makeLinearScale(curMusicianStats, 'ups', leftSide, rightSide)
+		let upsYScale = this.makeLinearScale(curMusicianStats, 'downs', (svgDimensions.height - this.state.margins.bottom), this.state.margins.top)
+		let downsXScale = this.makeLinearScale(curMusicianStats, 'downs', leftSide, rightSide)
+		let downsYScale = this.makeLinearScale(curMusicianStats, 'downs', this.state.margins.top, (svgDimensions.height - this.state.margins.bottom))
+		let arrows = this.makeLinesFromDataAndScales(this.convertToArray(curMusicianStats), upsXScale, upsYScale, downsXScale, downsYScale, svgDimensions)
 
 		//make class string for svg element
 		let thisClass = `upsAndDowns gr-${this.props.data[0].grWidth}`
-		
-		//prep scales
-		const xScale = this.xScale
-	      .domain(dataKeys)
-	      .range([this.state.margins.left, svgDimensions.width - this.state.margins.right])
-
-	    const yScale = this.yScale
-	      .domain([0, maxDataValue])
-	      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
 
 		return(
 			<React.Fragment>
 				<svg className={thisClass}>
-					<Bars
-			          scales={{ xScale, yScale }}
-			          margins={this.state.margins}
-			          data={curUsableData}
-			          maxValue={maxDataValue}
-			          svgDimensions={svgDimensions}
-			          mousedOver={this.mousedOver}
-			          barWidth={'10'}
-			        />
+					{arrows}
 		        </svg>
 				<Toggle cl='UpsAndDowns' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggleThis}/>	
 			</React.Fragment>

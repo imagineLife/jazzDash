@@ -57,7 +57,7 @@ class NoteTypePercents extends React.Component {
 	}
 
 	toggle(){
-		console.log('toggling')
+		// console.log('toggling')
 	    let newVal = (this.state.curShowing === 0) ? 1 : 0;
 	    this.setState({curShowing: newVal})
 	}
@@ -106,8 +106,8 @@ class NoteTypePercents extends React.Component {
 	}
 
 	render(){
-		console.log('RENDERING!! NoteTypePercents props')
-		console.log(this.props)
+		// console.log('RENDERING!! NoteTypePercents props')
+		// console.log(this.props)
 
 		//set svg dimensions
 	    const svgDimensions = {
@@ -124,8 +124,8 @@ class NoteTypePercents extends React.Component {
 		let filteredKeys = this.getFilteredKeys(curMusicianStats);
 		let curUsableData = this.convertToArray(curMusicianStats, filteredKeys);
 		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
-		console.log('maxDataValue')
-		console.log(maxDataValue)
+		// console.log('maxDataValue')
+		// console.log(maxDataValue)
 		let largestPieSliceRadius = this.getLargestRadius(divWidthLessMargins, divHeightLessMargins, maxDataValue);
 		//pie & arc functions
 		const { d3PieFunc, d3ArcFn } = this.makeD3PieFuncs(this.state.radiusColumn, (divWidthLessMargins))		

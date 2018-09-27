@@ -15,7 +15,6 @@ export default class LineComp extends React.Component {
 	}
 
 	componentDidUpdate(prevProps,prevState) {
-		console.log('compDidUpdate!!')
 
 		if(prevProps.x2 !== this.props.x2){
 			let el = d3.select(this.lineRef.current);
@@ -26,7 +25,6 @@ export default class LineComp extends React.Component {
 		    	'y2': prevProps.y2,
 		    })
 
-		    //1. D3 transition
 		    el.transition()
 		      .duration(650)
 		      .ease(d3.easeQuad)
@@ -36,8 +34,6 @@ export default class LineComp extends React.Component {
 		    	'y1': this.props.y1,
 		    	'y2': this.props.y2,
 		      })
-		      
-		      //setThis component state after transition
 		      .on("end", () =>
 		        this.setState({
 					'x1': this.props.x1,

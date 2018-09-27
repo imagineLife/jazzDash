@@ -40,8 +40,8 @@ export default class HorizontalRect extends React.Component {
   	}
 
   	render(){
-  		console.log('comp Name')
-  		console.log(this.constructor.name)
+  		// console.log('comp Name')
+  		// console.log(this.constructor.name)
   		// console.log('rect width on render')
   		// console.log(this.state.width)
   		return(

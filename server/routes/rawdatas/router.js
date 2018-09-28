@@ -41,6 +41,7 @@ router.get('/default', (req, res) => {
     	'_id': { $in: ['5b69712ebecd53905d3ee1f5','5b70868f687ffb3971a867fb']}
 	})
 	.populate('noteLengths', 'length count')
+	.populate('noteIntervals', 'chord count interval')
 	.populate('_musician', 'first last')
 	.populate('chordStats', 'chordName chordTones diatonicNCTs nonDiatonicNCTs totalNotes')
 	.populate('_song', 'title album')

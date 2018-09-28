@@ -1,20 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { noteLength } = require('./models');
+const { noteInterval } = require('./models');
 const { Musician } = require('../musicians/models');
 
 //Get SOng with populated musicians ID array
 router.get('/', (req, res) => {
-    noteLength
+    noteInterval
     .find()
-
-    // .populate (THIS schema (song) key 'lowercase musicians')
-    //similar to musicians.first
-    //not to be confused with 'Musicians' first
-    .populate('_song', 'title')
-    .populate('_artist', 'first')
+    .populate('song', 'title')
+    .populate('musician', 'first')
     .exec()
-    .then(noteLengthRes => res.status(201).json(noteLengthRes))
+    .then(noteIntRes => {
+      return res.status(201).json(noteIntRes)
+    })
     .catch(err => {
       console.error(err);
       res.status(500).json({error: 'something went terribly wrong'});

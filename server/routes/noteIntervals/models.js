@@ -8,7 +8,9 @@ const NoteIntervalSchema = mongoose.Schema({
 	interval : String,
 	chord: String,
 	song: {type: Schema.Types.ObjectId, ref: 'Songs' },
+	// song: String,
 	musician : {type: Schema.Types.ObjectId, ref: 'Musicians' },
+	// musician : String
 })
 
 const noteInterval = mongoose.model('NoteInterval', NoteIntervalSchema);

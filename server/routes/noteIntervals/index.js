@@ -1,4 +1,4 @@
-const { NoteLength } = require('./models');
+const { noteInterval } = require('./models');
 const { router } = require('./router');
 
-module.exports = { NoteLength, router };
+module.exports = { noteInterval, router };

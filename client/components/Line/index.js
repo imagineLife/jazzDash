@@ -27,7 +27,7 @@ export default class LineComp extends React.Component {
 
 		    el.transition()
 		      .duration(650)
-		      .ease(d3.easeQuad)
+		      .ease(d3.easeBounce)
 		      .attrs({
 		      	'x1': this.props.x1,
 		    	'x2': this.props.x2,

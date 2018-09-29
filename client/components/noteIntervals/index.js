@@ -2,6 +2,8 @@ import React from 'react';
 import './index.css';
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import * as d3 from 'd3'
+import Circle from '../Circle'
+
 
 class NoteIntervals extends React.Component {
 	constructor(props){
@@ -58,12 +60,25 @@ class NoteIntervals extends React.Component {
 		// console.log('radiusScale.range()')
 		// console.log(this.radiusScale.range())
 
-		console.log('noteIntervals curMusicianStats')
-		console.log(curMusicianStats)
-		console.log('- - - - -')
+		// console.log('noteIntervals curMusicianStats')
+		// console.log(curMusicianStats)
+		// console.log('- - - - -')
 		
+		let circles = curMusicianStats.map(d => {
+			return <Circle 
+				key={d._id}
+				r={this.radiusScale(d.count)}
+				fill={this.colorScale(d.count)}
+			/>
+		})
+
+		//make class string for svg element
+		let thisClass = `NoteIntervals gr-${this.props.data[0].grWidth}`
+
 		return(
-			<p>Dummy React Component here</p>	
+			<svg className={thisClass}>
+				{circles}
+			</svg>
 		);
 	}
 }

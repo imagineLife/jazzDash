@@ -9,6 +9,8 @@ object for more random data-using, as opposed to array for linear  looping
 */
 
 const parseData = function(data){
+	// console.log('reducer parsing DATA...')
+	// console.log(data)
 	let readyData = data.map((d, i) => {
 		return {
 			musician: `${d._musician.first} ${d._musician.last}`,
@@ -51,6 +53,12 @@ const parseData = function(data){
 				song: d._song,
 				grWidth:'6',
 				...d.noteLengths
+			},
+			noteIntervalCounts: {
+				musician: `${d._musician.first} ${d._musician.last}`,
+				song: d._song,
+				grWidth:'6',
+				...d.noteIntervals
 			},
 			totalsByNoteName: {
 				musician: `${d._musician.first} ${d._musician.last}`,

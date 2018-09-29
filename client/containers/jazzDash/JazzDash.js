@@ -33,9 +33,9 @@ class JazzDash extends Component {
 			);
 		}else{
 
-			console.log('dash wrapper props')
-			console.log(this.props.storeDashData)
-			console.log('- - - - -')
+			// console.log('dash wrapper props')
+			// console.log(this.props.storeDashData)
+			// console.log('- - - - -')
 
 			let musicians = this.props.storeDashData.musicians.map(m => {
 				let imgStr = m.replace(/\s/g, '');
@@ -60,7 +60,7 @@ class JazzDash extends Component {
 					</div>
 					<div className="row">
 						<NoteTypePercents data={this.props.storeDashData.noteTypesByPercentage} parentCol={'6'}/>
-						<NoteIntervals data={this.props.storeDashData.noteIntervals} parentCol={'6'}/>
+						<NoteIntervals data={this.props.storeDashData.noteIntervalCounts} parentCol={'6'}/>
 					</div>
 					<div className="bottomSpacer" />
 				</main>

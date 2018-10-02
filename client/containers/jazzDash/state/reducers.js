@@ -66,6 +66,12 @@ const parseData = function(data){
 				grWidth:'12',
 				...d.totalsByNoteName,
 
+			},
+			beatCounts: {
+				musician: `${d._musician.first} ${d._musician.last}`,
+				song: d._song,
+				...d.beatCounts,
+
 			}	
 		};
 	})

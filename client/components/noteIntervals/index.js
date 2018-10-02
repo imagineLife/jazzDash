@@ -16,6 +16,7 @@ class NoteIntervals extends React.Component {
 
 		this.colorScale = d3.scaleOrdinal(d3.schemeDark2)
 		this.radiusScale = d3.scaleSqrt()
+		this.circleObjs;
 	}
 
 	makeD3Simulation(){
@@ -33,6 +34,16 @@ class NoteIntervals extends React.Component {
 		}
 		return thisArr
 	}
+
+	resizeTick(e){
+		console.log('resizeTick called! E')
+	  // resizeCirclesObj.attrs({
+   //      "cx" : (d) => {return d.x},
+   //      "cy" : (d) => {return d.y}
+   //    })
+	}
+
+	
 	
 	render(){
 
@@ -48,6 +59,11 @@ class NoteIntervals extends React.Component {
 
 	    //1. Prep Data for working with d3
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
+
+		console.log('noteIntervals curMusicianStats')
+		console.log(curMusicianStats)
+		console.log('- - - - -')
+
 		let countExtent = d3.extent(curMusicianStats, d => d.count)
 		let smallestCircleRad = Math.min(svgDimensions.width, svgDimensions.height)
 
@@ -55,29 +71,33 @@ class NoteIntervals extends React.Component {
 
 		//setup simulation
 		let sim = this.makeD3Simulation();
-		sim.force("myCollide", d3.forceCollide(d => radiusScale(d.count)));
+		sim.force("myCollide", d3.forceCollide(d => this.radiusScale(d.count)))
+		.alpha(.5)
+		.nodes(curMusicianStats)
+      	// .on('tick', this.resizeTick);
 
-		// console.log('radiusScale.range()')
-		// console.log(this.radiusScale.range())
-
-		// console.log('noteIntervals curMusicianStats')
-		// console.log(curMusicianStats)
-		// console.log('- - - - -')
+		console.log('sim')
+		console.log(sim)
 		
-		let circles = curMusicianStats.map(d => {
+		let circles = sim.nodes().map(d => {
 			return <Circle 
 				key={d._id}
 				r={this.radiusScale(d.count)}
 				fill={this.colorScale(d.count)}
+				cl={`.interval-circle ${d.interval}`}
+				x={this.state.cx || d.x}
+				y={this.state.cy || d.x}
 			/>
 		})
 
 		//make class string for svg element
-		let thisClass = `NoteIntervals gr-${this.props.data[0].grWidth}`
-
+		let thisClass = `noteIntervals gr-${this.props.data[0].grWidth}`
+		let translateG = `translate(${svgDimensions.width /2},${svgDimensions.height /2})`;
 		return(
 			<svg className={thisClass}>
-				{circles}
+				<g className={'gWrapper'} transform={translateG}>
+					{circles}
+				</g>
 			</svg>
 		);
 	}

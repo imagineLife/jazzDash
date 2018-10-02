@@ -42,6 +42,7 @@ router.get('/default', (req, res) => {
 	})
 	.populate('noteLengths', 'length count')
 	.populate('noteIntervals', 'chord count interval')
+	.populate('beatCounts', 'count beat')
 	.populate('_musician', 'first last')
 	.populate('chordStats', 'chordName chordTones diatonicNCTs nonDiatonicNCTs totalNotes')
 	.populate('_song', 'title album')

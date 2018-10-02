@@ -6,8 +6,8 @@ const { Musician } = require('../musicians/models');
 router.get('/', (req, res) => {
     beatCount
     .find()
-    .populate('song', 'title')
-    .populate('musician', 'first')
+    // .populate('song', 'title')
+    // .populate('musician', 'first')
     .exec()
     .then(beatCountRes => res.status(201).json(beatCountRes))
     .catch(err => {

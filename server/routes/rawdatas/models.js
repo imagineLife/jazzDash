@@ -34,6 +34,7 @@ const RawDataScheme = mongoose.Schema({
 	},
 	noteLengths: [ {type: Schema.Types.ObjectId, ref: 'NoteLength' } ],
 	noteIntervals: [ {type: Schema.Types.ObjectId, ref: 'NoteInterval' } ],
+	beatCounts: [ {type: Schema.Types.ObjectId, ref: 'BeatCount' } ],
 	chordStats: [ {type: Schema.Types.ObjectId, ref: 'ChordStat' } ]
 })
 

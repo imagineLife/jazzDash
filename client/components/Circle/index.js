@@ -14,7 +14,8 @@ export default class Circle extends React.Component {
 		this.circleRef = React.createRef();
 	}
 
-	// componentDidUpdate(prevProps,prevState) {
+	componentDidUpdate(prevProps,prevState) {
+		console.log('circle cdu!')
 
 	// 	if(prevProps.x2 !== this.props.x2){
 	// 		let el = d3.select(this.lineRef.current);
@@ -44,7 +45,7 @@ export default class Circle extends React.Component {
 	// 	      );
 	// 	}
 	    
- //  	}
+  	}
 
   	render(){
   		return(
@@ -52,6 +53,8 @@ export default class Circle extends React.Component {
 				ref={this.circleRef}
 				r={this.props.r}
 				fill={this.props.fill}
+				cx={this.props.x}
+				cy={this.props.y}
 			/>
 		);
   	}

@@ -10,7 +10,7 @@ const chordStatRouter = require('./routes/chordStats/router');
 const rawDataRouter = require('./routes/rawdatas/router');
 const noteLengthRouter = require('./routes/notelengths/router');
 const noteIntervalRouter = require('./routes/noteIntervals/router');
-const beatCountsRouter = require('./routes/beatCounts/router');
+const beatCountsRouter = require('./routes/beatcounts/router');
 
 mongoose.Promise = global.Promise;
 

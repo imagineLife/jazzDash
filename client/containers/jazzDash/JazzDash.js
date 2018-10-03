@@ -6,6 +6,7 @@ import UpsAndDowns from '../../components/UpsAndDowns';
 import NoteLengthCounts from '../../components/noteLengthCounts';
 import NoteTypePercents from '../../components/NoteTypePercents';
 import NoteIntervals from '../../components/NoteIntervals';
+import BeatCounts from '../../components/BeatCounts';
 
 import BigImg from '../../components/BigImg';
 import './index.css';
@@ -61,6 +62,9 @@ class JazzDash extends Component {
 					<div className="row">
 						<NoteTypePercents data={this.props.storeDashData.noteTypesByPercentage} parentCol={'6'}/>
 						<NoteIntervals data={this.props.storeDashData.noteIntervalCounts} parentCol={'6'}/>
+					</div>
+					<div className="row">
+						<BeatCounts data={this.props.storeDashData.beatCounts} parentCol={'12'}/>
 					</div>
 					<div className="bottomSpacer" />
 				</main>

@@ -10,3 +10,7 @@
     text-anchor: middle;
     font-family: futura;
 }
+
+.beatSVG{
+	overflow: visible;
+}

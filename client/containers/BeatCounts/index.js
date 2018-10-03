@@ -2,12 +2,10 @@ import React from 'react';
 import './index.css';
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import Toggle from '../../components/Toggle'
+import SingleText from '../../components/SingleText'
 import * as d3 from 'd3';
 
 class BeatCounts extends React.Component {
-	// console.log('placeholder props')
-	// console.log(props)
-	// console.log('- - - - -')
 	constructor(props){
 		super(props)
 	
@@ -48,14 +46,15 @@ class BeatCounts extends React.Component {
 	}
 
 	render(){
-		console.log('beatNumber props')
-		console.log(this.props)
 
 		//prep svgDimensions var
 		const svgDimensions = {
 	      width: Math.max(this.props.respWrapWidth, 300),
 	      height: 450
 	    }
+
+	    console.log('svgDimensions')
+	    console.log(svgDimensions)
 
 	    //1. Prep Data for working with d3
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
@@ -77,11 +76,12 @@ class BeatCounts extends React.Component {
 			
 			return (<div key={obj.beat} className='beatNumber gr8-1-2'>
 					<svg className='beatSVG' width={singleBeatDims.beatW} height={singleBeatDims.beatH}>
-						<text 
-							className='beatTextVal'
-							fontSize={`${beatNumberSize}rem`} 
-							transform={singleBeatDims.thisTrans}>{friendlyBeat}
-						</text>
+						<SingleText 
+							cl={'beatTextVal'}
+							fs={`${beatNumberSize}rem`} 
+							tf={singleBeatDims.thisTrans}
+							textVal={friendlyBeat}
+						/>
 					</svg>
 				</div>)
 		})

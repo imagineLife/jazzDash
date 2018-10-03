@@ -47,7 +47,7 @@ class BeatCounts extends React.Component {
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
 
 		let beatCountExtent = d3.extent(curMusicianStats, d => d.count)
-		let beatSizeRange = [.5, 6]
+		let beatSizeRange = [.5, 8]
 		this.beatSizeScale.domain(beatCountExtent).range(beatSizeRange)
 
 		console.log('beatCountExtent')
@@ -60,11 +60,15 @@ class BeatCounts extends React.Component {
 
 		//make beat values, put in svg wrappers
 		let numbers = curMusicianStats.sort((a, b) => a.beat - b.beat).map(obj => {
+			let keyVal = obj.beat
+			if(obj.beat % 1 != 0){
+				obj.beat = '+'
+			}
 
 			let beatNumberSize = this.beatSizeScale(+obj.count)
-			console.log('beatNumberSize')
-			console.log(beatNumberSize)
-			return (<div key={obj.beat} className='beatNumber gr8-1-2'>
+			// console.log('beatNumberSize')
+			// console.log(beatNumberSize)
+			return (<div key={keyVal} className='beatNumber gr8-1-2'>
 					<svg className='beatSVG' width={singleBeatDims.beatW} height={singleBeatDims.beatH}>
 						<text 
 							className='beatTextVal'

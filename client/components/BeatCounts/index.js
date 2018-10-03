@@ -38,23 +38,13 @@ class BeatCounts extends React.Component {
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
 		console.log('curMusicianStats')
 		console.log(curMusicianStats)
-		let firstFourNumbers = curMusicianStats.sort((a, b) => a.beat - b.beat).map((obj, ind) => {
-			if(ind < 4){
-				return (<p key={obj.beat} className='beatNumber gr-3'>{obj.beat}</p>)
-			}
-		})
-		let lastFourNumbers = curMusicianStats.sort((a, b) => a.beat - b.beat).map((obj, ind) => {
-			if(ind > 3){
-				return (<p key={obj.beat} className='beatNumber gr-1'>{obj.beat}</p>)
-			}
+		let numbers = curMusicianStats.sort((a, b) => a.beat - b.beat).map((obj, ind) => {
+			return (<p key={obj.beat} className='beatNumber gr8-1-2'>{obj.beat}</p>)
 		})
 		
 
 		return(
-			<div className='beatNumbersGrid'>
-			<div className='gr-6 gridRow'>MicCheck</div>
-			<div className='gr-6 gridRow'>Row2</div>
-			</div>	
+			<div className='gr8row'>{numbers}</div>
 		);
 	}
 }

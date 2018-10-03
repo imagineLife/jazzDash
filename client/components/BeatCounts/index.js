@@ -25,7 +25,20 @@ class BeatCounts extends React.Component {
 		return thisArr.filter(obj => [1,1.5,2,2.5,3,3.5,4,4.5].includes(+obj.beat))
 	}
 
+	makeBeatSVGDims(w,h){
+		let beatW, beatH = h, thisTrans;
+		if(w > 450){
+			beatW = (w / 8)
+			thisTrans = `translate(${beatW/2},${h/2})`
+		}else{
+			beatW = (w/4)
+			thisTrans = `translate(${beatW/2},${h/2})`
+		}
+		return {beatW, beatH, thisTrans}
+	}
+
 	render(){
+		console.log('beatNumber props')
 		console.log(this.props)
 
 		//prep svgDimensions var
@@ -36,15 +49,30 @@ class BeatCounts extends React.Component {
 
 	    //1. Prep Data for working with d3
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
-		console.log('curMusicianStats')
-		console.log(curMusicianStats)
+
+		console.log('svgDimensions')
+		console.log(svgDimensions)
+		
+		//make svgDimensions for beatValues
+		const singleBeatDims = this.makeBeatSVGDims(svgDimensions.width, 200)
+		console.log('singleBeatDims')
+		console.log(singleBeatDims)
+
+		//make beat values, put in svg wrappers
 		let numbers = curMusicianStats.sort((a, b) => a.beat - b.beat).map((obj, ind) => {
-			return (<p key={obj.beat} className='beatNumber gr8-1-2'>{obj.beat}</p>)
+			return (<div key={obj.beat} className='beatNumber gr8-1-2'>
+					<svg className='beatSVG' width={singleBeatDims.beatW} height={singleBeatDims.beatH}>
+						<text className='beatTextVal' transform={singleBeatDims.thisTrans}>{obj.beat}</text>
+					</svg>
+				</div>)
 		})
+
+		//make class string for svg element
+		let thisClass = `BeatCounts gr8row`
 		
 
 		return(
-			<div className='gr8row'>{numbers}</div>
+			<div className={thisClass}>{numbers}</div>
 		);
 	}
 }

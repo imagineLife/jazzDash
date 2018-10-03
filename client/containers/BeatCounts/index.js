@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 import ResponsiveWrapper from '../ResponsiveWrapper'
+import Toggle from '../../components/Toggle'
 import * as d3 from 'd3';
 
 class BeatCounts extends React.Component {
@@ -11,9 +12,22 @@ class BeatCounts extends React.Component {
 		super(props)
 	
 		this.beatSizeScale = d3.scaleLinear()
+		this.toggle = this.toggle.bind(this)
 		this.state = {
 			curShowing: 0
 		}
+	}
+
+	getNamesFromData(data){
+		return {
+			first : data[0].musician, 
+			second : data[1].musician
+		}
+	}
+
+	toggle(){
+	    let newVal = (this.state.curShowing === 0) ? 1 : 0;
+	    this.setState({curShowing: newVal})
 	}
 
 	removeLessimportantData(data){
@@ -47,33 +61,27 @@ class BeatCounts extends React.Component {
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
 
 		let beatCountExtent = d3.extent(curMusicianStats, d => d.count)
-		let beatSizeRange = [.5, 8]
+		let beatSizeRange = [.5, 7.5]
 		this.beatSizeScale.domain(beatCountExtent).range(beatSizeRange)
-
-		console.log('beatCountExtent')
-		console.log(beatCountExtent)
 		
 		//make svgDimensions for beatValues
 		const singleBeatDims = this.makeBeatSVGDims(svgDimensions.width, 200)
-		console.log('singleBeatDims')
-		console.log(singleBeatDims)
 
 		//make beat values, put in svg wrappers
 		let numbers = curMusicianStats.sort((a, b) => a.beat - b.beat).map(obj => {
-			let keyVal = obj.beat
+			let friendlyBeat = obj.beat
 			if(obj.beat % 1 != 0){
-				obj.beat = '+'
+				friendlyBeat = '+'
 			}
-
 			let beatNumberSize = this.beatSizeScale(+obj.count)
-			// console.log('beatNumberSize')
-			// console.log(beatNumberSize)
-			return (<div key={keyVal} className='beatNumber gr8-1-2'>
+			
+			return (<div key={obj.beat} className='beatNumber gr8-1-2'>
 					<svg className='beatSVG' width={singleBeatDims.beatW} height={singleBeatDims.beatH}>
 						<text 
 							className='beatTextVal'
 							fontSize={`${beatNumberSize}rem`} 
-							transform={singleBeatDims.thisTrans}>{obj.beat}</text>
+							transform={singleBeatDims.thisTrans}>{friendlyBeat}
+						</text>
 					</svg>
 				</div>)
 		})
@@ -83,7 +91,10 @@ class BeatCounts extends React.Component {
 		
 
 		return(
-			<div className={thisClass}>{numbers}</div>
+			<React.Fragment>
+				<div className={thisClass}>{numbers}</div>
+				<Toggle cl='BeatCounts' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
+			</React.Fragment>				
 		);
 	}
 }

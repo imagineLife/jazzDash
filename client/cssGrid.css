@@ -84,13 +84,13 @@ mid-screens-size resizing
     grid-column-end: span 6;
   }
 
+}
+
+@media only screen and (min-width: 550px){
   .gr8-1-2{
     grid-column-end: span 1;
   }
-
 }
-
-
 
 
 

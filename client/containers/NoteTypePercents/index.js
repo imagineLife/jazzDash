@@ -1,12 +1,11 @@
 import React from 'react';
 import { scaleBand, scaleLinear, scaleSqrt } from 'd3-scale'
 import * as d3 from 'd3'
-import AxesAndMath from '../Axes'
-import AxisLabel from '../AxisLabel'
-import Path from '../Path'
-
+import AxesAndMath from '../../components/Axes'
+import AxisLabel from '../../components/AxisLabel'
+import Path from '../../components/Path'
 import ResponsiveWrapper from '../ResponsiveWrapper';
-import Toggle from '../Toggle'
+import Toggle from '../../components/Toggle'
 import './index.css';
 
 class NoteTypePercents extends React.Component {

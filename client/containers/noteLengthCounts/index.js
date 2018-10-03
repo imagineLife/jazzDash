@@ -1,10 +1,10 @@
 import React from 'react';
 import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
 import * as d3 from 'd3-selection'
-import Toggle from '../Toggle'
-import AxesAndMath from '../Axes'
-import AxisLabel from '../AxisLabel'
-import HorizontalRect from '../HorizontalRect'
+import Toggle from '../../components/Toggle'
+import AxesAndMath from '../../components/Axes'
+import AxisLabel from '../../components/AxisLabel'
+import HorizontalRect from '../../components/HorizontalRect'
 
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import './index.css';

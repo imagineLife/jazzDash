@@ -1,5 +1,5 @@
 import React from 'react';
-import ResponsiveWrapper from '../ResponsiveWrapper';
+import ResponsiveWrapper from '../../containers/ResponsiveWrapper';
 
 import './index.css';
 

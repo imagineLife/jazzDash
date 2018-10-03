@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import * as d3 from 'd3'
-import Circle from '../Circle'
+import Circle from '../../components/Circle'
 
 
 class NoteIntervals extends React.Component {

@@ -3,9 +3,9 @@ import React from 'react';
 import './index.css';
 import { scaleBand, scaleLinear } from 'd3-scale'
 import ResponsiveWrapper from '../ResponsiveWrapper'
-import Bars from '../Bars'
-import Line from '../Line'
-import Toggle from '../Toggle'
+import Bars from '../../components/Bars'
+import Line from '../../components/Line'
+import Toggle from '../../components/Toggle'
 
 
 class UpsAndDowns extends React.Component {
@@ -52,9 +52,6 @@ class UpsAndDowns extends React.Component {
 				count: musObj.unis
 			},
 		]
-		// console.log('cleanedData')
-		// console.log(cleanedData)
-		// console.log('- - - - -')
 		return cleanedData;
 	}
 
@@ -102,8 +99,8 @@ class UpsAndDowns extends React.Component {
 	}
 
 	render(){
-		console.log('RENDERING UPS & DOWNS')
-		console.log('- - - - -')
+		// console.log('RENDERING UPS & DOWNS')
+		// console.log('- - - - -')
 
 		//prep svgDimensions var
 		const svgDimensions = {
@@ -116,10 +113,7 @@ class UpsAndDowns extends React.Component {
 	    */
 
 	    //1. Select JUST the selected musician stats
-	    						//this.props.data[0]
 		let curMusicianStats = this.props.data[this.state.curShowing];
-		console.log('curMusicianStats')
-		console.log(curMusicianStats)
 
 		//2. vars for easier reading of range vals below
 		let leftSide = this.state.margins.left;

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
 import { fetchStats } from './state/actions';
-import CountByNoteName from '../../components/CountByNoteName';
-import UpsAndDowns from '../../components/UpsAndDowns';
-import NoteLengthCounts from '../../components/noteLengthCounts';
-import NoteTypePercents from '../../components/NoteTypePercents';
-import NoteIntervals from '../../components/NoteIntervals';
-import BeatCounts from '../../components/BeatCounts';
+import CountByNoteName from '../CountByNoteName';
+import UpsAndDowns from '../UpsAndDowns';
+import NoteLengthCounts from '../noteLengthCounts';
+import NoteTypePercents from '../NoteTypePercents';
+import NoteIntervals from '../NoteIntervals';
+import BeatCounts from '../BeatCounts';
 
 import BigImg from '../../components/BigImg';
 import './index.css';

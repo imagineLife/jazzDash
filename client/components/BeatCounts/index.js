@@ -26,15 +26,11 @@ class BeatCounts extends React.Component {
 	}
 
 	makeBeatSVGDims(w,h){
-		let beatW, beatH = h, thisTrans;
-		if(w > 450){
-			beatW = (w / 8)
+		let beatW, beatH = h, thisTrans, fs;
+			beatW = (w > 450) ? (w / 8) : (w / 4)
 			thisTrans = `translate(${beatW/2},${h/2})`
-		}else{
-			beatW = (w/4)
-			thisTrans = `translate(${beatW/2},${h/2})`
-		}
-		return {beatW, beatH, thisTrans}
+			fs = `${(beatW * .008)}rem`
+		return {beatW, beatH, thisTrans, fs}
 	}
 
 	render(){
@@ -62,7 +58,10 @@ class BeatCounts extends React.Component {
 		let numbers = curMusicianStats.sort((a, b) => a.beat - b.beat).map((obj, ind) => {
 			return (<div key={obj.beat} className='beatNumber gr8-1-2'>
 					<svg className='beatSVG' width={singleBeatDims.beatW} height={singleBeatDims.beatH}>
-						<text className='beatTextVal' transform={singleBeatDims.thisTrans}>{obj.beat}</text>
+						<text 
+							className='beatTextVal'
+							fontSize={singleBeatDims.fs} 
+							transform={singleBeatDims.thisTrans}>{obj.beat}</text>
 					</svg>
 				</div>)
 		})

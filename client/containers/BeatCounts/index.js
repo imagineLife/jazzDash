@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import ResponsiveWrapper from '../ResponsiveWrapper'
-
+import * as d3 from 'd3';
 
 class BeatCounts extends React.Component {
 	// console.log('placeholder props')
@@ -10,6 +10,7 @@ class BeatCounts extends React.Component {
 	constructor(props){
 		super(props)
 	
+		this.beatSizeScale = d3.scaleLinear()
 		this.state = {
 			curShowing: 0
 		}
@@ -29,8 +30,7 @@ class BeatCounts extends React.Component {
 		let beatW, beatH = h, thisTrans, fs;
 			beatW = (w > 450) ? (w / 8) : (w / 4)
 			thisTrans = `translate(${beatW/2},${h/2})`
-			fs = `${(beatW * .008)}rem`
-		return {beatW, beatH, thisTrans, fs}
+		return {beatW, beatH, thisTrans}
 	}
 
 	render(){
@@ -46,8 +46,12 @@ class BeatCounts extends React.Component {
 	    //1. Prep Data for working with d3
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
 
-		console.log('svgDimensions')
-		console.log(svgDimensions)
+		let beatCountExtent = d3.extent(curMusicianStats, d => d.count)
+		let beatSizeRange = [.5, 6]
+		this.beatSizeScale.domain(beatCountExtent).range(beatSizeRange)
+
+		console.log('beatCountExtent')
+		console.log(beatCountExtent)
 		
 		//make svgDimensions for beatValues
 		const singleBeatDims = this.makeBeatSVGDims(svgDimensions.width, 200)
@@ -55,12 +59,16 @@ class BeatCounts extends React.Component {
 		console.log(singleBeatDims)
 
 		//make beat values, put in svg wrappers
-		let numbers = curMusicianStats.sort((a, b) => a.beat - b.beat).map((obj, ind) => {
+		let numbers = curMusicianStats.sort((a, b) => a.beat - b.beat).map(obj => {
+
+			let beatNumberSize = this.beatSizeScale(+obj.count)
+			console.log('beatNumberSize')
+			console.log(beatNumberSize)
 			return (<div key={obj.beat} className='beatNumber gr8-1-2'>
 					<svg className='beatSVG' width={singleBeatDims.beatW} height={singleBeatDims.beatH}>
 						<text 
 							className='beatTextVal'
-							fontSize={singleBeatDims.fs} 
+							fontSize={`${beatNumberSize}rem`} 
 							transform={singleBeatDims.thisTrans}>{obj.beat}</text>
 					</svg>
 				</div>)

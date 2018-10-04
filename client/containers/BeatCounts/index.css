@@ -8,9 +8,15 @@
     fill: none;
     border: 1px solid green;
     text-anchor: middle;
-    font-family: futura;
+    font-family: 'Aclonica';
 }
 
 .beatSVG{
 	overflow: visible;
+}
+
+.beatNumberTitle{
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 35px;
+    margin-bottom: 15px;
 }

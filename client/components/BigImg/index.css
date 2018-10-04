@@ -19,3 +19,8 @@
     padding: 5px 0;
     color: white;
 }
+
+.songTitle{
+    font-size: 55px;
+    font-family:Impact, Charcoal, sans-serif;
+}

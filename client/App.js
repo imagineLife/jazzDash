@@ -10,6 +10,7 @@ import Nav from './components/Nav';
 import JazzDash from './containers/jazzDash/JazzDash';
 import './resetNormalize.css';
 import './cssGrid.css';
+import './main.css';
 
 class App extends React.Component {
 

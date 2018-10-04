@@ -53,15 +53,13 @@ class BeatCounts extends React.Component {
 	      height: 450
 	    }
 
-	    console.log('svgDimensions')
-	    console.log(svgDimensions)
-
 	    //1. Prep Data for working with d3
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
-
+		console.log('curMusicianStats')
+		console.log(curMusicianStats)
 		let beatCountExtent = d3.extent(curMusicianStats, d => d.count)
-		let beatSizeRange = [.5, 7.5]
-		this.beatSizeScale.domain(beatCountExtent).range(beatSizeRange)
+		let beatSizeRange = [.2, 8]
+		this.beatSizeScale.domain([beatCountExtent[0] * .9, beatCountExtent[1]]).range(beatSizeRange)
 		
 		//make svgDimensions for beatValues
 		const singleBeatDims = this.makeBeatSVGDims(svgDimensions.width, 200)
@@ -74,8 +72,9 @@ class BeatCounts extends React.Component {
 			}
 			let beatNumberSize = this.beatSizeScale(+obj.count)
 			
-			return (<div key={obj.beat} className='beatNumber gr8-1-2'>
-					<svg className='beatSVG' width={singleBeatDims.beatW} height={singleBeatDims.beatH}>
+			return (
+				<div key={obj.beat} className='beatNumber gr8-1-2'>
+					<svg className='beatSVG' width={singleBeatDims.beatW * 1.3} height={singleBeatDims.beatH}>
 						<SingleText 
 							cl={'beatTextVal'}
 							fs={`${beatNumberSize}rem`} 
@@ -92,6 +91,7 @@ class BeatCounts extends React.Component {
 
 		return(
 			<React.Fragment>
+				<h2 className='beatNumberTitle'>Beat Number Frequencies</h2>
 				<div className={thisClass}>{numbers}</div>
 				<Toggle cl='BeatCounts' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
 			</React.Fragment>				

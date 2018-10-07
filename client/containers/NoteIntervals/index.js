@@ -3,6 +3,7 @@ import './index.css';
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import * as d3 from 'd3'
 import Circle from '../../components/Circle'
+import Toggle from '../../components/Toggle'
 
 
 class NoteIntervals extends React.Component {
@@ -27,7 +28,21 @@ class NoteIntervals extends React.Component {
 
 	    this.myTickFn = this.myTickFn.bind(this)
 	    this.makeSeqDom = this.makeSeqDom.bind(this)
+		this.toggle = this.toggle.bind(this)
 
+	}
+
+	getNamesFromData(data){
+		return {
+			first : data[0].musician, 
+			second : data[1].musician
+		}
+	}
+
+	toggle(){
+		// console.log('toggling')
+	    let newVal = (this.state.curShowing === 0) ? 1 : 0;
+	    this.setState({curShowing: newVal})
 	}
 
 	makeSeqDom(data){
@@ -75,12 +90,15 @@ class NoteIntervals extends React.Component {
 	}
 
 	componentDidUpdate(){
-		console.log('cdu here!')
+		console.log('BUBBLE CHART!! cdu here!')
 		this.updateNodes();
 
 	}
 	
 	render(){
+		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
+		console.log('rendering these stats...')
+		console.log(curMusicianStats)
 		//prep svgDimensions var
 		const svgDimensions = {
 	      width: Math.max(this.props.respWrapWidth, 300),
@@ -88,7 +106,6 @@ class NoteIntervals extends React.Component {
 	    }
 
 	    //1. Prep Data for working with d3
-		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
 		let countExtent = d3.extent(curMusicianStats, d => d.count)
 		let smallestCircleRad = Math.min(svgDimensions.width, svgDimensions.height)
 		this.radiusScale.domain(countExtent).range([0, (smallestCircleRad/ 5)])
@@ -112,11 +129,14 @@ class NoteIntervals extends React.Component {
 		})
 
 		return(
-			<svg className={thisClass}>
-				<g className={'gWrapper'} transform={translateGWrapper}>
-					{circles}
-				</g>
-			</svg>
+			<React.Fragment>
+				<svg className={thisClass}>
+					<g className={'gWrapper'} transform={translateGWrapper}>
+						{circles}
+					</g>
+				</svg>
+				<Toggle cl={'NoteIntervals'} opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>
+			</React.Fragment>	
 		);
 	}
 }

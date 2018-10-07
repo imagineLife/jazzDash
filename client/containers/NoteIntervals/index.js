@@ -87,15 +87,17 @@ class NoteIntervals extends React.Component {
 	      height: 450
 	    }
 
-		/*
-			Make data workable with d3 scales
-	    */
-
 	    //1. Prep Data for working with d3
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
 		let countExtent = d3.extent(curMusicianStats, d => d.count)
 		let smallestCircleRad = Math.min(svgDimensions.width, svgDimensions.height)
 		this.radiusScale.domain(countExtent).range([0, (smallestCircleRad/ 5)])
+		
+		//make class string for svg element
+		let thisClass = `noteIntervals gr-${this.props.data[0].grWidth}`
+		
+		//setup gWrapper translation
+		let translateGWrapper = `translate(${svgDimensions.width /2},${svgDimensions.height /2})`;
 		
 		let circles = this.sim.nodes().map((d,ind) => {
 			return <Circle 
@@ -109,12 +111,9 @@ class NoteIntervals extends React.Component {
 			/>
 		})
 
-		//make class string for svg element
-		let thisClass = `noteIntervals gr-${this.props.data[0].grWidth}`
-		let translateG = `translate(${svgDimensions.width /2},${svgDimensions.height /2})`;
 		return(
 			<svg className={thisClass}>
-				<g className={'gWrapper'} transform={translateG}>
+				<g className={'gWrapper'} transform={translateGWrapper}>
 					{circles}
 				</g>
 			</svg>

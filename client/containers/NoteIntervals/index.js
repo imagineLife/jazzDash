@@ -14,10 +14,10 @@ class NoteIntervals extends React.Component {
 			curShowing: 0
 		}
 
-		this.colorScale = d3.scaleOrdinal(d3.schemeDark2)
+		this.theData = this.removeLessimportantData(this.props.data[this.state.curShowing])
+		this.seqClr = d3.scaleSequential().domain(this.makeSeqDom(this.theData)).interpolator(d3.interpolateRainbow);
 		this.radiusScale = d3.scaleSqrt()
 		this.sim = this.makeD3Simulation();
-		this.theData = this.removeLessimportantData(this.props.data[this.state.curShowing])
 		this.d3Circles;
 
 		//setup d3 force on simulation
@@ -26,7 +26,13 @@ class NoteIntervals extends React.Component {
 	      .nodes(this.theData);
 
 	    this.myTickFn = this.myTickFn.bind(this)
+	    this.makeSeqDom = this.makeSeqDom.bind(this)
 
+	}
+
+	makeSeqDom(data){
+		let indexes = data.sort((a, b) => b.count - a.count ).map((d,ind) => ind)
+		return d3.extent(indexes, d => d)
 	}
 
 	removeLessimportantData(data){
@@ -50,20 +56,31 @@ class NoteIntervals extends React.Component {
 	  this.d3Circles
 	  	.attr("cx", d => d.x)
       	.attr("cy",d => d.y)
-	}	
+	}
+
+	updateNodes(){
+		this.sim.nodes(this.theData).on('tick', this.myTickFn)
+	}
 
 	componentDidMount(){
+
 		this.d3Circles = d3.selectAll('.intervalCircle')
-			.data(this.theData)
+			.data(this.theData);
+
+		this.updateNodes();
+		
 
 		console.log('cdm this.d3Circles')
 		console.log(this.d3Circles)
+	}
 
-		this.sim.nodes(this.theData).on('tick', this.myTickFn)
+	componentDidUpdate(){
+		console.log('cdu here!')
+		this.updateNodes();
+
 	}
 	
 	render(){
-
 		//prep svgDimensions var
 		const svgDimensions = {
 	      width: Math.max(this.props.respWrapWidth, 300),
@@ -78,15 +95,17 @@ class NoteIntervals extends React.Component {
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
 		let countExtent = d3.extent(curMusicianStats, d => d.count)
 		let smallestCircleRad = Math.min(svgDimensions.width, svgDimensions.height)
-		this.radiusScale.domain(countExtent).range([0, (smallestCircleRad/ 4)])
+		this.radiusScale.domain(countExtent).range([0, (smallestCircleRad/ 5)])
 		
-		let circles = this.sim.nodes().map(d => {
+		let circles = this.sim.nodes().map((d,ind) => {
 			return <Circle 
 				key={d._id}
 				r={this.radiusScale(d.count)}
-				fill={this.colorScale(d.count)}
+				fill={this.seqClr(ind)}
 				cl={'intervalCircle'}
 				xPr={d.x}
+				yPr={d.y}
+				data={d.interval}
 			/>
 		})
 

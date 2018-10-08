@@ -1,0 +1,18 @@
+.icon{
+  width:35px;
+  height:auto;
+  margin-top: 10px;
+}
+
+.reactLink > *:hover { /* Firefox */
+    color: green;
+}
+
+
+.reactLink:visited { /* Firefox */
+    color: white;
+}
+
+.reactLink:visited {
+    color: white; 
+}

@@ -5,6 +5,7 @@ import { scaleBand, scaleLinear } from 'd3-scale'
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import Bars from '../../components/Bars'
 import Line from '../../components/Line'
+import Def from '../../components/Def'
 import Toggle from '../../components/Toggle'
 
 
@@ -94,8 +95,23 @@ class UpsAndDowns extends React.Component {
 				y2={(!['unis'].includes(d.direction)) ? thisYScale(d.count): (dims.height / 2)}
 				stroke={(d.direction == 'ups') ? 'green' : (d.direction == 'downs') ? 'darkblue' : 'black'}
 				strokeWidth={'3px'}
+				markerEnd={'url(#arrowHead)'}
 			/>
 		})
+	}
+
+	makeArrowHeadDefs(thisName){
+		return <Def 
+			id={thisName}
+			viewBox={'0 -5 10 10'}
+			refX={5}
+			refY={0}
+			markerWidth={4}
+			markerHeight={4}
+			orient={'auto'}
+			pathD={'M0,-5L10,0L0,5'}
+			pathCl={'arrowHead'}
+		/>
 	}
 
 	render(){
@@ -125,6 +141,7 @@ class UpsAndDowns extends React.Component {
 		let downsXScale = this.makeLinearScale(curMusicianStats, 'downs', leftSide, rightSide)
 		let downsYScale = this.makeLinearScale(curMusicianStats, 'downs', this.state.margins.top, (svgDimensions.height - this.state.margins.bottom))
 		let arrows = this.makeLinesFromDataAndScales(this.convertToArray(curMusicianStats), upsXScale, upsYScale, downsXScale, downsYScale, svgDimensions)
+		let arrowHeadDefs = this.makeArrowHeadDefs('arrowHead')
 
 		//make class string for svg element
 		let thisClass = `upsAndDowns gr-${this.props.data[0].grWidth}`
@@ -133,6 +150,7 @@ class UpsAndDowns extends React.Component {
 			<React.Fragment>
 				<svg className={thisClass}>
 					{arrows}
+					{arrowHeadDefs}
 		        </svg>
 				<Toggle cl='UpsAndDowns' opts={this.getNamesFromData(this.props.data)} onToggle={this.toggleThis}/>	
 			</React.Fragment>

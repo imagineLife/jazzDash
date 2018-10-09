@@ -100,8 +100,8 @@ class NoteTypePercents extends React.Component {
 
 	getLargestRadius(w,h, largestVal){
 		const smallerHorW = (w < h) ? w : h;
-		const largestRadiusCalculation = Math.floor( ( smallerHorW / 2) );
-		return (largestRadiusCalculation < largestVal)? largestVal : largestRadiusCalculation; 
+		const largestRadiusCalculation = Math.floor( ( smallerHorW / 1.25) );
+		return (largestRadiusCalculation > largestVal)? largestVal : largestRadiusCalculation; 
 	}
 
 	render(){

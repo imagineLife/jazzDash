@@ -55,8 +55,6 @@ class BeatCounts extends React.Component {
 
 	    //1. Prep Data for working with d3
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
-		console.log('curMusicianStats')
-		console.log(curMusicianStats)
 		let beatCountExtent = d3.extent(curMusicianStats, d => d.count)
 		let beatSizeRange = [.2, 8]
 		this.beatSizeScale.domain([beatCountExtent[0] * .9, beatCountExtent[1]]).range(beatSizeRange)

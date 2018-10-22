@@ -47,7 +47,7 @@ class DistanceByBeat extends React.Component {
 				  fontSize: '1.5em'
 				},
 			],
-			margins : { top: 45, right: 20, bottom: 80, left: 60 },
+			margins : { top: 45, right: 20, bottom: 100, left: 75 },
 			curShowing: 0
 		}
 	}
@@ -125,17 +125,17 @@ class DistanceByBeat extends React.Component {
 			let thisClass = `distanceByBeat gr-12`
 		
 			//update scales
-		    this.xScale
-		      .domain([1,4.99])
+		    let xScale = this.xScale
+		      .domain([1, 4.9])
 		      .range([this.state.margins.left, svgDimensions.width - this.state.margins.right])
 
 		     //yScale max hard-coded
 		     //yScale max hard-coded
-		    this.yScale
+		    let yScale = this.yScale
 		      .domain([0, 12])
 		      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
 
-		    this.radiusScale.domain([0, 4.5]).range([0,50])
+		    let radScale = this.radiusScale.domain([0, 4.5]).range([0,50])
 
 
 		    // Make data-driven axis labels
@@ -155,22 +155,31 @@ class DistanceByBeat extends React.Component {
 		    const circles = justDataPoints.map((c, ind) => {
 		    	// console.log('mapping circles')
 		    	for(let prop in c){
-		    		return <Circle 
-		    			key={ind}
-		    			r={this.radiusScale(+c[prop].noteDuration)}
-		    			xPr={this.xScale(c[prop].startedBeat)}
-				    	yPr={this.yScale(c[prop].halfStepsMoved)}
-				    	fill={this.colorScale(c[prop].chordTone)}
-				    	fillOpacity={0.1}
-				    	stroke={this.colorScale(c[prop].chordTone)}
-	    				strokeO={.7} 
-		    		/>
+		    		if(+c[prop].noteDuration <= 12){
+		    			return <Circle 
+			    			key={ind}
+			    			r={radScale(+c[prop].noteDuration)}
+			    			xPr={xScale(c[prop].startedBeat)}
+					    	yPr={yScale(c[prop].halfStepsMoved)}
+					    	fill={this.colorScale(c[prop].chordTone)}
+					    	fillOpacity={0.1}
+					    	stroke={this.colorScale(c[prop].chordTone)}
+		    				strokeO={.7} 
+			    		/>
+		    		}
 		    	}
 		    })
 
 	    	return (
 			    <React.Fragment>
 				    <svg className={thisClass}>
+
+				    <AxesAndMath
+			          scales={{ xScale, yScale }}
+			          margins={this.state.margins}
+			          svgDimensions={svgDimensions}
+			        />
+
 				    {axisLabels}
 				    {circles}
 					</svg>

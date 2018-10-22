@@ -4,6 +4,7 @@ import ResponsiveWrapper from '../ResponsiveWrapper'
 import * as d3 from 'd3'
 import Circle from '../../components/Circle'
 import Toggle from '../../components/Toggle'
+import AxisLabel from '../../components/AxisLabel'
 
 
 class NoteIntervals extends React.Component {
@@ -11,6 +12,16 @@ class NoteIntervals extends React.Component {
 		super(props)
 
 		this.state = {
+			labels: [
+				{
+				  type: 'chartTitle',
+				  text : 'Chord Interval Counts',
+				  textClass : 'chartTitle',
+				  gWrapperClass : 'chartTitleG',
+				  transformation: '',
+				  fontSize: '1.5em'
+				}
+			],
 			margins : { top: 20, right: 20, bottom: 100, left: 20 },
 			curShowing: 0
 		}
@@ -25,8 +36,30 @@ class NoteIntervals extends React.Component {
 	    this.makeSeqDom = this.makeSeqDom.bind(this)
 		this.toggle = this.toggle.bind(this)
 		this.drawChart = this.drawChart.bind(this)
+		this.calcXPos = this.calcXPos.bind(this)
+		this.calcYPos = this.calcYPos.bind(this)
 		this.bubbleDataJoin;
 
+	}
+
+	calcXPos(string, dims){
+		if(string.indexOf('y') > -1){
+			return -(dims.height / 2)
+		}else if(string.indexOf('c') > -1){
+			return (dims.width / 2)
+		}else{
+			return ( dims.width / 2)
+		}
+	}
+
+	calcYPos(string, dims){
+		if(string.indexOf('y') > -1){
+			return 20
+		}else if(string.indexOf('c') > -1){
+			return (dims.height * .05)
+		}else{
+			return dims.height - 25
+		}
 	}
 
 	getNamesFromData(data){
@@ -143,6 +176,20 @@ class NoteIntervals extends React.Component {
 	      height: 450
 	    }
 
+	   	//Make data-driven axis labels
+	    const axisLabels = this.state.labels.map((each) => {
+	      return <AxisLabel
+	        key={each.text}
+	        xPos={this.calcXPos(each.type, svgDimensions)}
+	        yPos={this.calcYPos(each.type, svgDimensions)}
+	        labelClass={each.textClass}
+	        groupClass={each.gWrapperClass}
+	        textVal={each.text}
+	        fontSize={each.fontSize}
+	        transformation={each.transformation}
+	      />
+	    })
+
 	    //1. Prep Data for working with d3
 		let countExtent = d3.extent(curMusicianStats, d => d.count)
 		let smallestCircleRad = Math.min(svgDimensions.width, svgDimensions.height)
@@ -169,6 +216,7 @@ class NoteIntervals extends React.Component {
 		return(
 			<React.Fragment>
 				<svg className={thisClass}>
+				{axisLabels}
 					<g className={'bubbleGWrapper'} transform={translateGWrapper} />
 				</svg>
 				<Toggle cl={'NoteIntervals'} opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>

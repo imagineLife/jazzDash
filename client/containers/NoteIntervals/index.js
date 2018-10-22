@@ -101,7 +101,6 @@ class NoteIntervals extends React.Component {
 	}
 
 	componentDidMount(){
-
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
 		this.drawChart(curMusicianStats)
 	}
@@ -158,12 +157,9 @@ class NoteIntervals extends React.Component {
 	}
 
 	render(){
-		console.log('rendering, curChosenNum!')
+
 		let curChosenNum = this.state.curShowing;
-		console.log(curChosenNum)
 		let curMusicianStats = this.removeLessimportantData(this.props.data[this.state.curShowing]);
-		// console.log('rendering these stats...')
-		// console.log(curMusicianStats)
 		//prep svgDimensions var
 		const svgDimensions = {
 	      width: Math.max(this.props.respWrapWidth, 300),

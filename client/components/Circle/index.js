@@ -6,44 +6,41 @@ import './index.css';
 export default class Circle extends React.Component {
 	constructor(props){
 		super(props)
-
-		// this.state = {
-		// 	height: props.height
-		// }
-
 		this.circleRef = React.createRef();
 	}
 
 	componentDidUpdate(prevProps,prevState) {
 		console.log('circle cdu!')
 
-	// 	if(prevProps.x2 !== this.props.x2){
-	// 		let el = d3.select(this.lineRef.current);
-	// 	    el.attrs({
-	// 	    	'x1': prevProps.x1,
-	// 	    	'x2': prevProps.x2,
-	// 	    	'y1': prevProps.y1,
-	// 	    	'y2': prevProps.y2,
-	// 	    })
+		if((prevProps.xPr !== this.props.xPr) || (prevProps.yPr !== this.props.yPr)){
+			let el = d3.select(this.circleRef.current);
+		    el.attrs({
+		    	'cx': prevProps.xPr,
+		    	'cy': prevProps.yPr,
+		    	'r':prevProps.r,
+				'fill':prevProps.fill,
+				'className':prevProps.cl,
+				'data':prevProps.data,
+		    	'fillOpacity':prevProps.fillOpacity,
+		    	'stroke':prevProps.stroke,
+				'strokeOpacity':prevProps.strokeO
+		    })
 
-	// 	    el.transition()
-	// 	      .duration(650)
-	// 	      .ease(d3.easeBounce)
-	// 	      .attrs({
-	// 	      	'x1': this.props.x1,
-	// 	    	'x2': this.props.x2,
-	// 	    	'y1': this.props.y1,
-	// 	    	'y2': this.props.y2,
-	// 	      })
-	// 	      .on("end", () =>
-	// 	        this.setState({
-	// 				'x1': this.props.x1,
-	// 				'x2': this.props.x2,
-	// 				'y1': this.props.y1,
-	// 				'y2': this.props.y2,
-	// 	        })
-	// 	      );
-	// 	}
+		    el.transition()
+		      .duration(1750)
+		      .ease(d3.easeLinear)
+		      .attrs({
+				'cx': this.props.xPr,
+		    	'cy': this.props.yPr,
+		    	'r':this.props.r,
+				'fill':this.props.fill,
+				'className':this.props.cl,
+				'data':this.props.data,
+		    	'fillOpacity':this.props.fillOpacity,
+		    	'stroke':this.props.stroke,
+				'strokeOpacity':this.props.strokeO
+		      })
+		}
 	    
   	}
 
@@ -53,8 +50,13 @@ export default class Circle extends React.Component {
 				ref={this.circleRef}
 				r={this.props.r}
 				fill={this.props.fill}
-				cx={this.props.x}
-				cy={this.props.y}
+				cx={this.props.xPr}
+				cy={this.props.yPr}
+				className={this.props.cl}
+				data={this.props.data}
+		    	fillOpacity={this.props.fillOpacity}
+		    	stroke={this.props.stroke}
+				strokeOpacity={this.props.strokeO} 
 			/>
 		);
   	}

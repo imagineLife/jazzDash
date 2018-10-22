@@ -39,7 +39,7 @@ class NoteLengthCounts extends React.Component {
 				},
 			{
 			  type: 'chartTitle',
-			  text : 'Times-Played Per Note-Duration',
+			  text : 'Times-Played Per Duration',
 			  textClass : 'chartTitle',
 			  gWrapperClass : 'chartTitleG',
 			  transformation: ''

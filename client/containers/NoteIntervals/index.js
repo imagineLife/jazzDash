@@ -121,20 +121,14 @@ class NoteIntervals extends React.Component {
 	            console.log(d)
 	          });
 	    let bubbleDataJoinEnter = this.bubbleDataJoin.enter().append('circle');
-
-	    // console.log('join')
-	    // console.log(bubbleDataJoin)    
-	    // console.log('enter')
-	    // console.log(bubbleDataJoinEnter)        
-	    //bubbleDataJoin.enter bubbleDataJoin.exit bubbleDataJoin
 	    
 	    this.bubbleDataJoin
 	        .transition(t)
-	          .style("fill", d => this.colorScale(d.interval))
+	          .style("fill", d => this.seqClr(d.count))
 	          .attr("r", d => d.count);
 
 	    bubbleDataJoinEnter
-	        .style("fill", d => this.colorScale(d.interval))
+	        .style("fill", d => this.seqClr(d.count))
 	        .merge(this.bubbleDataJoin)
 	        .transition().duration(1200)
 	          .attr("r", d => d.count)
@@ -216,7 +210,7 @@ class NoteIntervals extends React.Component {
 		return(
 			<React.Fragment>
 				<svg className={thisClass}>
-				{axisLabels}
+					{axisLabels}
 					<g className={'bubbleGWrapper'} transform={translateGWrapper} />
 				</svg>
 				<Toggle cl={'NoteIntervals'} opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>

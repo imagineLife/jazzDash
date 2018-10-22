@@ -1,10 +1,11 @@
 import React from 'react';
-import { scaleBand, scaleLinear } from 'd3-scale'
+import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
 import * as d3 from 'd3'
 import Toggle from '../../components/Toggle'
 import AxesAndMath from '../../components/Axes'
 import AxisLabel from '../../components/AxisLabel'
 import Bars from '../../components/Bars'
+import Circle from '../../components/Circle'
 import {notesData} from './AllNotesBoth'
 
 import ResponsiveWrapper from '../ResponsiveWrapper';
@@ -18,6 +19,7 @@ class DistanceByBeat extends React.Component {
 		this.radiusScale = scaleLinear()
 		this.calcXPos = this.calcXPos.bind(this)
 		this.calcYPos = this.calcYPos.bind(this)
+		this.colorScale = scaleOrdinal(d3.schemeDark2);
 		this.toggle = this.toggle.bind(this)
 		this.filterOutnotDataPoints = this.filterOutnotDataPoints.bind(this)
 		this.state = {
@@ -82,17 +84,13 @@ class DistanceByBeat extends React.Component {
 		}
 	}
 
-	convertToArray(obj, usableKeysArr){
-		let completedArr = [];
-		usableKeysArr.forEach(key => completedArr.push(obj[key]))
-		return completedArr
-	}
-
 	filterOutnotDataPoints(obj){
-		let res = {}
+		let res = []
 		for(let prop in obj){
 			if(!['musician','song'].includes(prop)){
-				res[prop] = obj[prop]
+				let thisObj = {}
+				thisObj[prop] = obj[prop]
+				res.push(thisObj)
 			}
 		}
 		return res
@@ -129,13 +127,16 @@ class DistanceByBeat extends React.Component {
 			//update scales
 		    this.xScale
 		      .domain([1,4.99])
-		      .range([this.state.margins.left, svgDimensions.width - this.state.margins.right - this.state.margins.left - 15])
+		      .range([this.state.margins.left, svgDimensions.width - this.state.margins.right])
 
 		     //yScale max hard-coded
 		     //yScale max hard-coded
 		    this.yScale
 		      .domain([0, 12])
 		      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
+
+		    this.radiusScale.domain([0, 4.5]).range([0,50])
+
 
 		    // Make data-driven axis labels
 		    const axisLabels = this.state.labels.map((each) => {
@@ -151,10 +152,27 @@ class DistanceByBeat extends React.Component {
 		      />
 		    })
 
+		    const circles = justDataPoints.map((c, ind) => {
+		    	// console.log('mapping circles')
+		    	for(let prop in c){
+		    		return <Circle 
+		    			key={ind}
+		    			r={this.radiusScale(+c[prop].noteDuration)}
+		    			xPr={this.xScale(c[prop].startedBeat)}
+				    	yPr={this.yScale(c[prop].halfStepsMoved)}
+				    	fill={this.colorScale(c[prop].chordTone)}
+				    	fillOpacity={0.1}
+				    	stroke={this.colorScale(c[prop].chordTone)}
+	    				strokeO={.7} 
+		    		/>
+		    	}
+		    })
+
 	    	return (
 			    <React.Fragment>
 				    <svg className={thisClass}>
 				    {axisLabels}
+				    {circles}
 					</svg>
 					<Toggle cl='DistanceByBeat' opts={this.getNamesFromData(this.state.noteData)} onToggle={this.toggle}/>
 				</React.Fragment>

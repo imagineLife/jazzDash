@@ -56,6 +56,7 @@ export default class LineComp extends React.Component {
 				y2={this.props.y2}
 				stroke={this.props.stroke}
 				strokeWidth={this.props.strokeWidth}
+				markerEnd={this.props.markerEnd}
 			/>
 		);
   	}

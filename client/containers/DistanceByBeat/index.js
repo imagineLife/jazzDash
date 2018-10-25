@@ -47,7 +47,7 @@ class DistanceByBeat extends React.Component {
 				  fontSize: '1.5em'
 				},
 			],
-			margins : { top: 45, right: 20, bottom: 100, left: 75 },
+			margins : { top: 45, right: 20, bottom: 75, left: 50 },
 			curShowing: 0
 		}
 	}
@@ -135,7 +135,7 @@ class DistanceByBeat extends React.Component {
 		      .domain([0, 12])
 		      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
 
-		    let radScale = this.radiusScale.domain([0, 4.5]).range([0,50])
+		    let radScale = this.radiusScale.domain([0, 4.5]).range([0,80])
 
 
 		    // Make data-driven axis labels

@@ -9,6 +9,7 @@
 }
 
 .Axis-Bottom text {
-  transform: rotate(-45deg);
-  text-anchor: end;
+  /*transform: rotate(-45deg);*/
+  transform: translate(-15px, 15) rotate(-45deg)
+  /*text-anchor: end;*/
 }

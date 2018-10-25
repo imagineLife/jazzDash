@@ -8,17 +8,15 @@
   margin: 0;
   margin: 0 auto;
   padding: 0 20px;
-  max-width: 1200px;
+  max-width: 1400px;
   grid-template-columns: 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33%;
 }
 
 .gr8row {
   margin-top: 100px;
   display: grid;
-  margin: 0;
   margin: 0 auto;
-  padding: 0 20px;
-  max-width: 1200px;
+  max-width: 1400px;
   grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
 }
 

@@ -7,6 +7,8 @@ import Bars from '../../components/Bars'
 import Line from '../../components/Line'
 import Def from '../../components/Def'
 import Toggle from '../../components/Toggle'
+import AxesAndMath from '../../components/Axes'
+import AxisLabel from '../../components/AxisLabel'
 
 
 class UpsAndDowns extends React.Component {
@@ -17,7 +19,17 @@ class UpsAndDowns extends React.Component {
 		this.yScale = scaleLinear();
 		this.state = {
 			margins : { top: 20, right: 20, bottom: 100, left: 20 },
-			curShowing: 0
+			curShowing: 0,
+			labels: [
+				{
+				  type: 'chartTitle',
+				  text : 'Ups & Downs',
+				  textClass : 'chartTitle',
+				  gWrapperClass : 'chartTitleG',
+				  transformation: '',
+				  fontSize: '1.5em'
+				},
+			],
 		}
 
 		this.convertToArray = this.convertToArray.bind(this)
@@ -34,6 +46,26 @@ class UpsAndDowns extends React.Component {
 		return {
 			first : data[0].musician, 
 			second : data[1].musician
+		}
+	}
+
+	calcXPos(string, dims){
+		if(string.indexOf('y') > -1){
+			return -(dims.height / 2)
+		}else if(string.indexOf('c') > -1){
+			return (dims.width / 2)
+		}else{
+			return ( dims.width / 2)
+		}
+	}
+
+	calcYPos(string, dims){
+		if(string.indexOf('y') > -1){
+			return 20
+		}else if(string.indexOf('c') > -1){
+			return (dims.height * .075)
+		}else{
+			return dims.height - 25
 		}
 	}
 
@@ -94,7 +126,7 @@ class UpsAndDowns extends React.Component {
 				x2={downX(d.count)}
 				y2={(!['unis'].includes(d.direction)) ? thisYScale(d.count): (dims.height / 2)}
 				stroke={(d.direction == 'ups') ? 'green' : (d.direction == 'downs') ? 'darkblue' : 'black'}
-				strokeWidth={'3px'}
+				strokeWidth={'5px'}
 				markerEnd={'url(#arrowHead)'}
 			/>
 		})
@@ -112,6 +144,21 @@ class UpsAndDowns extends React.Component {
 			pathD={'M0,-5L10,0L0,5'}
 			pathCl={'arrowHead'}
 		/>
+	}
+
+	makeLabels(labels, dims){
+		return labels.map((each) => {
+	      return <AxisLabel
+	        key={each.text}
+	        xPos={this.calcXPos(each.type, dims)}
+	        yPos={this.calcYPos(each.type, dims)}
+	        labelClass={each.textClass}
+	        groupClass={each.gWrapperClass}
+	        textVal={each.text}
+	        fontSize={'1.5em'}
+	        transformation={each.transformation}
+	      />
+	    })
 	}
 
 	render(){
@@ -146,9 +193,13 @@ class UpsAndDowns extends React.Component {
 		//make class string for svg element
 		let thisClass = `upsAndDowns gr-${this.props.data[0].grWidth}`
 
+		//Make data-driven axis labels
+	    const axisLabels = this.makeLabels(this.state.labels, svgDimensions)
+
 		return(
 			<React.Fragment>
 				<svg className={thisClass}>
+					{axisLabels}
 					{arrows}
 					{arrowHeadDefs}
 		        </svg>

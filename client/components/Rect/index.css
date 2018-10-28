@@ -16,3 +16,11 @@
 .reactLink:visited {
     color: white; 
 }
+
+.singleBar{
+	cursor: pointer;
+}
+
+.singleBar:hover{
+	opacity: .5;
+}

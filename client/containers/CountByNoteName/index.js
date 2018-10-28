@@ -99,6 +99,11 @@ class CountByNoteName extends React.Component {
 		})
 	}
 
+	buildToolTip(obj){
+		console.log('building tooltip obj')
+		console.log(obj)
+	}
+
 	render(){
 		// console.log('RENDERING!! CountByNoteName props')
 		// console.log(this.props)
@@ -154,8 +159,6 @@ class CountByNoteName extends React.Component {
 
 	    const bars = (
 	      curUsableData.map(d => {
-	        console.log('map bars d')
-	        console.log(d)
 	        return ( 
 	          <Rect
 	            key={d.noteName}
@@ -168,9 +171,8 @@ class CountByNoteName extends React.Component {
 	            strokeWidth={'2px'}
 	            count={d.count}
 	            val={d.noteName}
-	            // onClick={() => props.showBarDetails(d)}
-	            // onMouseOver={() => props.mousedOver(d)}
 	            className="singleBar"
+	            tooltipFn={this.props.showTooltip}
 	          />
 	        )
 	      })

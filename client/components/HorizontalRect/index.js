@@ -53,8 +53,6 @@ export default class HorizontalRect extends React.Component {
   	}
 
   	render(){
-  		console.log('hz bar this.props')
-  		console.log(this.props)
   		// console.log('rect width on render')
   		// console.log(this.state.width)
   		return(

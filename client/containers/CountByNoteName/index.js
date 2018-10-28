@@ -1,10 +1,10 @@
 import React from 'react';
-import { scaleBand, scaleLinear } from 'd3-scale'
+import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
 import * as d3 from 'd3-selection'
 import Toggle from '../../components/Toggle'
 import AxesAndMath from '../../components/Axes'
 import AxisLabel from '../../components/AxisLabel'
-import Bars from '../../components/Bars'
+import Rect from '../../components/Rect'
 
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import './index.css';
@@ -133,6 +133,11 @@ class CountByNoteName extends React.Component {
 	      .domain([0, 103])
 	      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
 
+	    const colorArr = ['cadetblue', 'green']
+
+	    const colorScale = scaleOrdinal()
+	      .range(colorArr);
+
 	    //Make data-driven axis labels
 	    const axisLabels = this.state.labels.map((each) => {
 	      return <AxisLabel
@@ -147,6 +152,28 @@ class CountByNoteName extends React.Component {
 	      />
 	    })
 
+	    const bars = (
+	      curUsableData.map(d => {
+	        console.log('map bars d')
+	        console.log(d)
+	        return ( 
+	          <Rect
+	            key={d.noteName}
+	            x={xScale(d.noteName)}
+	            y={yScale(d.count)}
+	            height={svgDimensions.height - this.state.margins.bottom - yScale(d.count)}
+	            width={xScale.bandwidth()}
+	            fill={colorScale(d.commodity)}
+	            stroke={'green'}
+	            strokeWidth={'2px'}
+	            // onClick={() => props.showBarDetails(d)}
+	            // onMouseOver={() => props.mousedOver(d)}
+	            className="singleBar"
+	          />
+	        )
+	      })
+	    )
+
 		return (
 		    <React.Fragment>
 			    <svg className={thisClass}>
@@ -157,16 +184,7 @@ class CountByNoteName extends React.Component {
 			          svgDimensions={svgDimensions}
 			        />
 
-			        <Bars
-			          scales={{ xScale, yScale }}
-			          margins={this.state.margins}
-			          data={curUsableData}
-			          maxValue={maxDataValue}
-			          svgDimensions={svgDimensions}
-			          mousedOver={this.mousedOver}
-			          alertLevel={this.state.alertLevel}
-			          showBarDetails={this.showingBarDetails}
-			        />
+			        {bars}
 
 			        {axisLabels}
 

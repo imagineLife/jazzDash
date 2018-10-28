@@ -82,11 +82,14 @@ class JazzDash extends Component {
 							showTooltip={this.addToolTipDataToState} 
 							hideTooltip={this.removeTooltipFromState} 
 							data={this.props.storeDashData.totalsByNoteName} 
-							parentCol={'12'}
-						/>
+							parentCol={'12'} />
 					</div>
 					<div className="row">
-						<NoteLengthCounts data={this.props.storeDashData.noteLengthCounts} parentCol={'6'}/>
+						<NoteLengthCounts 
+							showTooltip={this.addToolTipDataToState} 
+							hideTooltip={this.removeTooltipFromState} 
+							data={this.props.storeDashData.noteLengthCounts} 
+							parentCol={'6'} />
 						<UpsAndDowns data={this.props.storeDashData.totalDirections} parentCol={'6'}/>
 					</div>
 					<div className="row">

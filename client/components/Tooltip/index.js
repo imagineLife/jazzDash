@@ -10,13 +10,15 @@ export default function Tooltip(props) {
 		top: `${pgY - 150}px`,
 		display: 'inline-block',
 		color: 'white',
-		backgroundColor: `rgba(0,0,0,.7)`
+		backgroundColor: `rgba(0,0,0,.7)`,
+		textAlign: 'left'
 	}
 
 	console.log('- - - - -')
 	return(
 		<div className='toolTip' style={thisStyle}>
-			<p>Dummy Recat Component here</p>
+			<p><b>{val}</b> happens</p>
+			<p><b>{count}</b> times</p>
 		</div>
 	);
 }

@@ -78,6 +78,9 @@ class BeatCounts extends React.Component {
 							fs={`${beatNumberSize}rem`} 
 							tf={singleBeatDims.thisTrans}
 							textVal={friendlyBeat}
+							count={+obj.count}
+							tooltipFn={this.props.showTooltip}
+	            			hideTooltip={this.props.hideTooltip}
 						/>
 					</svg>
 				</div>)

@@ -15,8 +15,11 @@ import './index.css';
 class JazzDash extends Component {
 	constructor(props){
 		super(props)
-		this.state = {}
-		this.showTooltip = this.showTooltip.bind(this)
+		this.state = {
+			tooltipActive : false
+		}
+		this.addToolTipDataToState = this.addToolTipDataToState.bind(this)
+		this.removeTooltipFromState = this.removeTooltipFromState.bind(this)
 	}
 
 	componentWillMount(){
@@ -25,9 +28,21 @@ class JazzDash extends Component {
 		}
 	}
 
-	showTooltip(obj){
-		console.log('PARENT SHOW TOOLTIP!! test')
-		console.log(obj)
+	addToolTipDataToState(obj){
+		let newObj = { 
+			tooltipData:{
+				pgX: obj.pgX,
+				pgY: obj.pgY,
+				val: obj.val,
+				count: obj.count
+			},
+			tooltipActive: true
+		}
+		this.setState(newObj)
+	}
+
+	removeTooltipFromState(){
+		this.setState({tooltipActive: false, tooltipData: {}})
 	}
 
 	render(){
@@ -56,14 +71,19 @@ class JazzDash extends Component {
 
 			return(
 				<main className="dashWrapper">
-					<Tooltip />
+					{this.state.tooltipActive && <Tooltip data={this.state.tooltipData}/>}
 					<div className="row">
 						{albumImg}
 						{musicians}
 						{SongName}
 					</div>
 					<div className="row">
-						<CountByNoteName showTooltip={this.showTooltip} data={this.props.storeDashData.totalsByNoteName} parentCol={'12'}/>
+						<CountByNoteName 
+							showTooltip={this.addToolTipDataToState} 
+							hideTooltip={this.removeTooltipFromState} 
+							data={this.props.storeDashData.totalsByNoteName} 
+							parentCol={'12'}
+						/>
 					</div>
 					<div className="row">
 						<NoteLengthCounts data={this.props.storeDashData.noteLengthCounts} parentCol={'6'}/>

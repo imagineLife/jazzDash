@@ -3,6 +3,8 @@ import './index.css';
 
 export default function Tooltip(props) {
 	return(
-		<p>Dummy Recat Component here</p>	
+		<div className='toolTip' style={{display:'block'}}>
+			<p>Dummy Recat Component here</p>
+		</div>
 	);
 }

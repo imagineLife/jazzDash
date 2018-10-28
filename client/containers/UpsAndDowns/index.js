@@ -3,7 +3,6 @@ import React from 'react';
 import './index.css';
 import { scaleBand, scaleLinear } from 'd3-scale'
 import ResponsiveWrapper from '../ResponsiveWrapper'
-import Bars from '../../components/Bars'
 import Line from '../../components/Line'
 import Def from '../../components/Def'
 import Toggle from '../../components/Toggle'
@@ -128,6 +127,7 @@ class UpsAndDowns extends React.Component {
 				stroke={(d.direction == 'ups') ? 'green' : (d.direction == 'downs') ? 'darkblue' : 'black'}
 				strokeWidth={'5px'}
 				markerEnd={'url(#arrowHead)'}
+				dirStr={dirStr}
 			/>
 		})
 	}

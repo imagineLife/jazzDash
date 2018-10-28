@@ -4,7 +4,6 @@ import * as d3 from 'd3'
 import Toggle from '../../components/Toggle'
 import AxesAndMath from '../../components/Axes'
 import AxisLabel from '../../components/AxisLabel'
-import Bars from '../../components/Bars'
 import Circle from '../../components/Circle'
 import {notesData} from './AllNotesBoth'
 

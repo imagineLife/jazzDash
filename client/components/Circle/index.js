@@ -10,7 +10,6 @@ export default class Circle extends React.Component {
 	}
 
 	componentDidUpdate(prevProps,prevState) {
-		console.log('circle cdu!')
 
 		if((prevProps.xPr !== this.props.xPr) || (prevProps.yPr !== this.props.yPr)){
 			let el = d3.select(this.circleRef.current);

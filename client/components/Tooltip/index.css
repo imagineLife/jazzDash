@@ -1,0 +1,13 @@
+.toolTip {
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: none repeat scroll 0 0 rgb(25,25,25);
+  border: 1px solid rgb(142, 136, 131);
+  padding: 14px;
+  text-align: center;
+  font-size: .85em;
+  font-family: sans-serif;
+  line-height: 1.5;
+}

@@ -93,7 +93,11 @@ class JazzDash extends Component {
 						<UpsAndDowns data={this.props.storeDashData.totalDirections} parentCol={'6'}/>
 					</div>
 					<div className="row">
-						<BeatCounts data={this.props.storeDashData.beatCounts} parentCol={'12'}/>
+						<BeatCounts
+							showTooltip={this.addToolTipDataToState} 
+							hideTooltip={this.removeTooltipFromState}
+							data={this.props.storeDashData.beatCounts} 
+							parentCol={'12'}/>
 					</div>					
 					<div className="row">
 						<NoteTypePercents data={this.props.storeDashData.noteTypesByPercentage} parentCol={'6'}/>

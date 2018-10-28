@@ -173,6 +173,7 @@ class CountByNoteName extends React.Component {
 	            val={d.noteName}
 	            className="singleBar"
 	            tooltipFn={this.props.showTooltip}
+	            hideTooltip={this.props.hideTooltip}
 	          />
 	        )
 	      })

@@ -166,6 +166,8 @@ class CountByNoteName extends React.Component {
 	            fill={colorScale(d.commodity)}
 	            stroke={'green'}
 	            strokeWidth={'2px'}
+	            count={d.count}
+	            val={d.noteName}
 	            // onClick={() => props.showBarDetails(d)}
 	            // onMouseOver={() => props.mousedOver(d)}
 	            className="singleBar"

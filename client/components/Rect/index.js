@@ -11,6 +11,7 @@ export default class Rect extends React.Component {
 		}
 
 		this.rectRef = React.createRef();
+		this.prepToolTipObj = this.prepToolTipObj.bind(this)
 	}
 
 	componentDidUpdate(prevProps,prevState) {
@@ -37,6 +38,16 @@ export default class Rect extends React.Component {
 	    
   	}
 
+  	prepToolTipObj(e){
+  		
+  		let thisObj = {
+  			val: e.target.attributes.getNamedItem('data-val').value, 
+  			count: e.target.attributes.getNamedItem('data-count').value
+  		}
+
+  		this.props.tooltipFn(thisObj)
+  	}
+
   	render(){
   		return(
 			<rect
@@ -50,6 +61,9 @@ export default class Rect extends React.Component {
 	        stroke={this.props.stroke}
 	        strokeWidth={this.props.strokeWidth}
 	        className={this.props.className}
+	        onMouseOver={this.prepToolTipObj}
+	        data-val={this.props.val}
+	        data-count={this.props.count}
 	      />
 		);
   	}

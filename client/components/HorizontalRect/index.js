@@ -12,6 +12,7 @@ export default class HorizontalRect extends React.Component {
 		}
 
 		this.rectRef = React.createRef();
+		this.prepToolTipObj = this.prepToolTipObj.bind(this)
 	}
 
 	//updates pre-existing bars
@@ -39,9 +40,21 @@ export default class HorizontalRect extends React.Component {
 		}
   	}
 
+  	prepToolTipObj(e){
+  		
+  		let thisObj = {
+  			val: e.target.attributes.getNamedItem('data-val').value, 
+  			count: e.target.attributes.getNamedItem('data-count').value,
+  			pgX: e.pageX,
+  			pgY: e.pageY
+  		}
+
+  		this.props.tooltipFn(thisObj)
+  	}
+
   	render(){
-  		// console.log('comp Name')
-  		// console.log(this.constructor.name)
+  		console.log('hz bar this.props')
+  		console.log(this.props)
   		// console.log('rect width on render')
   		// console.log(this.state.width)
   		return(
@@ -54,8 +67,10 @@ export default class HorizontalRect extends React.Component {
 		        width={this.props.width}
 		        fill={'steelblue'}
 				transform={this.props.transform}
-		        // onClick={() => props.showBarDetails(d)}
-		        // onMouseOver={() => props.mousedOver(d)}
+				onMouseMove={this.prepToolTipObj}
+	        	onMouseOut={this.props.hideTooltip}
+	        	data-val={this.props.val}
+	        	data-count={this.props.count}
 		        className={this.props.className}
 		      />
 		);

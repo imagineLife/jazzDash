@@ -42,7 +42,9 @@ export default class Rect extends React.Component {
   		
   		let thisObj = {
   			val: e.target.attributes.getNamedItem('data-val').value, 
-  			count: e.target.attributes.getNamedItem('data-count').value
+  			count: e.target.attributes.getNamedItem('data-count').value,
+  			pgX: e.pageX,
+  			pgY. e.pageY
   		}
 
   		this.props.tooltipFn(thisObj)
@@ -61,7 +63,8 @@ export default class Rect extends React.Component {
 	        stroke={this.props.stroke}
 	        strokeWidth={this.props.strokeWidth}
 	        className={this.props.className}
-	        onMouseOver={this.prepToolTipObj}
+	        onMouseMove={this.prepToolTipObj}
+	        onMouseOut={this.props.hideTooltip}
 	        data-val={this.props.val}
 	        data-count={this.props.count}
 	      />

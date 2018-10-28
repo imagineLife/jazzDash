@@ -11,6 +11,7 @@ export default class SingleText extends React.Component {
 		}
 
 		this.textRef = React.createRef();
+		this.prepToolTipObj = this.prepToolTipObj.bind(this)
 	}
 
 	componentDidUpdate(prevProps) {
@@ -32,6 +33,18 @@ export default class SingleText extends React.Component {
 	    
   	}
 
+  	prepToolTipObj(e){
+  		
+  		let thisObj = {
+  			val: e.target.attributes.getNamedItem('data-val').value, 
+  			count: e.target.attributes.getNamedItem('data-count').value,
+  			pgX: e.pageX,
+  			pgY: e.pageY
+  		}
+
+  		this.props.tooltipFn(thisObj)
+  	}
+
   	render(){
   		return(
 			<text
@@ -39,6 +52,10 @@ export default class SingleText extends React.Component {
 				className={this.props.cl}
 				fontSize={this.state.fs} 
 				transform={this.props.tf}
+				data-val={this.props.textVal}
+	        	data-count={this.props.count}
+	        	onMouseMove={this.prepToolTipObj}
+	        	onMouseOut={this.props.hideTooltip}
 	      >{this.props.textVal}</text>
 		);
   	}

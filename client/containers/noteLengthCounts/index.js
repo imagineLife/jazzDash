@@ -203,7 +203,11 @@ class NoteLengthCounts extends React.Component {
 		            stroke={'green'}
 		            strokeWidth={'2px'}
 		            transform={trans}
+		            count={barData.count}
+	            	val={barData.duration}
 		            className="singleBar"
+		            tooltipFn={this.props.showTooltip}
+	            	hideTooltip={this.props.hideTooltip}
 		          />
 		        )
 	      	}

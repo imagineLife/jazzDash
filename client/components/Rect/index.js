@@ -44,7 +44,7 @@ export default class Rect extends React.Component {
   			val: e.target.attributes.getNamedItem('data-val').value, 
   			count: e.target.attributes.getNamedItem('data-count').value,
   			pgX: e.pageX,
-  			pgY. e.pageY
+  			pgY: e.pageY
   		}
 
   		this.props.tooltipFn(thisObj)

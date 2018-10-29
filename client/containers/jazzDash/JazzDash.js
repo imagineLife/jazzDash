@@ -34,6 +34,7 @@ class JazzDash extends Component {
 				pgX: obj.pgX,
 				pgY: obj.pgY,
 				val: obj.val,
+				valTxt: obj.valTxt,
 				count: obj.count
 			},
 			tooltipActive: true
@@ -90,7 +91,11 @@ class JazzDash extends Component {
 							hideTooltip={this.removeTooltipFromState} 
 							data={this.props.storeDashData.noteLengthCounts} 
 							parentCol={'6'} />
-						<UpsAndDowns data={this.props.storeDashData.totalDirections} parentCol={'6'}/>
+						<UpsAndDowns 
+							showTooltip={this.addToolTipDataToState} 
+							hideTooltip={this.removeTooltipFromState}
+							data={this.props.storeDashData.totalDirections} 
+							parentCol={'6'}/>
 					</div>
 					<div className="row">
 						<BeatCounts
@@ -101,7 +106,11 @@ class JazzDash extends Component {
 					</div>					
 					<div className="row">
 						<NoteTypePercents data={this.props.storeDashData.noteTypesByPercentage} parentCol={'6'}/>
-						<NoteIntervals data={this.props.storeDashData.noteIntervalCounts} parentCol={'6'}/>
+						<NoteIntervals 
+							showTooltip={this.addToolTipDataToState} 
+							hideTooltip={this.removeTooltipFromState}
+							data={this.props.storeDashData.noteIntervalCounts} 
+							parentCol={'6'}/>
 					</div>
 					<div className="row">
 						<DistanceByBeat parentCol={'12'}/>

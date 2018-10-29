@@ -1,5 +1,4 @@
 import React from 'react';
-// import {Link} from 'react-router-dom';
 import './index.css';
 import { scaleBand, scaleLinear } from 'd3-scale'
 import ResponsiveWrapper from '../ResponsiveWrapper'
@@ -128,6 +127,11 @@ class UpsAndDowns extends React.Component {
 				strokeWidth={'5px'}
 				markerEnd={'url(#arrowHead)'}
 				dirStr={dirStr}
+				tooltipFn={this.props.showTooltip}
+	            hideTooltip={this.props.hideTooltip}
+	            count={d.count}
+	            val={d.direction}
+
 			/>
 		})
 	}

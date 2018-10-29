@@ -129,6 +129,17 @@ class NoteIntervals extends React.Component {
 	    bubbleDataJoinEnter
 	        .style("fill", d => this.seqClr(d.count))
 	        .merge(this.bubbleDataJoin)
+	        .on('mousemove', d => {
+				let toolTipObj = {
+					val: `${d.index} 1/2 Steps`, 
+		  			count: d.count,
+		  			pgX: d3.event.pageX,
+		  			pgY: d3.event.pageY
+				}
+
+				this.props.showTooltip(toolTipObj);
+	        })
+	        .on('mouseout', this.props.hideTooltip)
 	        .transition().duration(1200)
 	          .attr("r", d => d.count)
 

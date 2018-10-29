@@ -12,6 +12,7 @@ export default class LineComp extends React.Component {
 		}
 
 		this.lineRef = React.createRef();
+		this.prepToolTipObj = this.prepToolTipObj.bind(this)
 	}
 
 	componentDidUpdate(prevProps,prevState) {
@@ -46,6 +47,19 @@ export default class LineComp extends React.Component {
 	    
   	}
 
+  	prepToolTipObj(e){
+  		
+  		let thisObj = {
+  			val: e.target.attributes.getNamedItem('data-val').value,
+  			valTxt: ' are played',
+  			count: e.target.attributes.getNamedItem('data-count').value,
+  			pgX: e.pageX,
+  			pgY: e.pageY
+  		}
+
+  		this.props.tooltipFn(thisObj)
+  	}
+
   	render(){
   		return(
 			<line
@@ -57,6 +71,10 @@ export default class LineComp extends React.Component {
 				stroke={this.props.stroke}
 				strokeWidth={this.props.strokeWidth}
 				markerEnd={this.props.markerEnd}
+				onMouseMove={this.prepToolTipObj}
+	        	onMouseOut={this.props.hideTooltip}
+	        	data-val={this.props.val}
+	        	data-count={this.props.count}
 			/>
 		);
   	}

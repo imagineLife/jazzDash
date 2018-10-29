@@ -11,6 +11,7 @@ export default class Path extends React.Component {
 		}
 
 		this.pathRef = React.createRef();
+		this.prepToolTipObj = this.prepToolTipObj.bind(this)
 	}
 
 	componentDidUpdate(prevProps,prevState) {
@@ -32,6 +33,19 @@ export default class Path extends React.Component {
 	    
   	}
 
+  	prepToolTipObj(e){
+  		
+  		let thisObj = {
+  			val: e.target.attributes.getNamedItem('data-val').value,
+  			valTxt: ' were played',
+  			count: e.target.attributes.getNamedItem('data-count').value,
+  			pgX: e.pageX,
+  			pgY: e.pageY
+  		}
+
+  		this.props.tooltipFn(thisObj)
+  	}
+
   	render(){
   		return(
 			<path
@@ -40,6 +54,10 @@ export default class Path extends React.Component {
 			fill={this.props.fill}
 			cursor={'pointer'}
 	        className={this.props.cl}
+	        onMouseMove={this.prepToolTipObj}
+            onMouseOut={this.props.hideTooltip}
+            data-count={this.props.count}
+            data-val={this.props.val}
 	      />
 		);
   	}

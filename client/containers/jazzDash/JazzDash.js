@@ -29,6 +29,7 @@ class JazzDash extends Component {
 	}
 
 	addToolTipDataToState(obj){
+		console.log('adding tooltip to state?')
 		let newObj = { 
 			tooltipData:{
 				pgX: obj.pgX,
@@ -57,9 +58,9 @@ class JazzDash extends Component {
 			);
 		}else{
 
-			console.log('dash wrapper props')
-			console.log(this.props)
-			console.log('- - - - -')
+			// console.log('dash wrapper props')
+			// console.log(this.props)
+			// console.log('- - - - -')
 
 			let musicians = this.props.storeDashData.musicians.map(m => {
 				let imgStr = m.replace(/\s/g, '');
@@ -105,7 +106,12 @@ class JazzDash extends Component {
 							parentCol={'12'}/>
 					</div>					
 					<div className="row">
-						<NoteTypePercents data={this.props.storeDashData.noteTypesByPercentage} parentCol={'6'}/>
+						<NoteTypePercents 
+							showTooltip={this.addToolTipDataToState} 
+							hideTooltip={this.removeTooltipFromState}
+							data={this.props.storeDashData.noteTypesByPercentage} 
+							parentCol={'6'}
+							/>
 						<NoteIntervals 
 							showTooltip={this.addToolTipDataToState} 
 							hideTooltip={this.removeTooltipFromState}

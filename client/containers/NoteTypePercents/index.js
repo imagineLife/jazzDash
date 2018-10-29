@@ -56,7 +56,6 @@ class NoteTypePercents extends React.Component {
 	}
 
 	toggle(){
-		// console.log('toggling')
 	    let newVal = (this.state.curShowing === 0) ? 1 : 0;
 	    this.setState({curShowing: newVal})
 	}
@@ -104,6 +103,25 @@ class NoteTypePercents extends React.Component {
 		return (largestRadiusCalculation > largestVal)? largestVal : largestRadiusCalculation; 
 	}
 
+	convertToFriendlyName(txt){
+		const thisTxt = (function(txt){
+			switch(txt){
+				case 'DNCTs':
+					return 'Diatonic Non-Chord Tones';
+					break;
+
+				case 'NDNCTs':
+					return 'Non-Diatonic Non-Chord Tones'
+					break;
+
+				default: 
+					return 'Chord Tones';
+			}
+		})(txt)
+
+		return thisTxt
+	}
+
 	render(){
 		// console.log('RENDERING!! NoteTypePercents props')
 		// console.log(this.props)
@@ -123,8 +141,6 @@ class NoteTypePercents extends React.Component {
 		let filteredKeys = this.getFilteredKeys(curMusicianStats);
 		let curUsableData = this.convertToArray(curMusicianStats, filteredKeys);
 		const maxDataValue = Math.max(...curUsableData.map(d => d.count))
-		// console.log('maxDataValue')
-		// console.log(maxDataValue)
 		let largestPieSliceRadius = this.getLargestRadius(divWidthLessMargins, divHeightLessMargins, maxDataValue);
 		//pie & arc functions
 		const { d3PieFunc, d3ArcFn } = this.makeD3PieFuncs(this.state.radiusColumn, (divWidthLessMargins))		
@@ -145,11 +161,16 @@ class NoteTypePercents extends React.Component {
 			
 			let thisSliceColor = colorScale(this.state.colorValue(arc.data))
 			let arcVal = d3ArcFn(arc)
+
 			return <Path 
 				key={ind}
 				d={arcVal}
 				fill={thisSliceColor}
 				cl={'singlePath'}
+				tooltipFn={this.props.showTooltip}
+	            hideTooltip={this.props.hideTooltip}
+	            count={arc.data.count}
+	            val={this.convertToFriendlyName(arc.data['noteType'])}
 			/>
 		})
 
@@ -164,9 +185,6 @@ class NoteTypePercents extends React.Component {
 	    const yScale = this.yScale
 	      .domain([0, 103])
 	      .range([svgDimensions.height - this.state.margins.bottom, this.state.margins.top])
-
-	   	// console.log('theseSlices')
-		// console.log(theseSlices)
 
 		//Make data-driven axis labels
 	    const axisLabels = this.state.labels.map((each) => {

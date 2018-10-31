@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive 'server/test/test.*.js' --exit",
-    "start:client": "webpack-dev-server --mode development ./client/index.js --config client/webpack.config.js", //--open 'Google Chrome'
+    "start:client": "webpack-dev-server --mode development ./client/index.js --config client/webpack.config.js",
     "start:server": "node server/server.js",
     "start": "npm run start:server & npm run start:client"
   },

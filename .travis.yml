@@ -2,6 +2,7 @@ language: node_js
 node_js: node
 deploy:
   provider: heroku
+  script: start:server
   api_key:
     secure: 6ce5afb6-da75-4295-83b9-52d5c53771d3
   app: blooming-tor-17450

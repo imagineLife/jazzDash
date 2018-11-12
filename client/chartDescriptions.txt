@@ -1,0 +1,24 @@
+Times Played per Note
+Musicians play notes, & there are 12 notes a musician can choose from.
+Here are the counts of each note that the musician played. Each bar represents a note name. Each Bar height represents the number pof times that beat was played.
+To toggle between musicians, select the gray toggle bar below the chart.
+
+
+Times Played Per Note Duration
+When a musician plays a note, the note has a duration (in beats), like a half-beat-long or 3.5 beats long. 
+Here are the sum of notes played with the given note-duration. Each bar represents a sum of notes matching the noted y-axis note-duration. Each bar length represents the number of times the musician played notes that were the given y-axis duration.
+
+
+Ups & Downs
+When a musician plays two notes, one of the ways the second note is related to the first note is by the direction-moved from the first note. If the second note is higher than the first note, the second note 'moved up' from the previous note. If the second noted is lower than the first note, the second note 'moved down' from the first note.
+Here are the counts of times notes have 'moved' in a given direction. Here, the length of the arrow is related to the number of times the given direction was moved.
+
+
+Beat Number Frequencies
+When a musician plays a note, the note is attached on a given beat. 
+Here are the count of times a musician plays notes on marked beats. The size of the beat number (or plus sign, the 'and' of the beat), is related to the number of times the given beat number was played. The larger the text, the more times that given beat had a note attacked on it. The smaller the text, the less.
+
+ChordTones By Percentage
+When a musician plays a note, it can be related to the underlying chord being played at the time. One way the note being played relates to the chord being played is its chord-tone relationship: the note can be a chord tone, or an on-chord tone.
+Here the note is considered one of 3 things: (-) a chord-tone (-) a Diatonic non-chord-tone (-) a Non-Diatonic Non-ChordTone.
+

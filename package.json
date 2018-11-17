@@ -6,8 +6,10 @@
   "scripts": {
     "test": "mocha --recursive 'server/test/test.*.js' --exit",
     "start:client": "webpack-dev-server --mode development ./client/index.js --config client/webpack.config.js",
+    "start:clientbuild": "webpack --mode production ./client/index.js --config client/webpack.config.js",
     "start:server": "node server/server.js",
     "start": "npm run start:server",
+    "start:local:build": "npm run start:server & npm run start:client",
     "start:local": "npm run start:server & npm run start:client"
   },
   "repository": {

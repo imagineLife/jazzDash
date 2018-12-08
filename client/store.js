@@ -21,10 +21,14 @@ export default function myStoreConfig(initialState){
 
 	//6. conditionally use the enhancers?
 	const composeEnhancers =
+			
 			//validate NOT in production
-		    process.env.NODE_ENV !== 'production' &&
+		    // process.env.NODE_ENV !== 'production' &&
+		    !~window.location.href.indexOf('http') &&
+
 		    //validate NOT testing, testing doesn't use a window
 		    typeof window === 'object' &&
+		    
 		    /*
 		    	IF those are true, does this xtnxn xst?
 			*/

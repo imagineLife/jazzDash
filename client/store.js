@@ -22,17 +22,18 @@ export default function myStoreConfig(initialState){
 	//6. conditionally use the enhancers?
 	const composeEnhancers =
 			
-			//validate NOT in production
+			//validate IN production to use compose
+
 		    // process.env.NODE_ENV !== 'production' &&
-		    !~window.location.href.indexOf('http') &&
+		    ~window.location.href.indexOf('http') &&
 
 		    //validate NOT testing, testing doesn't use a window
 		    typeof window === 'object' &&
 		    
-		    /*
-		    	IF those are true, does this xtnxn xst?
-			*/
+
+		   	// IF those are true, does this xtnxn xst?
 		    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+
 		      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 
 

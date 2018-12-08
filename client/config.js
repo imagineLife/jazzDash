@@ -1,0 +1,1 @@
+export const serverURL = ~window.location.href.indexOf('http') ? `https://blooming-tor-17450.herokuapp.com/api`: `http://localhost:8080/api`;

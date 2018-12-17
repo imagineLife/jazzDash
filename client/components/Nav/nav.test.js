@@ -41,9 +41,26 @@ describe('Nav', () => {
 	    const button = nav.find(NavLink);
 	    // console.log(button.debug());
 	    expect(nav.find(NavLink).at(1).props().linkTo).toBe('/about');
-	    // button.simulate('click');
-	    // expect(mockCallBack.mock.calls.length).toEqual(1);
 	});
 
+
+	
+	/*
+		testing Link in Nav
+		// button.simulate('click');
+		// expect(mockCallBack.mock.calls.length).toEqual(1);
+
+		https://reacttraining.com/react-router/web/guides/testing
+		// fixed!
+		test("it expands when the button is clicked", () => {
+		  render(
+		    <MemoryRouter>
+		      <Sidebar />
+		    </MemoryRouter>
+		  );
+		  click(theButton);
+		  expect(theThingToBeOpen);
+		});
+	*/
 })
 

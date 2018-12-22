@@ -29,20 +29,39 @@ describe('Nav', () => {
     })
 
     it('links first to "/"', () => {
-	    const mockCallBack = jest.fn();
 	    const nav = mount(<Router><Nav /></Router>);
 	    const button = nav.find(NavLink);
 	    expect(nav.find(NavLink).first().props().linkTo).toBe('/');
 	});
 
 	it('links second to "/about"', () => {
-	    const mockCallBack = jest.fn();
 	    const nav = mount(<Router><Nav /></Router>);
-	    const button = nav.find(NavLink);
+	    const button = nav.find(NavLink); //arr of NavLinks
 	    // console.log(button.debug());
 	    expect(nav.find(NavLink).at(1).props().linkTo).toBe('/about');
+
 	});
 
+	it('navigates to ', () =>{
+	    const nav = mount(<Router><Nav /></Router>);
+	    const button = nav.find(NavLink);
+	    expect(button)
+
+
+
+	    /*
+	    render the app
+			navigate to nav link 
+				app.find(NavLink)
+			
+			expect() //main default loaded page to exist
+
+			button.at(1).simulate('click')
+			expect() //about component to exist
+
+
+	    */
+	})
 
 	
 	/*

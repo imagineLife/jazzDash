@@ -28,37 +28,31 @@ describe('SVG Circle', () => {
 
     it('has radius from props', () => {
         const circle = shallow(<Circle {...dummyProps}/>);
-        console.log(circle.debug());
         expect(circle.prop('r')).toEqual(dummyProps.r);
     })
 
     it('has fill from props', () => {
         const circle = shallow(<Circle {...dummyProps}/>);
-        console.log(circle.debug());
         expect(circle.prop('fill')).toEqual(dummyProps.fill);
     })
 
 	it('has cx from props', () => {
         const circle = shallow(<Circle {...dummyProps}/>);
-        console.log(circle.debug());
         expect(circle.prop('cx')).toEqual(dummyProps.xPr);
     })
 
 	it('has cy from props', () => {
         const circle = shallow(<Circle {...dummyProps}/>);
-        console.log(circle.debug());
         expect(circle.prop('cy')).toEqual(dummyProps.yPr);
     })
 
 	it('has data from props', () => {
         const circle = shallow(<Circle {...dummyProps}/>);
-        console.log(circle.debug());
         expect(circle.prop('data')).toEqual(dummyProps.data);
     })
 
 	it('has stroke from props', () => {
         const circle = shallow(<Circle {...dummyProps}/>);
-        console.log(circle.debug());
         expect(circle.prop('stroke')).toEqual(dummyProps.stroke);
     })
 })

@@ -200,4 +200,5 @@ class CountByNoteName extends React.Component {
 	}
 }
 
+export {CountByNoteName};
 export default ResponsiveWrapper(CountByNoteName);

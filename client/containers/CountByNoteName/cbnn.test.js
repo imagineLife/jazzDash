@@ -15,4 +15,20 @@ describe('CHART CountByNoteName', () =>{
 		}
 		shallow(<CountByNoteName {...dummyProps}/>);
 	})
+
+	it.only('displays correct # of bars from props', () => {
+		let dummyProps = {
+			showTooltip: jest.mock(),
+			hideTooltip: jest.mock(),
+			data: cbnn,
+			parentCol: '12',
+			respWrapWidth: 502
+		}
+		let parent = shallow(<CountByNoteName {...dummyProps}/>);
+		console.log('parent')
+		// console.log(parent.find('.singleBar').length) not correct right not
+		console.log(parent.debug())
+		
+		// expect(parent.find(Rect).kength).to.equal(12)
+	})
 })

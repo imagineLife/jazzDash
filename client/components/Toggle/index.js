@@ -17,8 +17,9 @@ export default class Toggle extends React.Component {
 				<input 
 					type="checkbox" 
 					id={forName} 
-					name={forName} 
-					onClick={ onToggle }
+					name={forName}
+					className={forName}
+					onClick={(e) => onToggle(e) }
 				/>
 				<div className={sliderCl}>
 					<span className="off rightSpan">{firstFirst}</span>

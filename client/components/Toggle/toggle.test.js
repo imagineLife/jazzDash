@@ -55,11 +55,12 @@ describe('Tests Toggle', () => {
       expect(sliderDiv.find('span').first().text()).toEqual(dummyProps.opts.second)
     })
 
-    //ugh
-    // it('sets div class from props calculation', () => {
-    //     const toggle = mount(<Toggle {...dummyProps} />);
-    //     const togDiv = toggle.children().children().find(`[class="${dummyProps.sliderCl}"]`)
-    //     console.log(togDiv.debug());
-    // })
+    it('sets both span class from props', () => {
+        const toggle = shallow(<Toggle {...dummyProps} />);
+        console.log(toggle.debug());
+        expect(toggle.find(`.${dummyProps.cl}`).length).toEqual(2)
+    })
+
+    //help test CLICKING / changing the toggle
 })
 

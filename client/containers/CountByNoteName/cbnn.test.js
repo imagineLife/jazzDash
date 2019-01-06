@@ -35,7 +35,6 @@ describe('CHART CountByNoteName', () =>{
 		
 		//2. get a bar val
 		let firstBarProps = cbnnMount.find('Rect').first().props().count
-		// expect(firstBarProps).toEqual(mockComponentData.data[0]["A"])
 
 		//3.Find & toggle the toggle
 		let toggle = cbnnMount.find('[type="checkbox"]').simulate('click')
@@ -43,10 +42,8 @@ describe('CHART CountByNoteName', () =>{
 		//4. get same bar val as before
 		let barValAfterClick = cbnnMount.find('Rect').first().props().count
 		
-		//expect BEFORE & AFTER clicking toggle
-		expect(barValAfterClick).toEqual(mockComponentData.data[1]["A"])
-
-
+		//expect BEFORE & AFTER clicking toggle barVals
 		expect(firstBarProps).toEqual(mockComponentData.data[0]["A"])
+		expect(barValAfterClick).toEqual(mockComponentData.data[1]["A"])
 	})
 })

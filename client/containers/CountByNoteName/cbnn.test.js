@@ -28,7 +28,7 @@ describe('CHART CountByNoteName', () =>{
 		expect(cbnn.find('Rect').length).toEqual(12) 
 	})
 
-	it.only('toggles a bar as expected', () => {
+	it('toggles a bar as expected', () => {
 		
 		//1. render the chart component
 		let cbnnMount = mount(<CountByNoteName {...mockComponentData}/>);

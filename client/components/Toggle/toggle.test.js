@@ -62,5 +62,12 @@ describe('Tests Toggle', () => {
     })
 
     //help test CLICKING / changing the toggle
+    it.only('changes which span is highlighted onCheckboxToggle', () => {
+        const toggle = shallow(<Toggle {...dummyProps} />);
+        let rightSpan = toggle.find('.rightSpan')
+
+        //seems to have only ONE span in debug output ...?
+        console.log(slider.debug())
+    })
 })
 

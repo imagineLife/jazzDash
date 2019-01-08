@@ -11,7 +11,7 @@ export default class Toggle extends React.Component {
 		const switchCl = `${cl} switch`
 		const sliderCl = `${cl} slider`
 		const forName = `toggleMusician${cl}`
-
+		
 		return (
 			<label className={switchCl} htmlFor={forName}>
 				<input 

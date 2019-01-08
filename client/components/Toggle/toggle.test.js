@@ -4,12 +4,11 @@ import { shallow, mount, render } from 'enzyme';
 
 describe('Tests Toggle', () => {
     let dummyProps = {
-        opts: {
-            first: 'firstProp',
-            second: 'secondProp'
-        },
-        cl : 'dummyClass',
-        onToggle: jest.mock()
+      "cl": "DistanceByBeat",
+      "opts": {
+        "first": "Joe Henderson",
+        "second": "Woody Shaw"
+      }
     }
 
     // dummyProps.firstSecond = dummyProps.opts.first.replace(/ .*/,'');
@@ -61,12 +60,24 @@ describe('Tests Toggle', () => {
   })
 
   //help test CLICKING / changing the toggle
-  it('changes which span is highlighted onCheckboxToggle', () => {
-      const toggle = shallow(<Toggle {...dummyProps} />);
-      let rightSpan = toggle.find('.rightSpan')
+  it.only('changes which span is highlighted onCheckboxToggle', () => {
+      
+      //mock the click fn
+      let mockClickFn = jest.fn()
 
-      //seems to have only ONE span in debug output ...?
-      // console.log(slider.debug())
+      //render the toggle, pass the mock toggle fn
+      const toggle = shallow(<Toggle {...dummyProps} onToggle={mockClickFn} />);
+      
+      //grab the checkbox
+      const checkbox = toggle.find(`.toggleMusician${dummyProps.cl}`)
+      
+      //use mock onClickFn
+      checkbox.simulate('click');
+
+      //expect
+      expect(mockClickFn.mock.calls.length).toEqual(1);
+
+      
   })
 })
 

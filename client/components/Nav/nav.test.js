@@ -5,6 +5,13 @@ import NavLink from '../NavLink/index';
 import { shallow, mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+
+/*
+	DOC about testing Links, routes, starting on specific route
+	https://reacttraining.com/react-router/web/guides/testing/starting-at-specific-routes
+*/
+
+
 describe('Nav', () => {
 
 	//smoke tests

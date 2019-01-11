@@ -51,7 +51,7 @@ describe('Tests Toggle', () => {
   it('sets span texts from props', () => {
     const toggle = mount(<Toggle {...dummyProps} />);
     let sliderDiv = toggle.find('.slider')
-    expect(sliderDiv.find('span').first().text()).toEqual(dummyProps.opts.second)
+    expect(sliderDiv.find('span').first().text()).toEqual(dummyProps.opts.second.split(" ")[0])
   })
 
   it('sets both span class from props', () => {
@@ -60,7 +60,7 @@ describe('Tests Toggle', () => {
   })
 
   //help test CLICKING / changing the toggle
-  it.only('changes which span is highlighted onCheckboxToggle', () => {
+  it('changes which span is highlighted onCheckboxToggle', () => {
       
       //mock the click fn
       let mockClickFn = jest.fn()

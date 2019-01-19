@@ -7,7 +7,7 @@ function BigImg(props) {
 	if(props.fullName !== 'IF'){
 		return(
 			<section className='bigImgWrapper'>
-			<img className='bigImg' src={`./imgs/${props.type}s/${props.str}.jpg`}/>
+			<img className='bigImg' src={`./client/imgs/${props.type}s/${props.str}.jpg`}/>
 			<h3 className='bigImgName'>{props.fullName}</h3>
 			</section>
 		);

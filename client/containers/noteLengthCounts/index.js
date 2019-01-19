@@ -232,5 +232,5 @@ class NoteLengthCounts extends React.Component {
 		);
 	}
 }
-
+export {NoteLengthCounts};
 export default ResponsiveWrapper(NoteLengthCounts);

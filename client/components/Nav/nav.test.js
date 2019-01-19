@@ -48,45 +48,5 @@ describe('Nav', () => {
 	    expect(nav.find(NavLink).at(1).props().linkTo).toBe('/about');
 
 	});
-
-	it('navigates to ', () =>{
-	    const nav = mount(<Router><Nav /></Router>);
-	    const button = nav.find(NavLink);
-	    expect(button)
-
-
-
-	    /*
-	    render the app
-			navigate to nav link 
-				app.find(NavLink)
-			
-			expect() //main default loaded page to exist
-
-			button.at(1).simulate('click')
-			expect() //about component to exist
-
-
-	    */
-	})
-
-	
-	/*
-		testing Link in Nav
-		// button.simulate('click');
-		// expect(mockCallBack.mock.calls.length).toEqual(1);
-
-		https://reacttraining.com/react-router/web/guides/testing
-		// fixed!
-		test("it expands when the button is clicked", () => {
-		  render(
-		    <MemoryRouter>
-		      <Sidebar />
-		    </MemoryRouter>
-		  );
-		  click(theButton);
-		  expect(theThingToBeOpen);
-		});
-	*/
 })
 

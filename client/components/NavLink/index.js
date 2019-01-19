@@ -2,17 +2,16 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import './navLink.css';
 
-export default function NavLink(props) {
-
+export default function NavLink({linkTo, imgSrc, linkTitle}) {
 	return(
-		<Link to= {props.linkTo} className="reactLink">
+		<Link to= {linkTo} className="reactLink">
 			<li className='liWithIcon'>
 				<img 
-					src= {props.imgSrc} 
+					src= {imgSrc} 
 					className="icon" 
-					alt= {props.linkTitle} 
+					alt= {linkTitle} 
 				/>
-				<span className="navSpan"> {props.linkTitle} </span>
+				<span className="navSpan"> {linkTitle} </span>
 			</li>
 		</Link>		
 	);

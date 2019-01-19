@@ -22,10 +22,18 @@ describe('CHART NoteLengthCounts', () =>{
 		shallow(<NoteLengthCounts {...mockComponentData}/>);
 	})
 
-	// it('displays correct # of bars from props', () => {
-	// 	let cbnn = render(<NoteLengthCounts {...mockComponentData}/>);
-	// 	expect(cbnn.find('Rect').length).toEqual(12) 
-	// })
+	it('displays correct # of bars from props', () => {
+
+		//render the component with mock data as props
+		let cbnn = render(<NoteLengthCounts {...mockComponentData}/>);
+
+		//get number of expected bars from mock data
+		let mockBarsKeys = Object.keys(mockComponentData.data[0]).filter(d => !['musician','song','grWidth'].includes(d))
+		let countOfInitialMockBars = mockBarsKeys.length
+
+		//TEST
+		expect(cbnn.find('Rect').length).toEqual(countOfInitialMockBars) 
+	})
 
 	// it('correctly updates a bar value onToggle', () => {
 		

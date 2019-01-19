@@ -1,4 +1,4 @@
-const mockData = {
+const mockNoteLengthData = {
   "data": [
     {
       "0": {
@@ -128,4 +128,4 @@ const mockData = {
   "respWrapWidth": 363.84375
 }
 
-module.exports = mockData;
+module.exports = mockNoteLengthData;

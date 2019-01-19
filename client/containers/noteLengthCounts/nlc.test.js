@@ -1,7 +1,7 @@
 import React from 'react';
 import mockNoteLengthData from '../../../__mocks__/NoteLengthCounts.js';
 import {NoteLengthCounts} from './index'
-import Rect from '../../components/Rect'
+import HorizontalRect from '../../components/HorizontalRect'
 import { shallow, mount, render } from 'enzyme';
 
 //jest.mock replacement
@@ -57,5 +57,6 @@ describe('CHART NoteLengthCounts', () =>{
 		//expect BEFORE & AFTER clicking toggle barVals
 		// expect(firstBarProps).toEqual(mockNoteLengthData.data[0]["A"])
 		// expect(barValAfterClick).toEqual(mockNoteLengthData.data[1]["A"])
-	})
+	// })
+
 })

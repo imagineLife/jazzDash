@@ -100,4 +100,5 @@ class BeatCounts extends React.Component {
 	}
 }
 
+export {BeatCounts}
 export default ResponsiveWrapper(BeatCounts)

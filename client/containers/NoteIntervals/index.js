@@ -4,8 +4,6 @@ import ResponsiveWrapper from '../ResponsiveWrapper'
 import * as d3 from 'd3'
 import Circle from '../../components/Circle'
 import Toggle from '../../components/Toggle'
-import AxisLabel from '../../components/AxisLabel'
-
 
 class NoteIntervals extends React.Component {
 	constructor(props){
@@ -177,20 +175,6 @@ class NoteIntervals extends React.Component {
 	      height: 450
 	    }
 
-	   	//Make data-driven axis labels
-	    const axisLabels = this.state.labels.map((each) => {
-	      return <AxisLabel
-	        key={each.text}
-	        xPos={this.calcXPos(each.type, svgDimensions)}
-	        yPos={this.calcYPos(each.type, svgDimensions)}
-	        labelClass={each.textClass}
-	        groupClass={each.gWrapperClass}
-	        textVal={each.text}
-	        fontSize={each.fontSize}
-	        transformation={each.transformation}
-	      />
-	    })
-
 	    //1. Prep Data for working with d3
 		let countExtent = d3.extent(curMusicianStats, d => d.count)
 		let smallestCircleRad = Math.min(svgDimensions.width, svgDimensions.height)
@@ -217,7 +201,6 @@ class NoteIntervals extends React.Component {
 		return(
 			<React.Fragment>
 				<svg className={thisClass}>
-					{axisLabels}
 					<g className={'bubbleGWrapper'} transform={translateGWrapper} />
 				</svg>
 				<Toggle cl={'NoteIntervals'} opts={this.getNamesFromData(this.props.data)} onToggle={this.toggle}/>

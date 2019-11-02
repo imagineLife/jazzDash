@@ -43,7 +43,7 @@
     "immutable": "^3.8.2",
     "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.4.1",
-    "mongoose": "^5.2.5",
+    "mongoose": "^5.7.5",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
